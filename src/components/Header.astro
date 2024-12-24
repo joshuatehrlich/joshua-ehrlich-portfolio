@@ -5,20 +5,16 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<div class="header">
-			<h2 class="site-title"><a href="/">{SITE_TITLE}</a></h2>
-			<div class="header-contacts">
-				<a href="/">joshuatehrlich@gmail.com</a>
-				<a>(415) 715 - 7992</a>
-			</div>
-		</div>
-    <div class="sections-header">
-		</div>
+		<h2 class="site-title"><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/illustrations">Illustration</HeaderLink>
 			<HeaderLink href="/dust">Dust</HeaderLink>
 			<HeaderLink href="/earthen">Earthen</HeaderLink>
 			<HeaderLink href="/game-jams">Game Jams</HeaderLink>
+		</div>
+		<div class="header-contacts">
+			<a href="/">joshuatehrlich@gmail.com</a>
+			<a href="/">(415) 715 - 7992</a>
 		</div>
 		<!--
 		<div class="social-links">
@@ -93,48 +89,52 @@ import { SITE_TITLE } from '../consts';
 		}
 	} */
 
-.header {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+nav {
+  display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	background-color: rgba(220, 220, 220, 0);
+	/* padding: 20px; */
 
-	background-color: black;
-
-  padding-top: 17px;
-  padding-bottom: 17px;
-  padding-left: 35px;
-  padding-right: 35px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .site-title {
-  font-weight: 600;
-  font-size: 0.9em;
+  font-weight: 900;
+  font-size: 2em;
   text-align: left;
-  letter-spacing: 0.5cap;
-	margin: 0;
+  letter-spacing: 0.1cap;
 }
 
 .site-title a {
-	color: white;
+	color: black;
 	text-decoration: none;
-	margin: 0;
-	padding: 0;
+	transition: 150ms;
+}
+.site-title a:hover {
+	opacity: 0.5;
 }
 
 .header-contacts {
-  display: grid;
-  grid-template-columns: 1fr 120px;
-  align-items: center;
-  text-align: right;
+  display: flex;
+	justify-content: flex-end;
   font-size: 0.7em;
 }
 .header-contacts a {
-	color: rgb(170, 170, 170);
+	color: rgb(75, 75, 75);
 	text-decoration: none;
+	transition: 150ms;
+
+	margin-left: 20px;
+}
+.header-contacts a:hover {
+	color: black;
 }
 
 .internal-links {
   display: flex;
-  background-color: rgb(215, 215, 215);
-  margin-bottom: 20px;
+	width: 35%;
+  background-color: rgba(215, 215, 215, 0);
 }
 </style>
