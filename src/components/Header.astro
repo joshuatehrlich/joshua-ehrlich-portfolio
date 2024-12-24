@@ -5,12 +5,22 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/about">About</HeaderLink>
+		<div class="header">
+			<h2 class="site-title"><a href="/">{SITE_TITLE}</a></h2>
+			<div class="header-contacts">
+				<a href="/">joshuatehrlich@gmail.com</a>
+				<a>(415) 715 - 7992</a>
+			</div>
 		</div>
+    <div class="sections-header">
+		</div>
+		<div class="internal-links">
+			<HeaderLink href="/illustrations">Illustration</HeaderLink>
+			<HeaderLink href="/dust">Dust</HeaderLink>
+			<HeaderLink href="/earthen">Earthen</HeaderLink>
+			<HeaderLink href="/game-jams">Game Jams</HeaderLink>
+		</div>
+		<!--
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
 				<span class="sr-only">Follow Astro on Mastodon</span>
@@ -39,11 +49,11 @@ import { SITE_TITLE } from '../consts';
 					></path></svg
 				>
 			</a>
-		</div>
+		</div> -->
 	</nav>
 </header>
 <style>
-	header {
+	/* header {
 		margin: 0;
 		padding: 0 1em;
 		background: white;
@@ -81,5 +91,50 @@ import { SITE_TITLE } from '../consts';
 		.social-links {
 			display: none;
 		}
-	}
+	} */
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+	background-color: black;
+
+  padding-top: 17px;
+  padding-bottom: 17px;
+  padding-left: 35px;
+  padding-right: 35px;
+}
+
+.site-title {
+  font-weight: 600;
+  font-size: 0.9em;
+  text-align: left;
+  letter-spacing: 0.5cap;
+	margin: 0;
+}
+
+.site-title a {
+	color: white;
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+}
+
+.header-contacts {
+  display: grid;
+  grid-template-columns: 1fr 120px;
+  align-items: center;
+  text-align: right;
+  font-size: 0.7em;
+}
+.header-contacts a {
+	color: rgb(170, 170, 170);
+	text-decoration: none;
+}
+
+.internal-links {
+  display: flex;
+  background-color: rgb(215, 215, 215);
+  margin-bottom: 20px;
+}
 </style>
