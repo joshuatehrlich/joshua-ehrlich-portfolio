@@ -32,11 +32,14 @@ const imgs = [
 	<body>
 		<Header />
 
-		<!-- CURRENTLY BROKEN PARRALAX -->
-		<!-- <div class="parallax-viewport">
+		<div class="ptop"></div>
+		<div class="parallax-viewport">
 			<div class="parallax-layer">
 			</div>
-		</div> -->
+				<h3>View a selection</h1>
+				<p>of my illustrations below</p>
+			</div>
+		<div class="pbot"></div>
 
 		<div class="gallery">
 			{imgs.map((img) => (
@@ -49,6 +52,7 @@ const imgs = [
 </html>
 
 <style>
+
 
 .gallery {
 	display: grid;
@@ -75,42 +79,68 @@ const imgs = [
 	opacity: 0.5;	
 }
 
+/* -------------------- PARALLAX -------------------- */
 
-
-
-
-
-
-
-/* BULLSHIT PARALLAAX FUCK */
-
-/* Parallax Viewport — Contains the Effect */
-.parallax-viewport {
-  height: 50vh; /* Limit the parallax area */
-  overflow: hidden; /* Prevent layer overflow */
-  z-index: 0; /* Below header and content */
-	margin-bottom: 50px;
+/* covers */
+.ptop, .pbot {
+	width: 100%;
+	background-color: white;
+	position: absolute;
+	z-index: -1
+}
+.ptop {
+	top: 0;
+	height: 120px;
+}
+.pbot {
+	top: 50vh;
+	height: 100%;
 }
 
-/* Parallax Layer — Moves Independently */
+/* viewport */
+.parallax-viewport {
+	display: flex;
+  height: 44vh;
+  z-index: 0;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+/* text */
+.parallax-viewport h3, .parallax-viewport p {
+	color: white;
+	margin: 0;
+	padding: 0;
+	animation: parallaxScrollSlow linear forwards;
+  animation-timeline: scroll();
+	z-index: -2;
+}
+@keyframes parallaxScrollSlow {
+  to {
+    transform: translateY(300px);
+  }
+}
+.parallax-viewport p {
+	font-size: 24px;
+}
+
+/* image */
 .parallax-layer {
-  height: 100%;
-  width: 100%;
+  height: 50vh;
+	width: 100%;
   background-image: url('./illustration/forest.png');
   background-size: cover;
   background-position: center;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 60px;
   animation: parallaxScroll linear forwards;
   animation-timeline: scroll();
-  z-index: -1; /* Stays behind other content */
+  z-index: -2;
 }
-
-/* Smooth Scroll Animation */
 @keyframes parallaxScroll {
   to {
-    transform: translateY(500px); /* Adjust movement for parallax */
+    transform: translateY(400px);
   }
 }
 
