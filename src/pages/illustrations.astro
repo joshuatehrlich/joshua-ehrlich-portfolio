@@ -3,6 +3,25 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+const imgs = [
+	{
+		path: "giant",
+		width: 3
+	},{
+		path: "balloon",
+		width: 1
+	},{
+		path: "alice",
+		width: 1
+	},{
+		path: "desert",
+		width: 3
+	},{
+		path: "siftgun",
+		width: 3
+	}
+]
 ---
 
 <!doctype html>
@@ -12,16 +31,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>illustrations</h1>
-		</main>
 
+		<!-- CURRENTLY BROKEN PARRALAX -->
+		<!-- <div class="parallax-viewport">
+			<div class="parallax-layer">
+			</div>
+		</div> -->
 
 		<div class="gallery">
-			<image href="../../public/illustration/giant."></image>
+			{imgs.map((img) => (
+				<img src=`./illustration/${img.path}.png` />
+			))}
 		</div>
-
-
 
 		<Footer />
 	</body>
@@ -29,8 +50,68 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 <style>
 
-h1 {
-	text-align: center;
+.gallery {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-auto-rows: 80vh;
+	margin: 70px 90px 50px 90px;
+	column-gap: 10px;
+	row-gap: 10px;
+}
+.gallery img {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	background-position: center;
+	border-radius: 2px;
+
+	transition: 150ms;
+
+	text-decoration: none;
+}
+.gallery img:hover {
+	opacity: 0.5;	
+}
+
+
+
+
+
+
+
+
+/* BULLSHIT PARALLAAX FUCK */
+
+/* Parallax Viewport — Contains the Effect */
+.parallax-viewport {
+  height: 50vh; /* Limit the parallax area */
+  overflow: hidden; /* Prevent layer overflow */
+  z-index: 0; /* Below header and content */
+	margin-bottom: 50px;
+}
+
+/* Parallax Layer — Moves Independently */
+.parallax-layer {
+  height: 100%;
+  width: 100%;
+  background-image: url('./illustration/forest.png');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: parallaxScroll linear forwards;
+  animation-timeline: scroll();
+  z-index: -1; /* Stays behind other content */
+}
+
+/* Smooth Scroll Animation */
+@keyframes parallaxScroll {
+  to {
+    transform: translateY(500px); /* Adjust movement for parallax */
+  }
 }
 
 </style>
