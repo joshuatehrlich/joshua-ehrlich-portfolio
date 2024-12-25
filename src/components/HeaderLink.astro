@@ -14,7 +14,7 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 </a>
 <style>
 	a {
-		padding: 30px 16px 16px 16px;
+		padding: 30px 0px 16px 0px;
 		border-radius: 0px 0px 5px 5px;
 		white-space: nowrap;
 		flex-grow: 1;
@@ -29,6 +29,7 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		transition:
 			background-color 0.2s,
 			color 0.2s;
+			margin: 0;
 	}
 	a:hover, a.active {
 		background-color: rgb(188, 188, 188);
