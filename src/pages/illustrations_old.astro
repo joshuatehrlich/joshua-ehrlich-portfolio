@@ -4,8 +4,6 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
-import CardDemo from '../components/ui/card-demo.tsx';
-
 const imgs = [
 	{
 		path: "giant",
@@ -44,12 +42,14 @@ const imgs = [
 	<body>
 		<Header />
 
+		<div class="ptop"></div>
 		<div class="parallax-viewport">
-			<div class="parallax-content">
-				<h3 class="parallax-text-elements">View my work below</h1>
-				<p class="parallax-text-elements">click on any image for details</p>
+			<div class="parallax-layer">
 			</div>
-		</div>
+				<h3>View my work below</h1>
+				<p>click on any image for details</p>
+			</div>
+		<div class="pbot"></div>
 
 		<div class="gallery">
 			{imgs.map((img) => (
@@ -64,22 +64,16 @@ const imgs = [
 			))}
 		</div>
 
-		<!-- <CardDemo client:load /> -->
-
 		<Footer />
 	</body>
 </html>
 
 <style>
-.card {
-	background-color: red;
-	width: 400px;
-	height: 400px;
-}
+
 
 .gallery {
 	display: flex;
-	margin: 140px auto 200px auto;
+	margin: 140px auto 120px auto;
 	column-gap: 10px;
 	row-gap: 10px;
 	width: 90%;
@@ -152,69 +146,85 @@ const imgs = [
 
 /* -------------------- PARALLAX -------------------- */
 
+/* covers */
+.ptop, .pbot {
+	width: 100%;
+	background-color: white;
+	position: absolute;
+	z-index: -1
+}
+.ptop {
+	top: 0;
+	height: 120px;
+}
+.pbot {
+	top: 50vh;
+	height: 100%;
+}
+
 /* viewport */
 .parallax-viewport {
-	margin: 90px 0px 0px 0px;
-	position: relative;
-	
-  height: 40vh;
-  z-index: 0;
-	
-	background-image: url('/illustration/forest.png');
-	background-size: 120%;
-  animation: parallaxScroll linear forwards;
-	animation-fill-mode: both;
-	animation-duration: 1ms;
-  animation-timeline: view();
-	animation-range-start: contain 70%;
-	animation-range-end: cover;
-
-	background-position: 50% 70%;
-}
-@media (min-width: 730px) { @keyframes parallaxScroll {
-	to {
-    background-position: 50% 0%;
-  }
-}}
-
-.parallax-content{
-	width: 100%;
-	height: 100%;
+	margin-top: 8vh;
 	display: flex;
+  height: 32vh;
+  z-index: 0;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	animation: parallaxScrollSlow linear forwards;
-  animation-timeline: view();
-	animation-range-start: contain 70%;
-	animation-range-end: cover;
 }
-@media (min-width: 730px) { @keyframes parallaxScrollSlow {
-	from {
-		opacity: 1;
-	}
-  to {
-    transform: translateY(200px);
-		opacity: 0;
-  }
-}}
 
 /* text */
-.parallax-text-elements {
+.parallax-viewport h3, .parallax-viewport p {
 	color: white;
 	margin: 0;
 	padding: 0;
-	
+	animation: parallaxScrollSlow linear forwards;
+  animation-timeline: scroll();
+	z-index: -2;
 }
+@media (min-width: 730px) { @keyframes parallaxScrollSlow {
+	80% {
+		opacity: 0;
+	}
+  to {
+    transform: translateY(300px);
+		opacity: 0;
+  }
+}}
 .parallax-viewport p {
 	font-size: 24px;
 }
 
+/* image */
+.parallax-layer {
+  height: 50vh;
+	width: 100%;
+  background-image: url('/illustration/forest.png');
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  top: 60px;
+  animation: parallaxScroll linear forwards;
+  animation-timeline: scroll();
+  z-index: -2;
+}
+
+@media (min-width: 730px) { @keyframes parallaxScroll {
+  to {
+    transform: translateY(400px);
+  }
+}}
 
 @media (max-width: 720px) {
 .parallax-layer {
+	height: 30vh;
 }
 .parallax-viewport {
+	height: 9vh;
+	padding-top: 2vh;
+}
+.pbot {
+	top: 30vh;
 }
 }
 
