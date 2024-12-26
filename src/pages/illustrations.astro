@@ -6,14 +6,18 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 import CardDemo from '../components/ui/card-demo.tsx';
 
-const categories = ["path", "name", "details", "width", "height"] as const;
+
+// SETUP IMAGE IMPORTS
+const categories = ["path", "name", "details", "width", "vpos"] as const;
 
 const imgData = [
-  ["giant", "Giant", "...", 2],
-  ["balloon", "Escape", "..."],
-  ["desert", "Alice Abandoned", "...", 2],
-  ["alice", "Alice Redesign", "..."],
-  ["siftgun", "Sift", "..."]
+  ["giant", "Giant", "...", 3],["balloon", "Escape", "..."],
+  ["desert", "Alice Abandoned", "...", 2, "60%"],["alice", "Alice Redesign", "..."],
+
+	["siftmask", "Sift", "..."],["siftgun", "Sift", "...", 3, "0%"],
+	["eye", "Untitled", "...", 2],[null],
+
+	["camp", "Sift", "..."],["carride", "Sift", "..."],[null],
 ];
 
 type Image = {
@@ -21,11 +25,11 @@ type Image = {
   name: string;
   details: string;
   width: number;
-  height: number;
+  vpos: string;
 };
 
 const defaultWidth = 1;  // Default width
-const defaultHeight = 1; // Default height
+const defaultVPos = "50%"; // Default vertical position
 
 const imgs: Image[] = imgData.map(data => {
   const image = {
@@ -33,12 +37,11 @@ const imgs: Image[] = imgData.map(data => {
     name: data[1] as string,
     details: data[2] as string, // Details provided in imgData
     width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
-    height: (data[4] !== undefined ? data[4] : defaultHeight) as number,
+    vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
   } as Image;
 
   return image;
 });
-
 ---
 
 <!doctype html>
@@ -58,20 +61,22 @@ const imgs: Image[] = imgData.map(data => {
 
 		<div class="gallery-group">
 			{imgs.reduce((acc, img, index) => {
-				acc = acc as { path: string, width: number, name: string }[][];
+				acc = acc as { path: string, width: number, name: string, vpos: string }[][];
 				
 				// Start a new flexbox for every 4 images
-				if (index % 4 === 0) {
+				if (index % 4 === 0 || img.path === null) {
 					acc.push([]);
 				}
 				acc[acc.length - 1].push(img);
 				return acc;
-			}, [] as { path: string, width: number, name: string }[][]).map((imgGroup, groupIndex) => (
+			}, [] as { path: string, width: number, name: string, vpos: string }[][])
+			.map((imgGroup, groupIndex) => ( imgGroup.length > 1 && (
 				<div class="gallery">
 					{imgGroup.map((img, imgIndex) => (
 						<div class="stretchy-bg" style={{
 							backgroundImage: `url(/illustration/${img.path}.jpg)`,
-							'--flex-grow': `${img.width}`
+							'--flex-grow': `${img.width}`,
+							backgroundPosition: `50% ${img.vpos}`
 						}}>
 							<div class="stretchy-container">
 								<h3 class="stretchy-text">{img.name}</h3>
@@ -79,12 +84,11 @@ const imgs: Image[] = imgData.map(data => {
 						</div>
 					))}
 				</div>
-			))}
+			)))}
 			
 			
 			
   </div>
-))}
 
 		</div>
 
@@ -100,7 +104,7 @@ const imgs: Image[] = imgData.map(data => {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
-	margin: 100px 0px 100px 0px;
+	margin: 5vw 0px 100px 0px;
   row-gap: 10px;
 }
 
@@ -116,7 +120,7 @@ const imgs: Image[] = imgData.map(data => {
 	flex-wrap: wrap;
 }
 .stretchy-bg {
-	height: 20vh;
+	height: 20vw;
 	margin: 0;
 	padding: 0;
 	border-radius: 2px;
@@ -135,15 +139,15 @@ const imgs: Image[] = imgData.map(data => {
 @media (max-width: 1080px) {
 .stretchy-bg {
 	flex-basis: 34%;
-	height: 40vh;
+	height: 20vh;
 }} @media (max-width: 720px) {
 .stretchy-bg {
-	flex-basis: 100%;
-	height: 30vh;
+	/* flex-basis: 100%; */
+	height: 15vh;
 }}
 
 .stretchy-bg:hover {
-	flex-grow: calc(var(--flex-grow) + 1) !important;
+	flex-grow: calc(var(--flex-grow) + 0.5) !important;
 }
 .stretchy-container {
 	width: 100%;
@@ -168,7 +172,7 @@ const imgs: Image[] = imgData.map(data => {
 	white-space: nowrap;
 	opacity: 0;
 	transition: 250ms;
-
+	font-size: 1.4em;
 	margin: 0px 0px 20px 30px;
 }
 .stretchy-container:hover {
@@ -183,10 +187,10 @@ const imgs: Image[] = imgData.map(data => {
 
 /* viewport */
 .parallax-viewport {
-	margin: 90px 0px 0px 0px;
+	margin: 30px 0px 0px 0px;
 	position: relative;
 	
-  height: 40vh;
+  height: 30vw;
   z-index: 0;
 	
 	background-image: url('/illustration/forest.png');
@@ -215,7 +219,7 @@ const imgs: Image[] = imgData.map(data => {
 	justify-content: center;
 	animation: parallaxScrollSlow linear forwards;
   animation-timeline: view();
-	animation-range-start: contain 70%;
+	animation-range-start: contain 90%;
 	animation-range-end: cover;
 }
 @media (min-width: 730px) { @keyframes parallaxScrollSlow {
@@ -244,6 +248,7 @@ const imgs: Image[] = imgData.map(data => {
 .parallax-layer {
 }
 .parallax-viewport {
+	height: 50vw;
 }
 }
 
