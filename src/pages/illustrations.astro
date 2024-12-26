@@ -7,19 +7,29 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 const imgs = [
 	{
 		path: "giant",
-		width: 3
-	},{
+		name: "Giant",
+		width: 1
+	},
+	{
 		path: "balloon",
+		name: "Escape",
 		width: 1
-	},{
-		path: "alice",
-		width: 1
-	},{
+	},
+	{
 		path: "desert",
-		width: 3
-	},{
+		name: "Alice Abandoned",
+		width: 1
+	},
+	{
+		path: "alice",
+		name: "Alice Redesign",
+		width: 1
+	},
+	
+	{
 		path: "siftgun",
-		width: 3
+		name: "Sift",
+		width: 1
 	}
 ]
 ---
@@ -36,14 +46,21 @@ const imgs = [
 		<div class="parallax-viewport">
 			<div class="parallax-layer">
 			</div>
-				<h3>View a selection</h1>
-				<p>of my illustrations below</p>
+				<h3>View my work below</h1>
+				<p>click on any image for details</p>
 			</div>
 		<div class="pbot"></div>
 
 		<div class="gallery">
 			{imgs.map((img) => (
-				<img src=`/illustration/${img.path}.jpg` />
+				<div class="stretchy-bg" style={{
+					backgroundImage: `url(/illustration/${img.path}.jpg)`,
+					flexGrow: `${img.width}`
+					}}>
+					<div class="stretchy-container">
+						<h3 class="stretchy-text">{img.name}</h3>
+					</div>
+				</div>
 			))}
 		</div>
 
@@ -55,28 +72,79 @@ const imgs = [
 
 
 .gallery {
-	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-auto-rows: 80vh;
-	margin: 70px 90px 50px 90px;
+	display: flex;
+	margin: 100px auto 80px auto;
 	column-gap: 10px;
 	row-gap: 10px;
+	width: 90%;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+	flex-wrap: wrap;
 }
-.gallery img {
+.stretchy-bg {
+	height: 50vh;
 	margin: 0;
 	padding: 0;
-	height: 100%;
-	width: 100%;
-	object-fit: cover;
-	background-position: center;
 	border-radius: 2px;
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: 18%;
+	min-width: 0;
+	transition: 600ms;
 
-	transition: 150ms;
-
-	text-decoration: none;
+	background-size: cover;
+	background-position: center;
 }
-.gallery img:hover {
-	opacity: 0.5;	
+
+@media (max-width: 1080px) {
+.stretchy-bg {
+	flex-basis: 40%;
+	height: 40vh;
+}} @media (max-width: 720px) {
+.stretchy-bg {
+	flex-basis: 100%;
+	height: 30vh;
+}}
+
+.stretchy-bg:hover {
+	flex-grow: 3 !important;
+	/* border-radius: 20px;
+	height: 48vh;
+	margin: 0px 20px 0px 20px; */
+}
+.stretchy-container {
+	width: 100%;
+	height: 100%;
+	/* background-color: rgba(255,255,255,0); */
+	opacity: 0;
+	background: linear-gradient(
+		to top,
+		rgba(255, 255, 255, 0.783),
+		rgba(255, 255, 255, 0) 100%
+		);
+	transition: 350ms;
+	
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+}
+.stretchy-text {
+	color: rgba(56, 56, 56, 0.836);
+	transition: 150ms;
+	text-align: center;
+	white-space: nowrap;
+	opacity: 0;
+	transition: 250ms;
+
+	margin: 0px 0px 20px 30px;
+}
+.stretchy-container:hover {
+	/* background-color: rgba(255, 255, 255, 0.718); */
+	opacity: 1;
+}
+.stretchy-container:hover .stretchy-text {
+	opacity: 1;
 }
 
 /* -------------------- PARALLAX -------------------- */
@@ -117,8 +185,12 @@ const imgs = [
 	z-index: -2;
 }
 @keyframes parallaxScrollSlow {
+	80% {
+		opacity: 0;
+	}
   to {
     transform: translateY(300px);
+		opacity: 0;
   }
 }
 .parallax-viewport p {
