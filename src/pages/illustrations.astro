@@ -160,14 +160,7 @@ const imgs = [
 .pbot {
 	top: 50vh;
 	height: 100%;
-	animation: parallaxScrollTop linear forwards;
-  animation-timeline: scroll();
 }
-/* @keyframes parallaxScrollTop {
-	to {
-		top: 0vh;
-	}
-} */
 
 /* viewport */
 .parallax-viewport {
@@ -188,7 +181,7 @@ const imgs = [
   animation-timeline: scroll();
 	z-index: -2;
 }
-@keyframes parallaxScrollSlow {
+@media (min-width: 730px) { @keyframes parallaxScrollSlow {
 	80% {
 		opacity: 0;
 	}
@@ -196,7 +189,7 @@ const imgs = [
     transform: translateY(300px);
 		opacity: 0;
   }
-}
+}}
 .parallax-viewport p {
 	font-size: 24px;
 }
@@ -214,10 +207,24 @@ const imgs = [
   animation-timeline: scroll();
   z-index: -2;
 }
-@keyframes parallaxScroll {
+
+@media (min-width: 730px) { @keyframes parallaxScroll {
   to {
     transform: translateY(400px);
   }
+}}
+
+@media (max-width: 720px) {
+.parallax-layer {
+	height: 30vh;
+}
+.parallax-viewport {
+	height: 13vh;
+	padding-top: 100px;
+}
+.pbot {
+	top: 30vh;
+}
 }
 
 </style>
