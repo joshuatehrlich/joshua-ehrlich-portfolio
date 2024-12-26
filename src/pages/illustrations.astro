@@ -6,34 +6,39 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 import CardDemo from '../components/ui/card-demo.tsx';
 
-const imgs = [
-	{
-		path: "giant",
-		name: "Giant",
-		width: 1
-	},
-	{
-		path: "balloon",
-		name: "Escape",
-		width: 1
-	},
-	{
-		path: "desert",
-		name: "Alice Abandoned",
-		width: 1
-	},
-	{
-		path: "alice",
-		name: "Alice Redesign",
-		width: 1
-	},
-	
-	{
-		path: "siftgun",
-		name: "Sift",
-		width: 1
-	}
-]
+const categories = ["path", "name", "details", "width", "height"] as const;
+
+const imgData = [
+  ["giant", "Giant", "...", 2],
+  ["balloon", "Escape", "..."],
+  ["desert", "Alice Abandoned", "...", 2],
+  ["alice", "Alice Redesign", "..."],
+  ["siftgun", "Sift", "..."]
+];
+
+type Image = {
+  path: string;
+  name: string;
+  details: string;
+  width: number;
+  height: number;
+};
+
+const defaultWidth = 1;  // Default width
+const defaultHeight = 1; // Default height
+
+const imgs: Image[] = imgData.map(data => {
+  const image = {
+    path: data[0] as string,
+    name: data[1] as string,
+    details: data[2] as string, // Details provided in imgData
+    width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
+    height: (data[4] !== undefined ? data[4] : defaultHeight) as number,
+  } as Image;
+
+  return image;
+});
+
 ---
 
 <!doctype html>
@@ -51,17 +56,36 @@ const imgs = [
 			</div>
 		</div>
 
-		<div class="gallery">
-			{imgs.map((img) => (
-				<div class="stretchy-bg" style={{
-					backgroundImage: `url(/illustration/${img.path}.jpg)`,
-					flexGrow: `${img.width}`
-					}}>
-					<div class="stretchy-container">
-						<h3 class="stretchy-text">{img.name}</h3>
-					</div>
+		<div class="gallery-group">
+			{imgs.reduce((acc, img, index) => {
+				acc = acc as { path: string, width: number, name: string }[][];
+				
+				// Start a new flexbox for every 4 images
+				if (index % 4 === 0) {
+					acc.push([]);
+				}
+				acc[acc.length - 1].push(img);
+				return acc;
+			}, [] as { path: string, width: number, name: string }[][]).map((imgGroup, groupIndex) => (
+				<div class="gallery">
+					{imgGroup.map((img, imgIndex) => (
+						<div class="stretchy-bg" style={{
+							backgroundImage: `url(/illustration/${img.path}.jpg)`,
+							'--flex-grow': `${img.width}`
+						}}>
+							<div class="stretchy-container">
+								<h3 class="stretchy-text">{img.name}</h3>
+							</div>
+						</div>
+					))}
 				</div>
 			))}
+			
+			
+			
+  </div>
+))}
+
 		</div>
 
 		<!-- <CardDemo client:load /> -->
@@ -71,15 +95,18 @@ const imgs = [
 </html>
 
 <style>
-.card {
-	background-color: red;
-	width: 400px;
-	height: 400px;
+
+.gallery-group {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	margin: 100px 0px 100px 0px;
+  row-gap: 10px;
 }
 
 .gallery {
 	display: flex;
-	margin: 140px auto 200px auto;
+	margin: 0px auto 0px auto;
 	column-gap: 10px;
 	row-gap: 10px;
 	width: 90%;
@@ -89,18 +116,20 @@ const imgs = [
 	flex-wrap: wrap;
 }
 .stretchy-bg {
-	height: 50vh;
+	height: 20vh;
 	margin: 0;
 	padding: 0;
 	border-radius: 2px;
-	flex-grow: 1;
-	flex-shrink: 0;
+	
+	flex-shrink:2;
 	flex-basis: 0;
 	min-width: 0;
 	transition: 600ms;
 
 	background-size: cover;
 	background-position: center;
+	
+	flex-grow: var(--flex-grow);
 }
 
 @media (max-width: 1080px) {
@@ -114,7 +143,7 @@ const imgs = [
 }}
 
 .stretchy-bg:hover {
-	flex-grow: 3 !important;
+	flex-grow: calc(var(--flex-grow) + 1) !important;
 }
 .stretchy-container {
 	width: 100%;
