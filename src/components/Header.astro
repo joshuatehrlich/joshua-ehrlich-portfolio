@@ -1,13 +1,14 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import { ModeToggle } from '@/components/ModeToggle';
 ---
 
 <header>
 	<nav>
 		<h2 class="site-title"><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink class="header-link" href="/illustrations">Illustration</HeaderLink>
+			<HeaderLink class="header-link" href="/illustration">Illustration</HeaderLink>
 			<HeaderLink class="header-link" href="/dust">Dust</HeaderLink>
 			<HeaderLink class="header-link" href="/earthen">Earthen</HeaderLink>
 			<HeaderLink class="header-link" href="/game-jams">Game Jams</HeaderLink>

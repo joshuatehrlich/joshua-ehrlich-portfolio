@@ -1,0 +1,101 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/illustration.scss';
+
+import CardDemo from '../components/ui/card-demo.tsx';
+
+
+// SETUP IMAGE IMPORTS
+const categories = ["path", "name", "details", "width", "vpos"] as const;
+
+const imgData = [
+  ["giant", "Giant", "...", 3],["balloon", "Escape", "..."],
+  ["desert", "Alice Abandoned", "...", 2, "60%"],["alice", "Alice Redesign", "..."],
+
+	["siftmask", "Sift", "..."],["siftgun", "Sift", "...", 3, "0%"],
+	["eye", "Untitled", "...", 2],[null],
+
+	["camp", "Sift", "..."],["carride", "Sift", "..."],[null],
+];
+
+type Image = {
+  path: string;
+  name: string;
+  details: string;
+  width: number;
+  vpos: string;
+};
+
+const defaultWidth = 1;  // Default width
+const defaultVPos = "50%"; // Default vertical position
+
+const imgs: Image[] = imgData.map(data => {
+  const image = {
+    path: data[0] as string,
+    name: data[1] as string,
+    details: data[2] as string, // Details provided in imgData
+    width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
+    vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
+  } as Image;
+
+  return image;
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+
+		<div class="parallax-viewport">
+			<div class="parallax-content">
+				<h3>View my work below</h1>
+				<p>click on any image for details</p>
+			</div>
+		</div>
+
+		<div class="gallery-group">
+			{imgs.reduce((acc, img, index) => {
+				acc = acc as { path: string, width: number, name: string, vpos: string }[][];
+				
+				// Start a new flexbox for every 4 images
+				if (index % 4 === 0 || img.path === null) {
+					acc.push([]);
+				}
+				acc[acc.length - 1].push(img);
+				return acc;
+			}, [] as { path: string, width: number, name: string, vpos: string }[][])
+			.map((imgGroup, groupIndex) => ( imgGroup.length > 1 && (
+				<div class="gallery">
+					{imgGroup.map((img, imgIndex) => (
+						<div class="gallery-img" style={{
+							backgroundImage: `url(/illustration/${img.path}.jpg)`,
+							'--flex-grow': `${img.width}`,
+							backgroundPosition: `50% ${img.vpos}`
+						}}>
+							<div class="gallery-content-container">
+								<h3 class="gallery-content">{img.name}</h3>
+							</div>
+						</div>
+					))}
+				</div>
+			)))}
+			
+			
+			
+  </div>
+
+		</div>
+
+		<!-- <CardDemo client:load /> -->
+
+		<Footer />
+	</body>
+</html>

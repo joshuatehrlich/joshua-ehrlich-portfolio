@@ -9,6 +9,8 @@
  @tailwind utilities;
 
 :root {
+	--dark: black;
+	--light: white;
 	--accent: #848484;
 	--accent-dark: #323232;
 	--black: 15, 15, 15;
@@ -50,6 +52,7 @@ body {
 }
 html {
 	scroll-behavior: smooth;
+	background-color: var(--light);
 }
 html::-webkit-scrollbar {
   display: none;
