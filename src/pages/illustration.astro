@@ -13,13 +13,19 @@ import CardDemo from '../components/ui/card-demo.tsx';
 const categories = ["path", "name", "details", "width", "vpos"] as const;
 
 const imgData = [
-  ["giant", "Giant", "...", 3],["balloon", "Escape", "..."],
-  ["desert", "Alice Abandoned", "...", 2, "60%"],["alice", "Alice Redesign", "..."],
+  ["giant", "Giant", "40 by 60 inches, copic on illustration board.<br>2024", 3],
+	["balloon", "Escape", "Created in photoshop.<br>2024"],
+  ["desert", "Alice Abandoned",
+		"An exploration of an Alice in Wonderland redesign, set on an alien planet. Created in photoshop.<br>2024"
+	, 2, "60%"],
+	["alice", "Alice Redesign", 'A redesign of Alice in Wonderland, in response to the theme "Alice in Space."'],
 
-	["siftmask", "Sift", "..."],["siftgun", "Sift", "...", 3, "0%"],
+	["siftmask", "Sift Concept", 'Character concept for a top-down action project called "Sift".'],
+	["siftgun", "Sift Concept", 'Character concept for a top-down action project called "Sift".', 3, "0%"],
 	["eye", "Untitled", "...", 2],[null],
 
-	["camp", "Sift", "..."],["carride", "Sift", "..."],[null],
+	["camp", "Camp", "..."],
+	["carride", "The Move", "..."],[null],
 ];
 
 type Image = {
@@ -46,6 +52,23 @@ const imgs: Image[] = imgData.map(data => {
 });
 ---
 
+<script client:load>
+  function openPopup(imageSrc, imageTitle, imageDesc) {
+    document.getElementById('popup').style.display = 'flex';
+    document.getElementById('popup-image').src = imageSrc;
+		document.getElementById('popup-title').innerHTML = imageTitle;
+		document.getElementById('popup-desc').innerHTML = imageDesc;
+		if (imageDesc == "" || imageDesc == "...") {
+			document.getElementById('popup-text').style.display = 'none';
+		} else { document.getElementById('popup-text').style.display = 'flex'; }
+  }
+
+  function closePopup() {
+    document.getElementById('popup').style.display = 'none';
+  }
+</script>
+
+
 <!doctype html>
 <html lang="en">
 	<head>
@@ -61,9 +84,23 @@ const imgs: Image[] = imgData.map(data => {
 			</div>
 		</div>
 
+		<div id="popup" class="popup">
+			<span class="close-btn" onclick="closePopup()">&times;</span>
+			<div class="popup-flexbox">
+				
+				<img id="popup-image" src="/illustration/siftmask.jpg">
+				<div class="popup-text" id="popup-text">
+					<h1 id="popup-title">Name</h1>
+					<p id="popup-desc">Desc</p>
+				</div>
+			</div>
+			
+		</div>
+
+
 		<div class="gallery-group">
 			{imgs.reduce((acc, img, index) => {
-				acc = acc as { path: string, width: number, name: string, vpos: string }[][];
+				acc = acc as { path: string, width: number, name: string, details: string, vpos: string }[][];
 				
 				// Start a new flexbox for every 4 images
 				if (index % 4 === 0 || img.path === null) {
@@ -71,11 +108,13 @@ const imgs: Image[] = imgData.map(data => {
 				}
 				acc[acc.length - 1].push(img);
 				return acc;
-			}, [] as { path: string, width: number, name: string, vpos: string }[][])
+			}, [] as { path: string, width: number, name: string, details: string, vpos: string }[][])
 			.map((imgGroup, groupIndex) => ( imgGroup.length > 1 && (
 				<div class="gallery">
 					{imgGroup.map((img, imgIndex) => (
-						<div class="gallery-img" style={{
+						<div class="gallery-img"
+						onclick=`openPopup('/illustration/${img.path}.jpg', '${img.name}', '${img.details}')`,
+						style={{
 							backgroundImage: `url(/illustration/${img.path}.jpg)`,
 							'--flex-grow': `${img.width}`,
 							backgroundPosition: `50% ${img.vpos}`
