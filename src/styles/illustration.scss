@@ -73,6 +73,7 @@
 		}
 		.popup-text {
 			width: 100%;
+			max-width: 100%;
 			h1, p {
 				flex-shrink: 1;
 				flex-basis: 0;
@@ -118,6 +119,7 @@
 	align-items: center;
 	align-content: stretch;
 	flex-wrap: wrap;
+	
 }
 .gallery-img {
 	height: 20vw;
@@ -134,6 +136,7 @@
 	background-position: center;
 	
 	flex-grow: var(--flex-grow);
+	cursor: pointer;
 
 	&:hover {
 		flex-grow: calc(var(--flex-grow) + 0.5) !important;
