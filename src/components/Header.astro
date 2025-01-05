@@ -8,10 +8,16 @@ import { ModeToggle } from '@/components/ModeToggle';
 	<nav>
 		<h2 class="site-title"><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
-			<HeaderLink class="header-link" href="/illustration">Illustration</HeaderLink>
+			<HeaderLink class="header-link" href="/illustration">
+				<span class="full-text">llustration</span>
+				<span class="short-text">Illust</span>
+			</HeaderLink>
 			<HeaderLink class="header-link" href="/dust">Dust</HeaderLink>
 			<HeaderLink class="header-link" href="/earthen">Earthen</HeaderLink>
-			<HeaderLink class="header-link" href="/game-jams">Game Jams</HeaderLink>
+			<HeaderLink class="header-link" href="/game-jams">
+				<span class="full-text">Game Jams</span>
+				<span class="short-text">Other</span>
+			</HeaderLink>
 		</div>
 		<div class="header-contacts">
 			<a href="/">joshuatehrlich@gmail.com</a>
@@ -89,6 +95,14 @@ import { ModeToggle } from '@/components/ModeToggle';
 			display: none;
 		}
 	} */
+
+.short-text {
+	display: none;
+}
+@media (max-width: 720px) {
+	.short-text {display: block;}
+	.full-text {display: none;}
+}
 
 nav {
   display: flex;
