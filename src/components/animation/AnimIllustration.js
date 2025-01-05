@@ -30,7 +30,7 @@ gsap.to(".parallax-viewport", {
 gsap.from(".foot-image", {
 	scrollTrigger: {
 		trigger: '.foot-image',
-		markers: true,
+		// markers: true,
 		start: "top 80%",
 		end: "center 50%",
 		scrub: true
