@@ -73,3 +73,14 @@ gsap.to(".p1", {
 	y: "10vw",
 	ease: "none"
 });
+
+gsap.to(".parallax-content", {
+	scrollTrigger: {
+		startTrigger: ".title",
+		start: "100px 0px",
+		endTrigger: ".title",
+		end: "80% top",
+		scrub: true
+	},
+	backgroundColor: "black"
+});

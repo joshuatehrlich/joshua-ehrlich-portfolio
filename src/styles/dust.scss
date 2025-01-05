@@ -31,6 +31,12 @@
 		width: 35%;
 		object-fit: contain;
 		margin-top: -5vw;
+
+		pointer-events: none;
+
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		user-select: none;
 	}
 
 	@media (max-width: 1080px) {
@@ -47,6 +53,18 @@
 
 .content-background {
 	width: 100%;
-	height: 1000px;
+	height: fit-content;
 	background-color: black;
+
+	display: flex;
+	justify-content: center;
+	align-content: center;
+
+	padding-top: 5vw;
+	padding-bottom: 10vw;
+
+	img {
+		width: 90%;
+		object-fit: contain;
+	}
 }
