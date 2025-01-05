@@ -7,10 +7,11 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import '../styles/illustration.scss';
 
 import CardDemo from '../components/ui/card-demo.tsx';
+import { undefined } from 'astro:schema';
 
 
 // SETUP IMAGE IMPORTS
-const categories = ["path", "name", "details", "width", "vpos"] as const;
+const categories = ["path", "name", "details", "width", "vpos", "height"] as const;
 
 const imgData = [
   ["giant", "Giant", "40 by 60 inches, copic on illustration board.<br>2024", 3],
@@ -25,7 +26,18 @@ const imgData = [
 	["eye", "Untitled", "...", 2],[null],
 
 	["camp", "Camp", "...", 3],
-	["carride", "The Move", "...", 3],[null],
+	["carride", "The Move", "...", 3],[null],[null],
+
+	["knightcomic", "Camp", "...", 1.3],
+	["cookingathome", "The Move", "...", 3],
+	["washingmachine", "The Move", "...", 2],
+	["alpha", "Camp", "...", 1],
+
+	
+
+	["kaiju", "The Move", "...", 4, "0%", "40vw"],
+	["dive", "Camp", "...", 2, undefined, "40vw"],
+	[null],[null],
 ];
 
 type Image = {
@@ -34,6 +46,7 @@ type Image = {
   details: string;
   width: number;
   vpos: string;
+	height: string;
 };
 
 const defaultWidth = 1;  // Default width
@@ -46,14 +59,12 @@ const imgs: Image[] = imgData.map(data => {
     details: data[2] as string, // Details provided in imgData
     width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
     vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
+		height: (data[5] !== undefined ? data[5] : "20vw") as string,
   } as Image;
 
   return image;
 });
 ---
-
-
-
 
 <!doctype html>
 <html lang="en">
@@ -63,50 +74,20 @@ const imgs: Image[] = imgData.map(data => {
 	<body>
 		<Header class="header"/>
 
-		<script>
-			import { gsap } from 'gsap';
-			import { ScrollTrigger } from "gsap/ScrollTrigger";
-			gsap.registerPlugin(ScrollTrigger);
+		<!-- Handles Animations -->
+		<script src="../components/animation/AnimIllustration.js"></script>
 
-			gsap.to(".parallax-content", {
-				scrollTrigger: {
-					trigger: '.header',
-					endTrigger: '.parallax-content',
-					start: "0px 0px",
-					end: "bottom top",
-					scrub: true
-				},
-				opacity: 0,
-				y: "15vw",
-				ease: "none"
-			});
-
-			gsap.to(".parallax-viewport", {
-				scrollTrigger: {
-					trigger: '.header',
-					endTrigger: '.parallax-content',
-					start: "0px 0px",
-					end: "bottom top",
-					scrub: true
-				},
-				backgroundPosition: "50% 0%",
-				ease: "none"
-			});
-
-		</script>
-
-		<div class="parallax-viewport">
-			<div class="parallax-content">
-				<h3>View my work below</h1>
-				<p>click on any image for details</p>
-			</div>
-		</div>
-
-		<!-- I have no idea why this is throwing an error, client:load is necessary for it to work -->
-		<script client:load>
+		<!-- handles popups -->
+		<script client:load> // for some reason, this is read as typescript unless i use client:load
 
 			function openPopup(imageSrc, imageTitle, imageDesc) {
 				document.getElementById('popup').style.display = 'flex';
+				
+				// gsap.to(".popup", {
+				// 	opacity: 1,
+				// 	duration: 1
+				// });
+
 				document.getElementById('popup-image').src = imageSrc;
 				document.getElementById('popup-title').innerHTML = imageTitle;
 				document.getElementById('popup-desc').innerHTML = imageDesc;
@@ -120,6 +101,13 @@ const imgs: Image[] = imgData.map(data => {
 			}
 		</script>
 
+		<div class="parallax-viewport">
+			<div class="parallax-content">
+				<h3>View my work below</h1>
+				<p>click on any image for details</p>
+			</div>
+		</div>
+
 		<div id="popup" class="popup">
 			<span class="close-btn" onclick="closePopup()">&times;</span>
 			<div class="popup-flexbox">
@@ -130,13 +118,12 @@ const imgs: Image[] = imgData.map(data => {
 					<p id="popup-desc">Desc</p>
 				</div>
 			</div>
-			
 		</div>
 
 
 		<div class="gallery-group">
 			{imgs.reduce((acc, img, index) => {
-				acc = acc as { path: string, width: number, name: string, details: string, vpos: string }[][];
+				acc = acc as {}[][];
 				
 				// Start a new flexbox for every 4 images
 				if (index % 4 === 0 || img.path === null) {
@@ -144,7 +131,7 @@ const imgs: Image[] = imgData.map(data => {
 				}
 				acc[acc.length - 1].push(img);
 				return acc;
-			}, [] as { path: string, width: number, name: string, details: string, vpos: string }[][])
+			}, [] as {}[][])
 			.map((imgGroup, groupIndex) => ( imgGroup.length > 1 && (
 				<div class="gallery">
 					{imgGroup.map((img, imgIndex) => (
@@ -153,7 +140,8 @@ const imgs: Image[] = imgData.map(data => {
 						style={{
 							backgroundImage: `url(/illustration/${img.path}.jpg)`,
 							'--flex-grow': `${img.width}`,
-							backgroundPosition: `50% ${img.vpos}`
+							backgroundPosition: `50% ${img.vpos}`,
+							height: `${img.height}`
 						}}>
 							<div class="gallery-content-container">
 								<h3 class="gallery-content">{img.name}</h3>
@@ -162,6 +150,11 @@ const imgs: Image[] = imgData.map(data => {
 					))}
 				</div>
 			)))}
+		</div>
+
+		<div class="foot-div flex flex-1 flex-col justify-start items-center w-100% mt-12 mb-20">
+			<img src="/illustration/treefull.jpg" class="foot-image mb-1 w-1/2 object-contain" style="max-height: 50vh">
+			<h4 class="foot-text mw-1/4">Thanks for stopping by!</h4>
 		</div>
 
 		<Footer />
