@@ -1,0 +1,52 @@
+.parallax-image {
+	position: absolute;
+	top: -17vw;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+
+	pointer-events: none;
+
+	@media (max-width: 1080px) {
+		top: -12vw;
+	}
+	@media (max-width: 720px) {
+		top: -4vw;
+	}
+}
+
+.parallax-content {
+	position: relative;
+	width: 100%;
+	height: 35vw;
+
+	display: flex;
+	justify-content: flex-start;
+	align-content: center;
+	padding-left: 10vw;
+
+	pointer-events: none;
+
+	.title {
+		width: 35%;
+		object-fit: contain;
+		margin-top: -5vw;
+	}
+
+	@media (max-width: 1080px) {
+		height: 37vw;
+	}
+	@media (max-width: 720px) {
+		height: 40vw;
+
+		.title {
+			margin-top: 0;
+		}
+	}
+}
+
+.content-background {
+	width: 100%;
+	height: 1000px;
+	background-color: black;
+}
