@@ -106,7 +106,6 @@ const imgs: Image[] = imgData.map(data => {
 
 		<!-- I have no idea why this is throwing an error, client:load is necessary for it to work -->
 		<script client:load>
-import { getStaticPaths } from "./blog/[...slug].astro";
 
 			function openPopup(imageSrc, imageTitle, imageDesc) {
 				document.getElementById('popup').style.display = 'flex';
