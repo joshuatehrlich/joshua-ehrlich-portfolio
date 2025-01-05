@@ -218,11 +218,11 @@
 		height: 40vw;
 	}
 }
-@media (min-width: 730px) { @keyframes parallaxScroll {
-	to {
-    background-position: 50% 0%;
-  }
-}}
+// @media (min-width: 730px) { @keyframes parallaxScroll {
+// 	to {
+//     background-position: 50% 0%;
+//   }
+// }}
 
 
 .parallax-content{
@@ -246,12 +246,12 @@
 		font-size: 0.9rem;
 	}
 }
-@media (min-width: 730px) { @keyframes parallaxScrollSlow {
-	from {
-		opacity: 1;
-	}
-  to {
-    transform: translateY(200px);
-		opacity: 0;
-  }
-}}
+// @media (min-width: 730px) { @keyframes parallaxScrollSlow {
+// 	from {
+// 		opacity: 1;
+// 	}
+//   to {
+//     transform: translateY(200px);
+// 		opacity: 0;
+//   }
+// }}

@@ -24,8 +24,8 @@ const imgData = [
 	["siftgun", "Sift Concept", 'Character concept for a top-down action project called "Sift".', 3, "0%"],
 	["eye", "Untitled", "...", 2],[null],
 
-	["camp", "Camp", "..."],
-	["carride", "The Move", "..."],[null],
+	["camp", "Camp", "...", 3],
+	["carride", "The Move", "...", 3],[null],
 ];
 
 type Image = {
@@ -52,21 +52,7 @@ const imgs: Image[] = imgData.map(data => {
 });
 ---
 
-<script client:load>
-  function openPopup(imageSrc, imageTitle, imageDesc) {
-    document.getElementById('popup').style.display = 'flex';
-    document.getElementById('popup-image').src = imageSrc;
-		document.getElementById('popup-title').innerHTML = imageTitle;
-		document.getElementById('popup-desc').innerHTML = imageDesc;
-		if (imageDesc == "" || imageDesc == "...") {
-			document.getElementById('popup-text').style.display = 'none';
-		} else { document.getElementById('popup-text').style.display = 'flex'; }
-  }
 
-  function closePopup() {
-    document.getElementById('popup').style.display = 'none';
-  }
-</script>
 
 
 <!doctype html>
@@ -75,7 +61,41 @@ const imgs: Image[] = imgData.map(data => {
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
+		<Header class="header"/>
+
+		<script>
+			import { gsap } from 'gsap';
+			import { ScrollTrigger } from "gsap/ScrollTrigger";
+			gsap.registerPlugin(ScrollTrigger);
+
+			gsap.to(".parallax-content", {
+				scrollTrigger: {
+					trigger: '.header',
+					endTrigger: '.parallax-content',
+					start: "0px 0px",
+					end: "bottom top",
+					markers: true,
+					scrub: true
+				},
+				opacity: 0,
+				y: "15vw",
+				ease: "none"
+			});
+
+			gsap.to(".parallax-viewport", {
+				scrollTrigger: {
+					trigger: '.header',
+					endTrigger: '.parallax-content',
+					start: "0px 0px",
+					end: "bottom top",
+					markers: true,
+					scrub: true
+				},
+				backgroundPosition: "50% 0%",
+				ease: "none"
+			});
+
+		</script>
 
 		<div class="parallax-viewport">
 			<div class="parallax-content">
@@ -83,6 +103,25 @@ const imgs: Image[] = imgData.map(data => {
 				<p>click on any image for details</p>
 			</div>
 		</div>
+
+		<!-- I have no idea why this is throwing an error, client:load is necessary for it to work -->
+		<script client:load>
+import { getStaticPaths } from "./blog/[...slug].astro";
+
+			function openPopup(imageSrc, imageTitle, imageDesc) {
+				document.getElementById('popup').style.display = 'flex';
+				document.getElementById('popup-image').src = imageSrc;
+				document.getElementById('popup-title').innerHTML = imageTitle;
+				document.getElementById('popup-desc').innerHTML = imageDesc;
+				if (imageDesc == "" || imageDesc == "...") {
+					document.getElementById('popup-text').style.display = 'none';
+				} else { document.getElementById('popup-text').style.display = 'flex'; }
+			}
+
+			function closePopup() {
+				document.getElementById('popup').style.display = 'none';
+			}
+		</script>
 
 		<div id="popup" class="popup">
 			<span class="close-btn" onclick="closePopup()">&times;</span>
@@ -126,14 +165,7 @@ const imgs: Image[] = imgData.map(data => {
 					))}
 				</div>
 			)))}
-			
-			
-			
-  </div>
-
 		</div>
-
-		<!-- <CardDemo client:load /> -->
 
 		<Footer />
 	</body>
