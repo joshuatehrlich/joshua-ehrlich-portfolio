@@ -86,18 +86,22 @@
 		width: 200vw !important;
 		left: -27vw;
 		scale: 1.5;
+		
 	}
-	.parallax-content {
-		margin-top: 50vw;
+	.p1 {
+		left: -32vw;
+		top: -2vw
 	}
 	.parallax {
 		perspective-origin: 50% 80vw;
 	}
 	.parallax-content {
+		margin-top: 50vw;
 		justify-content: center;
 		padding-left: 5vw;
 		.title {
 			margin-top: -98vw;
+			width: 40%;
 		}
 	}
 }
