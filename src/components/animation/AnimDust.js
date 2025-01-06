@@ -8,8 +8,7 @@ gsap.to(".parallax-content", {
 		start: "100px 0px",
 		endTrigger: "html",
 		end: "80% top",
-		scrub: true,
-		markers: true
+		scrub: true
 	},
 	backgroundColor: "black"
 });
