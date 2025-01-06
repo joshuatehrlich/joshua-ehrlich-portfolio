@@ -66,7 +66,7 @@
 	.title {
 		width: 35%;
 		object-fit: contain;
-		margin-top: -5vw;
+		margin-top: 0;
 
 		pointer-events: none;
 
@@ -106,10 +106,15 @@
 	}
 }
 
-.content-background {
+.content {
+
+	* {
+		font-family: 'dust-caps';
+		color: white;
+		text-align: center;
+	}
 
 	width: 100%;
-	height: fit-content;
 	background-color: black;
 
 	display: flex;
@@ -118,11 +123,29 @@
 	align-items: center;
 	row-gap: 40px;
 
-	padding-top: 5vw;
+	padding-top: 50px;
 	padding-bottom: 10vw;
 
-	img {
+	.sellsheet {
 		width: 90%;
-		object-fit: contain;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content: center;
+		align-items: center;
+		
+		row-gap: 10px;
+
+		@media (max-width: 1080px) {
+			grid-template-columns: 1fr;
+			grid-template-rows: 1fr 1fr;
+			width: 80%;
+		}
+
+		img {
+			object-fit: contain;
+			flex-shrink: 1;
+			flex-basis: 0;
+			width: auto;
+		}
 	}
 }
