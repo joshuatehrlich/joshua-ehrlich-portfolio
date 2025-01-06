@@ -7,8 +7,8 @@ export default function ThreeDCardDemo() {
       <CardBody className="w-100px h-500px">
         <CardItem translateZ="20" className="w-full h-full">
           <img
-            src="./illustration/forest.jpg"
-            className="h-full w-full object-cover rounded-xl group-hover/card:shadow-xl"
+            src="./dust/cards/mist-f.jpg"
+            className="h-full w-full object-cover rounded-md group-hover/card:shadow-xl"
             alt="thumbnail"
           />
         </CardItem>

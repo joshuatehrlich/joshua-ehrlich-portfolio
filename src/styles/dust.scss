@@ -1,24 +1,66 @@
+.parallax {
+	height: 500px; /* fallback for older browsers */
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-perspective: 300px;
+	perspective: 300px;
+	perspective-origin: 50% 45vw;
+}
+
+
+.pbg-wrapper {
+	position: relative;
+	height: 500px; /* fallback for older browsers */
+	height: 40vw;
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+	z-index: -1;
+}
+
 .parallax-image {
 	position: absolute;
-	top: -17vw;
+	top: -6vw;
 	left: 0;
+	right: 0;
+	bottom: 0;
 	width: 100%;
 	z-index: -1;
 
 	pointer-events: none;
 
 	@media (max-width: 1080px) {
-		top: -12vw;
 	}
 	@media (max-width: 720px) {
-		top: -4vw;
 	}
+}
+
+.p6 {
+	-webkit-transform: translateZ(-600px) scale(3) translateY(-20vw);
+	transform: translateZ(-600px) scale(3) translateY(-20vw);
+	top: 10vw;
+}
+.p5 {
+	-webkit-transform: translateZ(-300px) scale(1.9) translateY(-12vw);
+	transform: translateZ(-300px) scale(1.9) translateY(-12vw);
+}
+.p4 {
+	-webkit-transform: translateZ(-200px) scale(1.7) translateY(-12vw);
+	transform: translateZ(-200px) scale(1.7) translateY(-12vw);
+}
+.p3 {
+	-webkit-transform: translateZ(-100px) scale(1.4) translateY(-12vw);
+	transform: translateZ(-100px) scale(1.4) translateY(-12vw);
+}
+.p2, .p1 {
+	-webkit-transform: translateZ(-50px) scale(1.2) translateY(-12vw);
+	transform: translateZ(-50px) scale(1.2) translateY(-12vw);
 }
 
 .parallax-content {
 	position: relative;
 	width: 100%;
-	height: 35vw;
+	height: 100%;
 
 	display: flex;
 	justify-content: flex-start;
@@ -40,25 +82,22 @@
 	}
 
 	@media (max-width: 1080px) {
-		height: 37vw;
 	}
 	@media (max-width: 720px) {
-		height: 40vw;
-
-		.title {
-			margin-top: 0;
-		}
 	}
 }
 
 .content-background {
+
 	width: 100%;
 	height: fit-content;
 	background-color: black;
 
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	align-content: center;
+	align-items: center;
+	row-gap: 40px;
 
 	padding-top: 5vw;
 	padding-bottom: 10vw;

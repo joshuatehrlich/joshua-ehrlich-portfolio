@@ -5,6 +5,8 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 import '../styles/dust.scss';
+
+import CardDemo from '../components/ui/card-demo.tsx';
 ---
 
 <!doctype html>
@@ -13,27 +15,36 @@ import '../styles/dust.scss';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header/>
+		
 
 		<!-- Handles Animations -->
 		<script src="../components/animation/AnimDust.js"></script>
 
-		<!-- PARALLAX BG ELEMENTS -->
-		<img class="parallax-image p6" src="/dust/parallax-vista/6.png">
-		<img class="parallax-image p5" src="/dust/parallax-vista/5.png">
-		<img class="parallax-image p4" src="/dust/parallax-vista/4.png">
-		<img class="parallax-image p3" src="/dust/parallax-vista/3.png">
-		<img class="parallax-image p2" src="/dust/parallax-vista/2.png">
-		<img class="parallax-image p1" src="/dust/parallax-vista/1.png">
+		<div class="parallax">
+			<Header/>
 
-		<div class="parallax-content">
-			<img src="/dust/title.png" class="title">
+			<!-- PARALLAX BG ELEMENTS -->
+			<div class="pbg-wrapper">
+				<img class="parallax-image p6" src="/dust/parallax-vista/6.png">
+				<img class="parallax-image p5" src="/dust/parallax-vista/5.png">
+				<img class="parallax-image p4" src="/dust/parallax-vista/4.png">
+				<img class="parallax-image p3" src="/dust/parallax-vista/3.png">
+				<img class="parallax-image p2" src="/dust/parallax-vista/2.png">
+				<img class="parallax-image p1" src="/dust/parallax-vista/1.png">
+				<div class="parallax-content">
+					<img src="/dust/title.png" class="title">
+				</div>
+			</div>
+
+			
+
+			<div class="content-background">
+				<img src="/dust/sellsheet.jpg">
+
+				<!-- <CardDemo client:load/> -->
+			</div>
+
+			<Footer />
 		</div>
-
-		<div class="content-background">
-			<img src="/dust/sellsheet.jpg">
-		</div>
-
-		<Footer />
 	</body>
 </html>
