@@ -7,14 +7,14 @@
 	overflow-y: auto;
 	-webkit-perspective: 300px;
 	perspective: 300px;
-	perspective-origin: 50% 45vw;
+	perspective-origin: 50% 50vw;
 }
 
 
 .pbg-wrapper {
 	position: relative;
 	height: 500px; /* fallback for older browsers */
-	height: 40vw;
+	height: 50vw;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
 	z-index: -1;
@@ -22,7 +22,7 @@
 
 .parallax-image {
 	position: absolute;
-	top: -6vw;
+	top: 6vw;
 	width: 100%;
 	z-index: -1;
 
@@ -86,11 +86,17 @@
 		width: 200vw !important;
 		left: -27vw;
 		scale: 1.5;
-		
+		top: -10vw;
+	}
+	.pbg-wrapper {
+		height: 40vw;
 	}
 	.p1 {
 		left: -32vw;
 		top: -2vw
+	}
+	.p5 {
+		top: -6vw;
 	}
 	.parallax {
 		perspective-origin: 50% 80vw;
