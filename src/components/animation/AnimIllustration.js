@@ -31,22 +31,22 @@ gsap.from(".foot-image", {
 	scrollTrigger: {
 		trigger: '.foot-image',
 		// markers: true,
-		start: "top 80%",
-		end: "center 50%",
+		start: "top 50%",
+		end: "bottom 50%",
 		scrub: true
 	},
-	x: -500,
-	opacity: 0
+	opacity: 0,
+	y: -90
 });
 
 gsap.from(".foot-text", {
 	scrollTrigger: {
 		trigger: '.foot-image',
 		// markers: true,
-		start: "top 80%",
-		end: "center 50%",
+		start: "top 50%",
+		end: "bottom 50%",
 		scrub: true
 	},
-	x: 500,
-	opacity: 0
+	opacity: 0,
+	y: -90
 });
