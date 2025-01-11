@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/earthen.scss';
 ---
 
 <!doctype html>
@@ -11,11 +13,58 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
+
+		<!-- Handles Animations -->
+		<script src="../components/animation/AnimEarthen.js"></script>
+
 		<Header />
-		<main>
-			<h1>Earthen</h1>
-		</main>
+		<div class="earthen">
+
+			<div class="header-group">
+				<div class="title-one title-container">
+					<div class="text-flex">
+						<h1>Earthen</h1>
+						<h2>Currently in development</h2>
+					</div>
+					<img src="/earthen/forest-edit.jpg">
+				</div>
+				<div class="title-two title-container">
+					<div class="text-flex">
+						<h2>an adventure by</h2>
+						<img src="/earthen/lukko-text.png">
+					</div>
+					<img class="bg-image" src="/earthen/rockroom-edit.jpg">
+				</div>
+			</div>
+
+			<div class="introduction">
+				<div class="player-holder">
+					<canvas id="player"></canvas>
+				</div>
+				<div class="text-flex">
+					<h2>An open world discovery-based adventure</h2>
+					<p>Awaken deep underground. Humanity has not seen the surface for eons. <b>The Creators</b> have long past. Can you uncover the mysteries of <b>Rustaveli,</b> and reach the surface?<br><br>
+
+						Meet strange characters, and explore the underground, learning both it's dangers and secrets. Use the telephone system to call tunneling pods to travel between regions, and <b>learn their true mechanics</b> to unlock new areas. Interface with ancient technology, and learn it's inner workings in order to solve puzzles left behind by your ancestors.<br><br>
+						
+						Earthen is a <b>pure discovery game.</b> All abilities are present from the moment the game begins. You just have to uncover them. <b>Seek the surface, and the truth.</b></p>
+				</div>
+			</div>
+
+			<div class="open-world">
+
+			</div>
+
+		</div>
+		
+		
+		
+
+		
+		
+
 		<Footer />
+
 	</body>
 </html>
 
