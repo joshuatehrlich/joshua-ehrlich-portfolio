@@ -4,13 +4,13 @@ body {
 
 h1, h2, h3, p {
 	color: white;
+	margin: 0;
 }
 
 p {
 	font-size: 1.3em;
 	line-height: 130%;
 }
-
 
 .header-group {
 	width: 100%;
@@ -107,7 +107,7 @@ p {
 		width: 30%;
 
 		canvas {
-			width: 150%;
+			width: 200%;
 		}
 	}
 
@@ -167,6 +167,7 @@ p {
 
 		* {
 			text-align: left;
+			text-wrap: pretty;
 		}
 		h2 {
 			font-size: 3em;
@@ -187,19 +188,80 @@ p {
 }
 
 .features {
-	height: 100vw;
+	height: fit-content;
+	padding-bottom: 20vw;
 	background-color: gray;
 	width: 100%;
+
+	background-image: url(/earthen/features-bg.jpg);
+	background-position: 25% 0%;
+	background-size: cover;
+
+	display:flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+
+	.features-title {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 93%;
+		margin: 0 0 1vw 0;
+
+		.line {
+			background-color: white;
+			height: 1px;
+			min-width: 100px;
+			width: 100%;
+			flex-grow: 1;
+		}
+		h1 {
+			margin: 3vw;
+			font-size: 2.5em;
+			font-weight: 900;
+		}
+	}	
 
 	.feature-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		justify-items: center;
+		justify-content: center;
+		align-items: flex-start;
+		row-gap: 60px;
+		padding: 0 3vw 5vw 3vw;
+		column-gap: 2vw;
 
-		img {
-			width: 80%;
-			height: auto;
+		.feature {
+			display:flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			row-gap: 15px;
+
+			img {
+			width: 100%;
+			height: 25vw;
+			object-fit: cover;
+			}
+			h3 {
+				font-size: 1.5em;
+				font-weight: 600;
+			}
+			p {
+				text-align: center;
+				width: 90%;
+				font-size: 1em;
+				margin-top: -8px;
+				text-wrap: pretty;
+			}
 		}
+		
 	}
 }
 
+.screenshots {
+	height: 100vw;
+	background-color: black;
+	width: 100%;
+}
