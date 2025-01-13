@@ -190,17 +190,26 @@ p {
 .features {
 	height: fit-content;
 	padding-bottom: 20vw;
-	background-color: gray;
+	padding-top: 2vw;
 	width: 100%;
 
 	background-image: url(/earthen/features-bg.jpg);
-	background-position: 25% 0%;
+	background-position: 50% 0%;
 	background-size: cover;
 
-	display:flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+	display: flex;
+	justify-content: center;
+
+	.features-inner {
+		height: fit-content;
+		width: 100%;
+		
+	
+		display:flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
 
 	.features-title {
 		display: flex;
@@ -264,4 +273,7 @@ p {
 	height: 100vw;
 	background-color: black;
 	width: 100%;
+
+	display: flex;
+	justify-content: center;
 }
