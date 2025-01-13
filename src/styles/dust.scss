@@ -125,15 +125,7 @@
 
 .content {
 
-	.text {
-		font-family: 'dust-caps';
-		color: white;
-		text-align: center;
-		font-size: 4vw;
-		@media (max-width: 1080px) {
-			font-size: 7vw !important;
-		}
-	}
+	
 
 	width: 100%;
 	background-color: black;
@@ -146,6 +138,22 @@
 
 	padding-top: 50px;
 	padding-bottom: 10vw;
+
+	@media (max-width: 1080px) {
+		padding-top: 20px;
+		row-gap: 10px;
+	}
+
+	.text {
+		font-family: 'dust-caps';
+		color: white;
+		text-align: center;
+		font-size: 4vw;
+		margin: 0vw 10vw;
+		@media (max-width: 1080px) {
+			font-size: 8vw !important;
+		}
+	}
 
 	.sellsheet {
 		width: 90%;
@@ -160,6 +168,7 @@
 			grid-template-columns: 1fr;
 			grid-template-rows: 1fr 1fr;
 			width: 80%;
+			row-gap: 0px;
 		}
 
 		img {
