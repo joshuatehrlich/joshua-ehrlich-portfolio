@@ -16,7 +16,7 @@ p {
 	line-height: 130%;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 720px) {
 	.wide-only-text {
 		display: none;
 	}
@@ -94,13 +94,15 @@ p {
 		
 	}
 
-	@media (max-width: 1080px) {
+	@media (max-width: 720px) {
 		display:flex;
 		flex-direction: column;
 		row-gap: 0px;
+		padding-bottom: 120px !important;
+		padding-top: 10vw;
 
 		.title-container {
-			height: fit-content !important;
+			height: 150vw !important;
 			flex-direction: column;
 			justify-content: center !important;
 			row-gap: 50px;
@@ -126,8 +128,14 @@ p {
 		}
 
 		.bg-image {
-			transform: scale(1.6);
 			padding: 20px 0px;
+			&.forest {
+				transform: translateX(10px) scale(1.6);
+			}
+			&.rockroom {
+				padding: 80px 0px 60px 0px !important;
+				transform: scale(2) !important;
+			}
 		}
 	}
 }
@@ -420,6 +428,7 @@ p {
 		opacity: 0.5;
 
 		z-index: 3;
+		transition: 150ms;
 
 		@media (min-width: 1450px) {
 			&.left {
@@ -445,7 +454,7 @@ p {
 			opacity: 1;
 		}
 
-		transition: 150ms;
+		
 
 		img {
 			width: 12px;
