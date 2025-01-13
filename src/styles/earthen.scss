@@ -1,3 +1,7 @@
+html {
+	background-color: black;
+}
+
 body {
   height: 5000px;
 }
@@ -16,7 +20,6 @@ p {
 	width: 100%;
 	margin-top: 30px;
 	background-color: rgb(0, 0, 0);
-	padding-top: 5vw;
 	padding-bottom: 12vw;
 
 	.title-container {
@@ -24,7 +27,7 @@ p {
 		width: 100%;
 		display: flex;
 		align-items: center;
-		padding: 10vw;
+		padding: 5vw 10vw 10vw 10vw;
 		position: relative;
 	}
 	.text-flex {
@@ -121,6 +124,9 @@ p {
 			font-size: 2.1em;
 			margin-bottom: 2vw;
 		}
+		p {
+			font-size: 1em;
+		}
 	}
 
 	@media (max-width:1200px) {
@@ -175,7 +181,7 @@ p {
 		}
 		p {
 			max-width: 25%;
-			font-size: 1.2em;
+			font-size: 1em;
 		}
 	}
 
@@ -183,7 +189,7 @@ p {
 		position: absolute;
 		object-fit: cover;
 		right: 5vw;
-		width: 65vw;
+		width: 55vw;
 	}
 }
 
@@ -202,7 +208,7 @@ p {
 
 	.features-inner {
 		height: fit-content;
-		width: 100%;
+		width: 90%;
 		
 	
 		display:flex;
@@ -228,7 +234,7 @@ p {
 		justify-content: center;
 		align-items: flex-start;
 		row-gap: 60px;
-		padding: 0 3vw 5vw 3vw;
+		padding: 0 3vw 100px 3vw;
 		column-gap: 2vw;
 
 		.feature {
@@ -264,7 +270,6 @@ p {
 	justify-content: center;
 	align-items: center;
 	width: 93%;
-	margin: 0 0 1vw 0;
 
 	.line {
 		background-color: white;
@@ -279,6 +284,7 @@ p {
 // CAROUSEL
 
 .screenshots {
+	overflow: hidden;
 	height: fit-content;
 	background-color: black;
 	width: 100%;
@@ -289,33 +295,32 @@ p {
 	align-items: center;
 	row-gap: 2vw;
 
-	padding-top: 3vw;
+	padding-top: 100px;
 	padding-bottom: 10vw;
 
 	background-image: url('/earthen/bball-bg.png');
 	background-position: 50% 10%;
 	background-size: cover;
-
 	h1 {
 		font-weight: 900;
-		font-size: 2.0em;
-		margin: 0vw 2vw;
+		margin: 0vw 0vw;
 		font-size: 2.5em;
+	}
+	.concept-art-title {
+		margin-top: 200px !important;
 	}
 }
 
-.screenshots-title {
-	margin-top: 4vw !important;
-}
-.concept-art-title {
-	margin-top: 7vw !important;
-}
 
 .carousel {
 	position: relative;
 	height: 45vw;
+	max-height: 70vh;
 	width: 80vw;
 	margin: 0 auto;
+
+
+	
 
 	.carousel__track-container {
 		// background: lightGreen;
@@ -340,7 +345,7 @@ p {
 				.carousel__image {
 					width: 100%;
 					height: 100%;
-					object-fit: cover;
+					object-fit: contain;
 				}
 			}
 		}
@@ -354,6 +359,33 @@ p {
 		background: transparent;
 		border: 0;
 		cursor: pointer;
+		opacity: 0.5;
+
+		z-index: 3;
+
+		@media (min-width: 1450px) {
+			&.left {
+				left: 50px !important;
+			}
+			&.right {
+				right: 50px !important;
+			}
+		}
+
+		&::before {
+			content: '';
+			position: absolute;
+			top: 100px; /* Adjust as needed */
+			bottom: 100px; /* Adjust as needed */
+			left: -100px; /* Adjust as needed */
+			right: -100px; /* Adjust as needed */
+			background: transparent;
+		}
+
+		&:hover {
+			transform: translateY(-50%) scale(2);
+			opacity: 1;
+		}
 
 		transition: 150ms;
 
@@ -385,7 +417,14 @@ p {
 		margin: 0 8px;
 		cursor: pointer;
 
+		opacity: 0.7;
+
 		transition: 150ms;
+
+		&:hover {
+			transform: scale(1.3);
+			opacity: 1;
+		}
 
 		&.current-slide {
 			background: rgba(255, 255, 255, 0.75);
@@ -394,4 +433,4 @@ p {
 
 }
 
-.is-hidden { opacity: 0; pointer-events: none; }
+.is-hidden { opacity: 0 !important; pointer-events: none; }

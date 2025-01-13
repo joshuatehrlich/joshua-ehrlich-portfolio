@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
+import '../styles/header.scss'
 
 type Props = HTMLAttributes<'a'>;
 
@@ -25,18 +26,19 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		margin: 0;
 		cursor: pointer;
 		text-align: center;
-		background-color: rgba(212, 212, 212, 0);
-		color: rgb(60, 60, 60);
+		color: var(--dark);
+		background-color: var(--light);
+		opacity: 0.7;
 		transition: 250ms;
 	}
 	a:hover {
 		/* background-color: rgb(188, 188, 188); */
-		opacity: 0.5;
+		opacity: 0.3;
 		/* color: rgb(255, 255, 255); */
 	}
 	a.active {
-		background-color: black;
-		color: white;
 		opacity: 1;
+		background-color: var(--dark);
+		color: var(--light);
 	}
 </style>

@@ -10,7 +10,7 @@ import '../styles/earthen.scss';
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={'Earthen'} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 
@@ -18,8 +18,10 @@ import '../styles/earthen.scss';
 		<script src="../components/animation/AnimEarthen.js"></script>
 
 		
-
-		<Header />
+		<div class="invert-colors">
+			<Header />
+		</div>
+		
 		<div class="earthen">
 
 			<div class="header-group">
@@ -40,9 +42,9 @@ import '../styles/earthen.scss';
 			</div>
 
 			<div class="introduction">
-				<div class="player-holder">
+				<!-- <div class="player-holder">
 					<canvas id="player"></canvas>
-				</div>
+				</div> -->
 				<div class="text-flex">
 					<h2>An Open World Discovery-Based Adventure</h2>
 					<p>
@@ -113,89 +115,48 @@ import '../styles/earthen.scss';
 
 			</div>
 
+
 			<!-- CAROUSELS -->
 			
 			<div class="screenshots">
 
-				<div class="features-title">
-					<div class="line"></div>
-				</div>
-
 				<h1 class="screenshots-title">Screenshots</h1>
 
-				<div class="carousel">
+				<div class="carousel screenshot">
 					<button class="carousel__button left is-hidden">
 						<img src="/ui/left.svg">
 					</button>
 					<div class="carousel__track-container">
-						<ul class="carousel__track">
-							<li class="carousel__slide current-slide">
-								<img class="carousel__image" src="/earthen/screenshots/forest-1.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/bball.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/danger.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/house.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/glade.jpg" alt="">
-							</li>
-						</ul>
+						<ul class="carousel__track"></ul>
 					</div>
 					<button class="carousel__button right">
 						<img src="/ui/right.svg">
 					</button>
+
+					<div class="carousel__nav">
+					</div>
 				</div>
 
-				<div class="carousel__nav">
-					<button class="carousel__indicator current-slide"></button>
-					<button class="carousel__indicator"></button>
-					<button class="carousel__indicator"></button>
-					<button class="carousel__indicator"></button>
-					<button class="carousel__indicator"></button>
-				</div>
+				
 
-				<!-- <h1 class="concept-art-title">Concept Art</h1>
+				<h1 class="concept-art-title">Concept Art</h1>
 
-				<div class="carousel">
+				<div class="carousel conceptart">
 					<button class="carousel__button left is-hidden">
 						<img src="/ui/left.svg">
 					</button>
 					<div class="carousel__track-container">
-						<ul class="carousel__track">
-							<li class="carousel__slide current-slide">
-								<img class="carousel__image" src="/earthen/screenshots/forest-1.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/bball.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/danger.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/house.jpg" alt="">
-							</li>
-							<li class="carousel__slide">
-								<img class="carousel__image" src="/earthen/screenshots/glade.jpg" alt="">
-							</li>
-						</ul>
+						<ul class="carousel__track"></ul>
 					</div>
 					<button class="carousel__button right">
 						<img src="/ui/right.svg">
 					</button>
+
+					<div class="carousel__nav">
+					</div>
 				</div>
 
-				<div class="carousel__nav">
-					<button class="carousel__indicator current-slide"></button>
-					<button class="carousel__indicator"></button>
-					<button class="carousel__indicator"></button>
-					<button class="carousel__indicator"></button>
-					<button class="carousel__indicator"></button>
-				</div> -->
+				
 
 				
 
