@@ -16,6 +16,13 @@ p {
 	line-height: 130%;
 }
 
+@media (max-width: 1080px) {
+	.wide-only-text {
+		display: none;
+	}
+}
+
+
 .header-group {
 	width: 100%;
 	margin-top: 30px;
@@ -84,7 +91,41 @@ p {
 		}
 		
 	}
+
+	@media (max-width: 1080px) {
+		display:flex;
+		flex-direction: column;
+		row-gap: 0px;
+
+		.title-container {
+			height: fit-content !important;
+			flex-direction: column;
+			justify-content: center !important;
+			row-gap: 50px;
+			padding: 20px 40px;
+		}
+		.text-flex {
+			font-size: 0.6em !important;
+			img {
+				width: 200px !important;
+			}
+			.in-dev {
+				margin-top: -0.9em !important;
+			}
+			.adv-by {
+				margin-bottom: -0.1em !important;
+				font-size: 4em !important;
+			}
+		}
+		img {
+			position: relative !important;
+			left: 0 !important;
+			right: 0 !important;
+		}
+	}
 }
+
+
 
 .introduction {
 	height: fit-content;
@@ -129,20 +170,30 @@ p {
 		}
 	}
 
-	@media (max-width:1200px) {
+	@media (max-width:1080px) {
 		flex-direction: column;
+		padding: 70px 0px;
 		font-size: 1.1em;
-		h2 {
-			margin-bottom: 5vw;
-			font-size: 2em !important;
-		}
+
+		
 		.text-flex {
-		text-align: center;
-		padding: 0vw 2vw 8vw 2vw;
+			padding: 0;
+			text-align: center;
+			h2 {
+				margin-bottom: 5vw;
+				font-size: 1.6em !important;
+			}
+			p {
+				font-size: 1em !important;
+			}
 		}
 		canvas {
 			width: 200% !important;
 		}
+	}
+
+	@media (max-width: 1080px) {
+
 	}
 }
 
