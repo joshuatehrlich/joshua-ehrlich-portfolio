@@ -189,7 +189,7 @@ p {
 
 .features {
 	height: fit-content;
-	padding-bottom: 20vw;
+	padding-bottom: 0vw;
 	padding-top: 2vw;
 	width: 100%;
 
@@ -212,25 +212,15 @@ p {
 	}
 
 	.features-title {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		width: 93%;
-		margin: 0 0 1vw 0;
-
-		.line {
-			background-color: white;
-			height: 1px;
-			min-width: 100px;
-			width: 100%;
-			flex-grow: 1;
-		}
+	
 		h1 {
 			margin: 3vw;
 			font-size: 2.5em;
 			font-weight: 900;
 		}
 	}	
+
+	
 
 	.feature-grid {
 		display: grid;
@@ -269,11 +259,139 @@ p {
 	}
 }
 
+.features-title {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 93%;
+	margin: 0 0 1vw 0;
+
+	.line {
+		background-color: white;
+		height: 1px;
+		min-width: 100px;
+		width: 100%;
+		flex-grow: 1;
+	}
+}	
+
+
+// CAROUSEL
+
 .screenshots {
-	height: 100vw;
+	height: fit-content;
 	background-color: black;
 	width: 100%;
 
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	row-gap: 2vw;
+
+	padding-top: 3vw;
+	padding-bottom: 10vw;
+
+	background-image: url('/earthen/bball-bg.png');
+	background-position: 50% 10%;
+	background-size: cover;
+
+	h1 {
+		font-weight: 900;
+		font-size: 2.0em;
+		margin: 0vw 2vw;
+		font-size: 2.5em;
+	}
 }
+
+.screenshots-title {
+	margin-top: 4vw !important;
+}
+.concept-art-title {
+	margin-top: 7vw !important;
+}
+
+.carousel {
+	position: relative;
+	height: 45vw;
+	width: 80vw;
+	margin: 0 auto;
+
+	.carousel__track-container {
+		// background: lightGreen;
+		height: 100%;
+		position: relative;
+		overflow: hidden;
+
+		.carousel__track {
+			padding: 0;
+			margin: 0;
+			list-style: none;
+			position: relative;
+			height: 100%;
+			transition: 250ms ease-out;
+
+			.carousel__slide {
+				position: absolute;
+				top: 0;
+				bottom: 0;
+				width: 100%;
+
+				.carousel__image {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+		}
+	}
+
+	.carousel__button {
+		position: absolute;
+		top: 50%;
+		height: 400px;
+		transform: translateY(-50%) scale(1.5);
+		background: transparent;
+		border: 0;
+		cursor: pointer;
+
+		transition: 150ms;
+
+		img {
+			width: 12px;
+		}
+
+		&.left {
+			left: -40px;
+		}
+		&.right {
+			right: -40px;
+		}
+	}
+}
+
+.carousel__nav {
+	// background: rgba(255, 192, 203, 0.097);
+	display: flex;
+	justify-content: center;
+	padding: 15px 0;
+
+	.carousel__indicator {
+		border: 0;
+		border-radius: 50%;
+		width: 15px;
+		height: 15px;
+		background: rgba(255, 255, 255, 0.3);
+		margin: 0 8px;
+		cursor: pointer;
+
+		transition: 150ms;
+
+		&.current-slide {
+			background: rgba(255, 255, 255, 0.75);
+		}
+	}
+
+}
+
+.is-hidden { opacity: 0; pointer-events: none; }

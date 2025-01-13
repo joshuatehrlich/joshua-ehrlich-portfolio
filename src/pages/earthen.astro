@@ -17,8 +17,7 @@ import '../styles/earthen.scss';
 		<!-- Handles Animations -->
 		<script src="../components/animation/AnimEarthen.js"></script>
 
-		<!-- Handles Carousels and other scripting needs -->
-		<script src="../scripts/earthen.js"></script>
+		
 
 		<Header />
 		<div class="earthen">
@@ -113,10 +112,99 @@ import '../styles/earthen.scss';
 				</div>
 
 			</div>
+
+			<!-- CAROUSELS -->
 			
 			<div class="screenshots">
-				<h1>Screenshots</h1>
+
+				<div class="features-title">
+					<div class="line"></div>
+				</div>
+
+				<h1 class="screenshots-title">Screenshots</h1>
+
+				<div class="carousel">
+					<button class="carousel__button left is-hidden">
+						<img src="/ui/left.svg">
+					</button>
+					<div class="carousel__track-container">
+						<ul class="carousel__track">
+							<li class="carousel__slide current-slide">
+								<img class="carousel__image" src="/earthen/screenshots/forest-1.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/bball.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/danger.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/house.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/glade.jpg" alt="">
+							</li>
+						</ul>
+					</div>
+					<button class="carousel__button right">
+						<img src="/ui/right.svg">
+					</button>
+				</div>
+
+				<div class="carousel__nav">
+					<button class="carousel__indicator current-slide"></button>
+					<button class="carousel__indicator"></button>
+					<button class="carousel__indicator"></button>
+					<button class="carousel__indicator"></button>
+					<button class="carousel__indicator"></button>
+				</div>
+
+				<!-- <h1 class="concept-art-title">Concept Art</h1>
+
+				<div class="carousel">
+					<button class="carousel__button left is-hidden">
+						<img src="/ui/left.svg">
+					</button>
+					<div class="carousel__track-container">
+						<ul class="carousel__track">
+							<li class="carousel__slide current-slide">
+								<img class="carousel__image" src="/earthen/screenshots/forest-1.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/bball.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/danger.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/house.jpg" alt="">
+							</li>
+							<li class="carousel__slide">
+								<img class="carousel__image" src="/earthen/screenshots/glade.jpg" alt="">
+							</li>
+						</ul>
+					</div>
+					<button class="carousel__button right">
+						<img src="/ui/right.svg">
+					</button>
+				</div>
+
+				<div class="carousel__nav">
+					<button class="carousel__indicator current-slide"></button>
+					<button class="carousel__indicator"></button>
+					<button class="carousel__indicator"></button>
+					<button class="carousel__indicator"></button>
+					<button class="carousel__indicator"></button>
+				</div> -->
+
+				
+
 			</div>
+
+			<!-- Handles Carousels and other scripting needs -->
+			<script src="../scripts/earthen.js"></script>
+
+			
 
 		</div>
 		<Footer />
