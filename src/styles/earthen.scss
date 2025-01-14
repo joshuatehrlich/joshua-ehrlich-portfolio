@@ -500,7 +500,7 @@ p {
 				.carousel__image {
 					width: 100%;
 					height: 100%;
-					object-fit: cover;
+					object-fit: contain;
 				}
 			}
 		}
@@ -614,10 +614,12 @@ p {
 		height: 10px !important;
 		margin: 0 5px !important;
 	}
-	// .carousel {
-	// 	height: 50.1vw !important;
-	// 	width: 90vw !important;
-	// }
+	.carousel {
+		height: 45vw;
+		width: 80vw;
+		height: 50.1vw !important;
+		width: 90vw !important;
+	}
 
 	.concept-art-title {
 		margin-top: 19vw !important;
