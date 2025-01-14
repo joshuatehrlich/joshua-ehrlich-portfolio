@@ -454,11 +454,11 @@ p {
 	background-size: cover;
 	h1 {
 		font-weight: 900;
-		margin: 0vw 0vw;
+		margin: 0 0 0 0;
 		font-size: 2.5em;
 	}
 	.concept-art-title {
-		margin-top: 200px;
+		margin-top: 12vw !important;
 	}
 
 	@media (max-width: 720px) {
@@ -625,6 +625,7 @@ p {
 	.carousel {
 		// height: 50vw !important; // just made it higher, it was 45 before, lower if it gets worse
 		// width: 100vw !important;
+		// for some reason i couldnt do that or it would glitch ONLY on build version ONLY on actual phone (not chrome mobile idfk josh godamnit)
 		transform: scale(1.1);
 	}
 
@@ -634,5 +635,13 @@ p {
 
 	.screenshots {
 		padding-bottom: 30vw;
+
+		h1 {
+			margin: 0 0 2vw 0;
+
+			&.concept-art-title {
+				margin-top: 25vw !important;
+			}
+		}
 	}
 }
