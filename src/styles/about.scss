@@ -21,7 +21,7 @@
 	align-items: center;
 
 
-	column-gap: 2vw;
+	column-gap: 5vw;
 
 	// line-height: 150%;
 
@@ -35,6 +35,10 @@
 			color: rgb(107, 107, 162);
 			font-weight: 600;
 			text-decoration: underline;
+			transition: 100ms;
+		}
+		a:hover {
+			color:black;
 		}
 	}
 	
@@ -42,7 +46,7 @@
 		flex-grow: 1;
 		// flex-shrink: 1.9;
 
-		// transform: scale(1.4);
+		transform: scale(1.2);
 		z-index: -1;
 	}
 
