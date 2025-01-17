@@ -3,21 +3,49 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/about.scss'
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={'About Me'} description={SITE_DESCRIPTION} />
+		<meta http-equiv="refresh" content="0; url=/illustration" />
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>Hi! My name is Josh.</h1>
-			<p>
-				I'm a game designer and illustrator studying at Rhode Island School of Design. Take a look at some of my projects above!
-			</p>
-		</main>
+
+		<div class="layout">
+			<div class="intro">
+				<div class="intro-image">
+					<img src="/illustration/treefull.jpg"/>
+				</div>
+				
+				<div class="intro-text">
+					<h1>Hi! My name is Josh.</h1>
+					<p>
+						I'm a game designer/artist in my Junior year studying Illustration at Rhode Island School of Design.
+						Take a look at some of my projects above!
+					</p>
+					<p>
+						I love designing interactive experiences that push the medium of game design as a mode of learning.
+						I hope for my work to insight curiousity and a sense of exploration. I'm the lead artist at <a href="https://lukko.digital" target="_blank">Lukko Digital</a>,
+						where we're exploring these ideas - check out our <a href="/earthen">current project here.</a>
+					</p>
+					<p>
+						If you'd like to work with me, or get a sample of any of my game projects, please reach out on any of my socials below, or shoot me an email at <b>joshuatehrlich@gmail.com</b>
+					</p>
+					<h5><a href="/resume.Joshua-Ehrlich-Resume-2025.pdf" download>Download my resume here</a></h5>
+					
+				</div>
+				
+			</div>
+			<!-- <h2>Thanks for stopping by!</h2> -->
+		</div>
+		
+		
+
 		<Footer />
 	</body>
 </html>
