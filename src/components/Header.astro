@@ -5,8 +5,11 @@ import '../styles/header.scss'
 ---
 
 <header>
-	<nav>
-		<h2 class="site-title"><a href="/about">{SITE_TITLE}</a></h2>
+
+	<div id="header">
+
+		<h2 class="site-title navitem"><a href="/about">{SITE_TITLE}</a></h2>
+
 		<div class="internal-links">
 			<HeaderLink class="header-link" href="/illustration">
 				<span class="full-text">llustration</span>
@@ -19,9 +22,21 @@ import '../styles/header.scss'
 				<span class="short-text">About</span>
 			</HeaderLink>
 		</div>
-		<div class="header-contacts">
-			<a href="/about">joshuatehrlich@gmail.com</a>
-			<a href="/about" class="number">(415) 715 - 7992</a>
+
+		<input type="checkbox" id="menuCheckbox" />
+		
+		<div class="spans navitem">
+			<span class="hamburger-span" style="order:2"></span>
+			<span class="hamburger-span" style="order:3"></span>
+			<span class="hamburger-span" style="order:1"></span>
 		</div>
-	</nav>
+
+		<ul id="dropdown">
+			<li><label for="Illustrations"><a href="/illustration/">Illustration</a></label></li>
+			<li><label for="Dust"><a href="/dust/">Dust</a></label></li>
+			<li><label for="Illustrations"><a href="/earthen/">Earthen</a></label></li>
+			<li><label for="Dust"><a href="/game-jams/">Game Jams</a></label></li>
+			<li><label for="Dust"><a href="/about/">About</a></label></li>
+		</ul>
+	</div>
 </header>
