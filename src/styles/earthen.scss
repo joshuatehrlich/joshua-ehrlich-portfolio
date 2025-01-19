@@ -32,6 +32,21 @@ p {
 	}
 }
 
+h1 {
+	font-family: 'naot';
+	font-weight: 400 !important;
+	// font-size: 4em !important;
+}
+h2 {
+	font-family: 'naot';
+	font-weight: 100 !important;
+// 	font-size: 3em !important;
+}
+h3 {
+	font-family: 'naot';
+	font-weight: 100 !important;
+// 	font-size: 3em !important;
+}
 
 .header-group {
 	width: 100%;
@@ -73,11 +88,14 @@ p {
 			
 			h1 {
 				font-size: 6em;
-				font-weight: 600;
+				font-weight: 300;
+				font-family: 'naot';
 			}
 			h2 {
 				font-size: 1.7em;
 				margin-top: -3vw;
+				font-family: 'Crimson Text';
+				font-weight: 300;
 			}
 		}
 		
@@ -98,6 +116,7 @@ p {
 				font-family: "dust-caps";
 				font-size: 3em;
 			}
+			
 			img {
 				width: 25vw;
 			}
@@ -132,6 +151,7 @@ p {
 			}
 			.in-dev {
 				margin-top: -0.9em !important;
+				
 			}
 			.adv-by {
 				margin-bottom: -0.1em !important;
@@ -240,7 +260,8 @@ p {
 			max-width: 100%;
 			
 			h2 {
-				font-size: 1.6em !important;
+				font-size: 1.9em !important;
+				font-weight: 300 !important;
 			}
 			p {
 				font-size: 1em !important;
