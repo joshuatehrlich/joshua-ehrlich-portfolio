@@ -53,13 +53,13 @@ h3 {
 	margin-top: 30px;
 	background-color: rgb(0, 0, 0);
 	padding-bottom: 20vh;
-	padding-top: 10vh;
+	// padding-top: 10vh;
 
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	row-gap: 10vh;
+	row-gap: 0vh;
 
 	overflow: hidden;
 
@@ -76,7 +76,7 @@ h3 {
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		z-index: 5;
+		z-index: 2;
 		font-size: 1.6vw;
 
 		transition: 200ms;
@@ -141,7 +141,7 @@ h3 {
 		flex-direction: column;
 		row-gap: 0px;
 		padding-bottom: 120px !important;
-		padding-top: 10vw;
+		margin-top: 0px;
 
 		.title-container {
 			height: 150vw !important;
@@ -151,7 +151,7 @@ h3 {
 			padding: 20px 40px;
 		}
 		.text-flex {
-			font-size: 0.6em !important;
+			font-size: 3vw !important;
 			img {
 				width: 200px !important;
 			}
@@ -161,7 +161,10 @@ h3 {
 			}
 			.adv-by {
 				margin-bottom: -0.1em !important;
-				font-size: 4em !important;
+				font-size: 6em !important;
+			}
+			.lukko-digi {
+				width: 40vw !important;
 			}
 		}
 		img {
@@ -526,13 +529,6 @@ h3 {
 	.concept-art-title {
 		margin-top: 12vw !important;
 	}
-
-	@media (max-width: 720px) {
-		h1 {
-			font-size: 1.6em;
-			opacity: 0.7;
-		}
-	}
 }
 
 
@@ -704,6 +700,7 @@ h3 {
 
 		h1 {
 			margin: 0 0 2vw 0;
+			font-size: 8vw;
 
 			&.concept-art-title {
 				margin-top: 25vw !important;

@@ -10,9 +10,22 @@
  * {
   scroll-behavior: smooth;
 }
+.spacer {
+	display: block;
+	position: relative;
+	height: 100px;
+	background: rgba(0,0,0,0);
+
+	@media (min-width: 720px) {
+		height: 0px;
+	}
+}
 :root {
 	--dark: black;
 	--light: white;
+	--off-light: rgb(236, 236, 236);
+	--off-dark: rgb(48, 48, 48);
+	--light-transp: rgba(255, 255, 255, 0.664);
 	--accent: #848484;
 	--accent-dark: #323232;
 	--black: 15, 15, 15;
@@ -27,6 +40,20 @@
 	--light: black;
 	--dark: white;
 	--gray-light: rgb(32, 32, 32);
+	--off-light: rgba(18, 18, 18, 1);
+	--off-dark: rgb(236, 236, 236);
+	--light-transp: rgba(0, 0, 0, 0.695);
+}
+
+@media (max-width: 720px) {
+	.big-only {
+		display: none;
+	}
+}
+@media (min-width: 720px) {
+	.small-only {
+		display: none;
+	}
 }
 
 .disable-dbl-tap-zoom {

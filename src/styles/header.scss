@@ -6,6 +6,8 @@
 	.full-text {display: none;}
 }
 
+
+
 // HEADER STYLES
 
 #header
@@ -17,20 +19,24 @@
   display: flex;
   /* You can also use relative/absolute here if you want to stay on the top */
   position: relative;
-  // top: 50px;
+	width: 100%;
+  top: 0px;
+
+	height: 70px;
   // left: 50px;
 	
 	// padding: 20px 20px;
   
-  z-index: 1;
+  z-index: 5;
   
   -webkit-user-select: none;
   user-select: none;
-}
 
-// have to do this on a per item basis cause of the drop down menu
-.spans {
-	margin: 40px;
+	@media (max-width: 720px) {
+		position: fixed;
+		background-color: var(--light-transp);
+		height: 60px;
+	}
 }
 
 .site-title {
@@ -58,7 +64,10 @@
 .internal-links {
   display: flex;
 	width: 45%;
+	height: 100%;
 	column-gap: 10px;
+	justify-content: center;
+	align-items: center;
 }
 
 @media (max-width: 1200px) {
@@ -73,10 +82,11 @@
 		display: none;
 	}
 	.spans {
-		margin: 32px 30px;
+		margin: 19px 30px !important;
 	}
 	.site-title {
-		margin: 25px 30px;
+		margin: 17px 30px;
+		font-size: 1.3em;
 	}
 }
 
@@ -84,6 +94,22 @@
 	.internal-links {
 		width: 90%;
 		font-size: 0.9em;
+	}
+}
+
+.spans {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin: 30px;
+	span:first-child
+	{
+		transform-origin: 0% 0%;
+	}
+	span:nth-last-child(2)
+	{
+		transform-origin: 0% 100%;
 	}
 }
 
@@ -95,10 +121,10 @@
   margin-bottom: 5px;
   position: relative;
   
-  background: var(--dark);
+  background: var(--off-dark);
   border-radius: 3px;
   
-  z-index: 1;
+  z-index: 5;
   
   transform-origin: 4px 0px;
   
@@ -107,35 +133,19 @@
               opacity 0.55s ease;
 }
 
-.spans {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	// margin: 0;
-	span:first-child
-	{
-		transform-origin: 0% 0%;
-	}
-	span:nth-last-child(2)
-	{
-		transform-origin: 0% 100%;
-	}
-}
-
 #menuCheckbox
 {
   display: block;
   width: 44px;
   height: 36px;
   position: absolute;
-  top: 42px;
-  right: 34px;
+  top: 25px;
+  right: 25px;
   
   cursor: pointer;
   
   opacity: 0; /* hide this */
-  z-index: 2; /* and place it over the hamburger */
+  z-index: 6; /* and place it over the hamburger */
   
   -webkit-touch-callout: none;
 
@@ -143,7 +153,7 @@
 		~ .spans span {
 			opacity: 1;
 			transform: rotate(45deg) translate(-2px, -1px);
-			background: #232323;
+			background: var(--dark);
 		}
 		~ .spans span:nth-last-child(3) {
 			opacity: 0;
@@ -166,7 +176,7 @@
   padding: 50px;
   box-sizing: border-box;
   overflow-y: auto;
-  background: #ededed;
+  background: var(--off-light);
   list-style-type: none;
   -webkit-font-smoothing: antialiased;
   /* to stop flickering of text in safari */
@@ -177,6 +187,10 @@
   transform: translate(0, -100%);
   
   transition: transform 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+
+	a {
+		color: var(--dark);
+	}
 
 	li
 	{
