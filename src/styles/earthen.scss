@@ -71,13 +71,18 @@ h3 {
 		padding: 5vw 10vw 10vw 10vw;
 		position: relative;
 	}
-	.text-flex {
+	.text-flex, .text-flex a {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		z-index: 5;
 		font-size: 1.6vw;
+
+		transition: 200ms;
+	}
+	.text-flex a:hover {
+		transform: scale(1.1);
 	}
 
 	.title-one {
@@ -113,8 +118,9 @@ h3 {
 		.text-flex {
 
 			h2 {
-				font-family: "dust-caps";
+				font-family: "dust-caps" !important;
 				font-size: 3em;
+				margin-bottom: -1vw;
 			}
 			
 			img {
