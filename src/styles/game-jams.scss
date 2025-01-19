@@ -1,0 +1,397 @@
+.parallax {
+	height: 500px; /* fallback for older browsers */
+	height: 100vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	-webkit-perspective: 300px;
+	perspective: 300px;
+	perspective-origin: 50% 0;
+}
+
+
+.intro {
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	width: 100%;
+	height: 30vw;
+	
+	text-align: center;
+
+	* {
+		margin: 0;
+	}
+	h1 {
+		text-align: center;
+		font-family: 'naot';
+	}
+	p {
+		line-height: 120%;
+		font-weight: 600;;
+	}
+	transform: translateZ(-600px) scale(3) translateY(13vw);
+
+	@media (max-width: 1080px) {
+		height: 50vw;
+		transform: translateZ(-600px) scale(2.5) translateY(30vw);
+	}
+}
+
+.jams-section {
+
+	// background: rgba(255, 219, 225, 0.272);
+	height: fit-content;
+
+	display: flex;
+	flex-direction: column;
+	padding: 0 7vw;
+	margin-bottom: 8vw;
+
+	row-gap: 5vw;
+
+	-webkit-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+
+	@media (max-width: 1080px) {
+		padding: 0 0vw;
+		row-gap: 0;
+		margin-bottom: 0;
+	}
+
+	.jam {
+
+		
+		
+		height: 37vw;
+		background-repeat: no-repeat;
+		border-radius: 25px;
+		overflow: hidden;
+		transition: 200ms ease-out;
+
+		
+		
+		position: relative;
+		-webkit-transform-style: preserve-3d;
+		transform-style: preserve-3d;
+		z-index: -1;
+
+	
+		* {
+			color: white;
+		}
+
+		.jam-content {
+			height: 100%;
+			width: 100%;
+			display: grid;
+			padding: 0 6vw;
+			grid-template-columns: 1fr 1fr;
+			align-items: center;
+			transition: 200ms ease-out;
+
+			column-gap: 3vw;
+
+			&:hover {
+				transform: scale(1.02);
+			}
+
+			.content {
+				display: flex;
+				flex-direction: column;
+				align-items: flex-start;
+				img {
+					width: 100%;
+					pointer-events: none;
+				}
+			}
+
+			.video {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				row-gap: 2vw;
+				iframe {
+					width: 100%;
+					height: calc(100% * 0.62);
+					border-radius: 10px;
+				}
+				button {
+					background-color: white;
+					padding: 1vw 2vw;
+					border-radius: 100px;
+					transition: 200ms;
+					* {
+						color: black;
+						margin: 0;
+					}
+					&:hover {
+						background-color: rgba(255, 255, 255, 0.359);
+						transform: scale(1.05);
+						* {
+							// color: white;
+						}
+					}
+				}
+			}
+
+			// JAM CONTENT SPECIFICS
+			&.lithic {
+				grid-template-columns: 1fr 55%;
+
+				* {
+					font-family: "lithic";
+					font-size: 1vw;
+				}
+
+				h2 {
+					font-size: 1.5vw;
+				}
+
+				img{
+					transform:scale(2.2) translateX(-0.5vw);
+					margin-bottom: -1vw;
+					margin-top: -2vw;
+				}
+	
+				background-color: rgba(70, 35, 0, 0.422);
+			}
+			&.marotte {
+				
+				background-color: rgba(0, 0, 0, 0);
+				grid-template-columns: 55% 1fr;
+
+				.content {
+					row-gap: 2vw;
+					padding: 0 2vw;
+					// transform: scale(0.9);
+				}
+
+				* {
+					font-family: "dust-calli";
+					font-size: 2.4vw;
+					margin: 0;
+					line-height: 70%;
+				}
+
+				h2 {
+					font-size: 3vw;
+				}
+
+				button {
+					p {
+						margin: -0vw 0;
+					}
+				}
+			}
+			&.dungeon {
+				background-color: rgba(0, 0, 0, 0.445);
+				grid-template-columns: 1fr 55%;
+
+				* {
+					font-family: "dungeon";
+					line-height: 80%;
+					margin: 0;
+				}
+
+				.video {
+					img {
+						transition: 200ms;
+					}
+					img:hover {
+						transform: scale(1.03);
+					}
+				}
+
+				button {
+					p {
+						font-size: 1.5vw;
+					}
+				}
+				.content {
+					row-gap: 2vw;
+					transform: scale(0.8);
+
+					
+					p {
+						font-size: 2.5vw;
+					}
+					h1 {
+						font-size: 4.5vw;
+					}
+					h2 {
+						font-size: 3vw;
+					}
+				}
+				
+				
+			}
+			// STILL JAMN CONTENT FOR MOBVILE
+
+		}
+
+		
+
+		
+
+		// .jam-bg {
+		// 	-webkit-transform-style: preserve-3d;
+		// 	transform-style: preserve-3d;
+
+		// 	position: relative;
+		// 	top: 0;
+		// 	left: 0;
+		// 	width: 100%;
+		// 	height: 100%;
+
+		// 	background-image: url(/game-jams/lithic/bg.jpg);
+		// 	transform: translateZ(-200px) scale(1.45) translateY(-12vw);
+
+		// 	z-index: -1;
+
+		// }
+
+		&::before {
+
+			
+
+			content: "";
+			transform: scale(1.05);
+			background-size: cover;
+			background-position: 50% 50%;
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+
+			z-index: -1;
+
+			transition: 500ms ease-out;
+		}
+		&.lithic::before {
+			background-image: url(/game-jams/lithic/bg.jpg);
+		}
+		&.marotte::before {
+			background-image: url(/game-jams/marotte/bg.jpg);
+		}
+		&.dungeon::before {
+			background-image: url(/game-jams/dungeon/bg.jpg);
+		}
+		&:hover {
+			&::before {
+				transform: scale(1);
+			}
+		}
+
+		&:hover {
+			background-size: 100%;
+		}
+		&.dungeon:hover {
+			background-size: auto 100%;
+		}
+
+
+
+		@media (max-width: 1080px) {
+			border-radius: 0;
+			height: fit-content !important;
+
+			.jam-content {
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				padding: 15vw 8vw;
+
+				row-gap: 12vw !important;
+
+				.video {
+					iframe {
+						height: 42vw;
+					}
+				}
+				
+				.content {
+					align-items: center;
+					row-gap: 5vw;
+				}
+
+				* {
+					
+					text-align: center;
+				}
+
+				button {
+					margin-top: 2vw !important;
+					padding: 3vw 5vw !important;
+				}
+
+				&.lithic {
+					background-color: rgba(34, 21, 0, 0.781);
+
+					img {
+						transform: scale(2);
+						margin-top: -4vw;
+					}
+
+					p {
+						font-size: 3vw;
+					}
+					h2 {
+						font-size: 6vw;
+					}
+					button {
+						
+						
+						p {
+							font-size: 3.5vw !important;
+						}
+					}
+				}
+				&.marotte {
+					flex-direction: column-reverse;
+					p {
+						font-size: 7vw;
+					}
+					h2 {
+						font-size: 9vw;
+					}
+					.content {
+						row-gap: 5vw;
+					}
+					button {
+						p {
+							font-size: 8vw !important;
+						}
+					}
+				}
+				&.dungeon {
+					row-gap: 5vw !important;
+					.content {row-gap: 8vw !important;}
+					h1 {
+						font-size: 12vw !important;
+					}
+					p {
+						font-size: 7vw !important;
+					}
+					h2 {
+						font-size: 9vw !important;
+					}
+				}
+			}
+		}
+
+
+
+
+
+
+	}
+
+}

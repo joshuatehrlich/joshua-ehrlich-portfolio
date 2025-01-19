@@ -3,6 +3,8 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/game-jams.scss';
 ---
 
 <!doctype html>
@@ -11,18 +13,71 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<Header />
-		<main>
-			<h1>game jams</h1>
-		</main>
-		<Footer />
+		<div class="parallax">
+
+			<Header />
+
+			<div class="intro">
+				<h1>game jams</h1>
+				<p>
+					I've competed in a number of game jams with my<br>
+					team at Lukko Digital. Check them out below!
+				</p>
+			</div>
+			
+			<div class="jams-section">
+
+				<div class="jam lithic">
+					<div class="jam-content lithic">
+						<div class="content">
+							<img src="/game-jams/lithic/title.gif"/>
+							<p>A sokoban narrative experience</p>
+
+							<p>Created in 1 week for brackey's 2024 game jam</p>
+
+							<h2>Placed 4th of 700 entries!</h2>
+						</div>
+						<div class="video">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/VJPp3JFPAmg?si=FoyOyX8XSokAyvpw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<a target="_blank" href="https://lukko-digital.itch.io/lithic"><button><p>Play in browser</p></button></a>
+						</div>
+					</div>
+					<div class="jam-bg lithic"></div>
+				</div>
+
+				<div class="jam marotte">
+					<div class="jam-content marotte">
+						<div class="video">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/PcKnbLq7LgE?si=Z6yG298kf2Ye3ojJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<a target="_blank" href="https://lukko-digital.itch.io/marotte"><button><p>Play in browser</p></button></a>
+						</div>
+						<div class="content">
+							<img src="/game-jams/marotte/title.png"/>
+							<p>A game about social anxiety and mind control. Can you make the king laugh?
+							</p>
+							<h2>Created in 48 hours for Global Game Jam 2024!</h2>
+						</div>
+					</div>
+				</div>
+
+				<div class="jam dungeon">
+					<div class="jam-content dungeon">
+						<div class="content">
+							<h1>You Made the Dungeon</h1>
+							<p>Created in 48hr for GMTK Game Jam 2023</p>
+							<h2>Placed top 1% of 7,000 entries!</h2>
+						</div>
+						<div class="video">
+							<a target="_blank" href="https://lukko-digital.itch.io/you-made-the-dungeon"><img src="/game-jams/dungeon/1.jpg"></a>
+							<a target="_blank" href="https://lukko-digital.itch.io/you-made-the-dungeon"><button><p>Play on Itch</p></button></a>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			
+			<Footer />
+
+		</div>
 	</body>
 </html>
-
-<style>
-
-h1 {
-	text-align: center;
-}
-
-</style>

@@ -51,7 +51,23 @@
 }
 @font-face {
 	font-family: 'dust-calli';
+	src: url('/fonts/Dust_calli-Regular.ttf');
+}
+@font-face {
+	font-family: 'dust-calli';
 	src: url('/fonts/dust-calli-regular.ttf');
+}
+@font-face {
+	font-family: 'dungeon';
+	src: url('/fonts/8bitOperatorPlus8-Regular.ttf');
+}
+@font-face {
+	font-family: 'lithic';
+	src: url('/fonts/gameboy.ttf');
+}
+@font-face {
+	font-family: 'naot';
+	src: url('/fonts/Naot-Regular.ttf');
 }
 body {
 	font-family: 'Crimson Text', sans-serif;
