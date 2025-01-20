@@ -18,6 +18,8 @@
 	justify-content: space-between;
 	align-items: flex-start;
 
+	overflow-x: clip;
+
   display: flex;
   /* You can also use relative/absolute here if you want to stay on the top */
   position: relative;
@@ -249,8 +251,10 @@
 	}
 
 	@media (min-width: 1200px) {
+		overflow: auto !important;
+		position: fixed;
 		right: 0;
-		height: 100vw;
+		height: 1000vh !important;
 		text-align: left;
 		max-width: 30vw;
 		transform-origin: 0% 0%;

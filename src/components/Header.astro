@@ -5,6 +5,35 @@ import '../styles/header.scss'
 ---
 
 <header>
+
+
+	<script>
+
+		document.addEventListener('scroll', function() {
+			const checkbox = document.getElementById('menuCheckbox');
+			if (checkbox.checked && window.innerWidth > 720) {
+				checkbox.checked = false;
+			}
+		});
+
+
+		const dropdown = document.getElementById('dropdown');
+
+		dropdown.addEventListener('mouseout', function(event) {
+			if (!dropdown.contains(event.relatedTarget)) {
+
+				const checkbox = document.getElementById('menuCheckbox');
+				if (checkbox.checked) {
+					checkbox.checked = false;
+				}
+			}
+		});
+
+
+
+
+	</script>
+
 	<!-- <div class="spacer"></div> -->
 	<div id="header">
 
