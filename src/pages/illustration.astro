@@ -10,7 +10,7 @@ import '../styles/illustration.scss';
 // SETUP IMAGE IMPORTS
 const categories = ["path", "name", "details", "width", "vpos", "height"] as const;
 
-const imgData = [
+const imgDataIllust = [
   ["giant", "Giant", "40 by 60 inches, copic on illustration board. Winner of Silver award in Illustration West 63.<br>2024", 3],
 	["balloon", "Escape", "Created in photoshop.<br>2024"],
   ["desert", "Alice Abandoned",
@@ -33,6 +33,102 @@ const imgData = [
 	["cookingathome", "Cooking at Home", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 3],
 	["washingmachine", "Machine Room", "Study from life, created in Procreate.<br>2024", 2],
 	["alpha", "Anthro Alphabet", "Created in Photoshop.<br>2023", 1],
+
+	["exile1", "Exile Part Two", "12 by 18 inches, ink and digital coloring.<br>2024", 4],
+	["exile2", "Exile Part Two", "12 by 18 inches, ink and digital coloring.<br>2024", 4],
+	[null],[null],[null],
+];
+
+const imgDataAcademic = [
+	["academic/hands", "Graphite Hand Study", "", 1.3],
+	["academic/tree", "Sketch", "", 1],
+	["academic/torso", "Charcoal Figure Study", "", 1.5],
+	[null],
+
+  ["academic/jonathan", "Oil Portrait", "", 1],
+	["academic/asaro", "Oil Asaro Study", "", 1.5],
+	["academic/woman", "Oil Portrait", "", 1],
+	
+	// ["academic/selfportrait", "Name", "",1],
+	[null],
+	
+
+	// ["academic/coffee", "Name", "", 1],
+	["academic/box", "Charcoal Study", "", 1.5],
+	
+	["academic/desk", "My Desk", "", 1],
+	["academic/shoe", "Still Life", "", 2],
+	[null],
+
+	["academic/portrait4", "Portrait Study", "", 1],
+	["academic/portrait1", "Portrait Study", "", 1 ],
+	["academic/portrait3", "Portrait Study", "", 1],
+	// ["academic/portrait5", "Name", "", 2],
+	["academic/portrait2", "Portrait Study", "", 1],
+
+	["figure/1", "Figure Study", "", 1],
+	["figure/2", "Figure Study", "", 2],
+	["figure/3", "Figure Study", "", 1],
+	["figure/4", "Figure Study", "", 1.5],
+
+	["figure/5", "Figure Study", "", 1.5],
+	["figure/6", "Figure Study", "", 1],
+	["figure/7", "Figure Study", "", 2],
+	["figure/8", "Figure Study", "", 1],
+
+	["figure/9", "Figure Study", "", 1],
+	["figure/11", "Figure Study", "", 2],
+	["figure/10", "Figure Study", "", 1],
+	["figure/14", "Figure Study", "", 1.5],
+];
+
+const imgDataSketchbook = [
+	["sketchbook/1a", "Giant Sketch", "", 1],
+	["sketchbook/1b", "Kaiju Sketch", "", 1],
+	[null],[null],
+
+	["sketchbook/2a", "Digital Sketch 2024", "", 1],
+	["sketchbook/2b", "Digital Sketch 2024", "", 1],
+	["sketchbook/2c", "Digital Sketch 2024", "", 1],
+	[null],
+
+	["sketchbook/3a", "Digital Sketch 2024", "", 1],
+	["sketchbook/3c", "Digital Sketch 2024", "", 1],
+	["sketchbook/3b", "Digital Sketch 2024", "", 1],
+	[null],
+
+	["sketchbook/1", "Sketchbook 2023", "", 1],
+	["sketchbook/2", "Sketchbook 2023", "", 1],
+	["sketchbook/4", "Sketchbook 2023", "", 1],
+	["sketchbook/5", "Sketchbook 2023", "", 1],
+
+	["sketchbook/6", "Sketchbook 2023", "", 1],
+	["sketchbook/7", "Sketchbook 2023", "", 1],
+	["sketchbook/8", "Sketchbook 2023", "", 1],
+	["sketchbook/9", "Sketchbook 2023", "", 1],
+
+	["sketchbook/10", "Sketchbook 2023", "", 1],
+	["sketchbook/11", "Sketchbook 2023", "", 1],
+	["sketchbook/12", "Sketchbook 2023", "", 1],
+	["sketchbook/13", "Sketchbook 2023", "", 1],
+
+	["sketchbook/14", "Sketchbook 2023", "", 1],
+	["sketchbook/15", "Sketchbook 2023", "", 1],
+	["sketchbook/16", "Sketchbook 2023", "", 1],
+	["sketchbook/17", "Sketchbook 2023", "", 1],
+
+	["sketchbook/b1", "Perspective Study", "", 1],
+	["sketchbook/b2", "Perspective Study", "", 1],
+	["sketchbook/b3", "Perspective Study", "", 1],
+	[null],
+	["sketchbook/bp1", "Perspective Study", "", 1],
+	["sketchbook/bp2", "Perspective Study", "", 1],
+	["sketchbook/bp3", "Perspective Study", "", 1],
+	[null],
+	["sketchbook/p1", "Perspective Study", "", 1],
+	["sketchbook/p2", "Perspective Study", "", 1],
+	["sketchbook/p3", "Perspective Study", "", 1],
+	[null],
 ];
 
 type Image = {
@@ -47,7 +143,7 @@ type Image = {
 const defaultWidth = 1;  // Default width
 const defaultVPos = "50%"; // Default vertical position
 
-const imgs: Image[] = imgData.map(data => {
+const imgsIllust: Image[] = imgDataIllust.map(data => {
   const image = {
     path: data[0] as string,
     name: data[1] as string,
@@ -59,6 +155,37 @@ const imgs: Image[] = imgData.map(data => {
 
   return image;
 });
+
+const imgsAcademic: Image[] = imgDataAcademic.map(data => {
+  const image = {
+    path: data[0] as string,
+    name: data[1] as string,
+    details: data[2] as string, // Details provided in imgData
+    width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
+    vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
+		height: (data[5] !== undefined ? data[5] : "20vw") as string,
+  } as Image;
+
+  return image;
+});
+
+const imgsSketchbook: Image[] = imgDataSketchbook.map(data => {
+  const image = {
+    path: data[0] as string,
+    name: data[1] as string,
+    details: data[2] as string, // Details provided in imgData
+    width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
+    vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
+		height: (data[5] !== undefined ? data[5] : "20vw") as string,
+  } as Image;
+
+  return image;
+});
+
+let category = 'illustration'; // your category value
+const isIllustration = category === 'illustration';
+const isAcademic = category === 'academic';
+const isSketchbook = category === 'sketchbook';
 ---
 
 <!doctype html>
@@ -67,23 +194,16 @@ const imgs: Image[] = imgData.map(data => {
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
-		<div class="invert-colors"><Header class="header"/></div>
-		<div class="spacer"></div>
-		
+
+		<!-- PYTHON ZONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 
 		<!-- Handles Animations -->
 		<script src="../components/animation/AnimIllustration.js"></script>
 
-		<!-- handles popups -->
 		<script client:load> // for some reason, this is read as typescript unless i use client:load
 
 			function openPopup(imageSrc, imageTitle, imageDesc) {
 				document.getElementById('popup').style.display = 'flex';
-				
-				// gsap.to(".popup", {
-				// 	opacity: 1,
-				// 	duration: 1
-				// });
 
 				document.getElementById('popup-image').src = imageSrc;
 				document.getElementById('popup-title').innerHTML = imageTitle;
@@ -96,11 +216,55 @@ const imgs: Image[] = imgData.map(data => {
 			function closePopup() {
 				document.getElementById('popup').style.display = 'none';
 			}
+
+			
+
+			function setCategory(ctg) {
+				category = ctg;
+
+				const selectorDivs = document.querySelectorAll('.selector');
+				
+				selectorDivs.forEach(div => {
+					div.classList.remove('active');
+				});
+				
+				const categoryDiv = document.querySelector(`.${category}`);
+				if (categoryDiv && !categoryDiv.classList.contains('active')) {
+					categoryDiv.classList.add('active');
+				}
+
+				// Get all elements with the class 'gallery'
+				const galleryElements = document.querySelectorAll('.gallery-group');
+				
+				// Hide all gallery elements and show only the one with the passed in category class
+				galleryElements.forEach(element => {
+					if (element.classList.contains(category)) {
+						element.style.display = 'flex';
+					} else {
+						element.style.display = 'none';
+					}
+				});
+
+			}
+			
+
+
+
+
+
+
 		</script>
+
+
+
+		<!-- HTML BEGINS HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+		<div class="invert-colors"><Header class="header"/></div>
+		<div class="spacer"></div>
 
 		<div class="parallax-viewport">
 			<div class="parallax-content">
-				<h3>View my work below</h1>
+				<h3>View my work below</h3>
 				<p>click on any image for details</p>
 			</div>
 		</div>
@@ -118,8 +282,43 @@ const imgs: Image[] = imgData.map(data => {
 		</div>
 
 
-		<div class="gallery-group">
-			{imgs.reduce((acc, img, index) => {
+
+
+
+
+
+		<div class="category-selector">
+			<div class=`selector illustration ${isIllustration ? 'active' : ''}` onclick=`setCategory('illustration')`>
+				<p>
+					Illustration
+				</p>
+			</div>
+			<div class=`selector academic ${isAcademic ? 'active' : ''}` onclick=`setCategory('academic')`>
+				<p>
+					Academic
+				</p>
+			</div>
+			<div class=`selector sketchbook ${isSketchbook ? 'active' : ''}` onclick=`setCategory('sketchbook')`>
+				<p>
+					Sketchbook
+				</p>
+			</div>
+		</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+		<div class="gallery-group illustration">
+			{imgsIllust.reduce((acc, img, index) => {
 				acc = acc as {}[][];
 				
 				// Start a new flexbox for every 4 images
@@ -130,9 +329,9 @@ const imgs: Image[] = imgData.map(data => {
 				return acc;
 			}, [] as {}[][])
 			.map((imgGroup, groupIndex) => ( imgGroup.length > 1 && (
-				<div class="gallery">
+				<div class="gallery illustration">
 					{imgGroup.map((img, imgIndex) => (
-						<div class="gallery-img"
+						<div class="gallery-img illustration"
 						onclick=`openPopup('/illustration/${img.path}.jpg', '${img.name}', '${img.details}')`,
 						style={{
 							backgroundImage: `url(/illustration/${img.path}.jpg)`,
@@ -149,10 +348,72 @@ const imgs: Image[] = imgData.map(data => {
 			)))}
 		</div>
 
-		<div class="foot-div flex flex-1 flex-col justify-start items-center w-100% mt-12 mb-20">
+		<div class="gallery-group academic">
+			{imgsAcademic.reduce((acc, img, index) => {
+				acc = acc as {}[][];
+				
+				// Start a new flexbox for every 4 images
+				if (index % 4 === 0 || img.path === null) {
+					acc.push([]);
+				}
+				acc[acc.length - 1].push(img);
+				return acc;
+			}, [] as {}[][])
+			.map((imgGroup, groupIndex) => ( imgGroup.length > 1 && (
+				<div class="gallery academic">
+					{imgGroup.map((img, imgIndex) => (
+						<div class="gallery-img academic"
+						onclick=`openPopup('/illustration/${img.path}.jpg', '${img.name}', '${img.details}')`,
+						style={{
+							backgroundImage: `url(/illustration/${img.path}.jpg)`,
+							'--flex-grow': `${img.width}`,
+							backgroundPosition: `50% ${img.vpos}`,
+							height: `${img.height}`
+						}}>
+							<div class="gallery-content-container">
+								<h3 class="gallery-content">{img.name}</h3>
+							</div>
+						</div>
+					))}
+				</div>
+			)))}
+		</div>
+
+		<div class="gallery-group sketchbook">
+			{imgsSketchbook.reduce((acc, img, index) => {
+				acc = acc as {}[][];
+				
+				// Start a new flexbox for every 4 images
+				if (index % 4 === 0 || img.path === null) {
+					acc.push([]);
+				}
+				acc[acc.length - 1].push(img);
+				return acc;
+			}, [] as {}[][])
+			.map((imgGroup, groupIndex) => ( imgGroup.length > 1 && (
+				<div class="gallery sketchbook">
+					{imgGroup.map((img, imgIndex) => (
+						<div class="gallery-img sketchbook"
+						onclick=`openPopup('/illustration/${img.path}.jpg', '${img.name}', '${img.details}')`,
+						style={{
+							backgroundImage: `url(/illustration/${img.path}.jpg)`,
+							'--flex-grow': `${img.width}`,
+							backgroundPosition: `50% ${img.vpos}`,
+							height: `${img.height}`
+						}}>
+							<div class="gallery-content-container">
+								<h3 class="gallery-content">{img.name}</h3>
+							</div>
+						</div>
+					))}
+				</div>
+			)))}
+		</div>
+
+		<!-- <div class="foot-div flex flex-1 flex-col justify-start items-center w-100% mt-12 mb-20">
 			<img src="/illustration/treefull.jpg" class="foot-image mb-1 w-1/2 object-contain" style="max-height: 50vh">
 			<h4 class="foot-text mw-1/4">Thanks for stopping by!</h4>
-		</div>
+		</div> -->
 
 		<Footer />
 	</body>

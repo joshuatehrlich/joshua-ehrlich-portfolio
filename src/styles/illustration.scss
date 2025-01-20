@@ -35,7 +35,7 @@
 	
 
 	img {
-		max-height: 70%;
+		max-height: 90%;
 		max-width: 70%;
 		
 		height: auto;
@@ -103,6 +103,7 @@
 
 /* viewport */
 .parallax-viewport {
+	pointer-events: none;
 	margin: -70px auto 0px auto;
 
 	width: 100%;
@@ -152,13 +153,85 @@
 		padding-bottom: 13vw;
 	}
 	@media (max-width: 720px) {
-		padding-bottom: 50px;
+		padding-bottom: 57px;
 		margin-top: -100px;
-		font-size: 1em;
+		font-size: 0.8em;
 	}
 }
 
 /* -------------------- GALLERY -------------------- */
+
+
+
+
+.category-selector {
+	margin: 5vw auto 0 auto;
+	display: flex;
+	width: fit-content;
+	justify-content: center;
+	align-items: center;
+
+	column-gap: 0.5vw;
+
+	border-radius: 10px !important;
+
+	overflow: hidden;
+
+	.selector {
+		cursor: pointer;
+		text-align: center;
+		background-color: rgba(0, 0, 0, 0.079);
+		width: 100%;
+
+		margin: 0;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		padding: 1vw 5vw;
+
+		&.active {
+			background-color: black;
+			color: white;
+		}
+
+		p {
+			font-size: 1em;
+			margin: 0;
+			font-weight: 600;
+			
+			transition: 200ms ease-out;
+		}
+		&:hover {
+			p {
+				transform: scale(1.1);
+			}
+		}
+
+		
+	}
+	@media (max-width: 720px) {
+		column-gap: 2vw;
+		.selector {
+			padding: 2vw 7vw;
+		p {
+			font-size: 0.7em;
+			font-weight: 200;
+		}
+		}
+		margin: 9vw auto 9vw auto;
+		
+	}
+}
+
+
+
+
+
+
+
+
 
 .gallery-group {
 	display: flex;
@@ -168,7 +241,9 @@
   row-gap: 10px;
 	border-radius: 10px;
 	overflow: hidden;
-	
+	&.academic, &.sketchbook{
+		display: none;
+	}
 }
 
 .gallery {
@@ -177,10 +252,12 @@
 	column-gap: 10px;
 	row-gap: 10px;
 	width: 100%;
+	max-width: 1500px;
 	justify-content: center;
 	align-items: center;
 	align-content: stretch;
 	flex-wrap: wrap;
+	
 	
 }
 .gallery-img {
@@ -188,6 +265,10 @@
 	margin: 0;
 	padding: 0;
 	border-radius: 2px;
+
+	&.academic {
+		height: 25vw !important;
+	}
 	
 	flex-shrink:2;
 	flex-basis: 0;
@@ -206,8 +287,20 @@
 
 	@media (max-width: 1080px) {
 		flex-basis: 34%;
+		&.academic {
+			flex-grow: 1;
+		}
+		
 		height: 30vw !important;
+
+		&.academic {
+			height: 60vw !important;
+		}
 	}
+	// @media (max-width: 720px) {
+	// 	flex-basis: 50%;
+	// 	height: 60vw !important;
+	// }
 }
 
 .gallery-content-container {
