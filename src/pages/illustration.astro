@@ -369,7 +369,7 @@ const isSketchbook = category === 'sketchbook';
 						<div class="gallery-img illustration"
 						onclick=`openPopup('/illustration/${img.path}-full.jpg', '${img.name}', '${img.details}')`,
 						style={{
-							backgroundImage: `url(/illustration/${img.path}.jpg)`,
+							backgroundImage: `url(/illustration/${img.path}-lowres.jpg)`,
 							'--flex-grow': `${img.width}`,
 							backgroundPosition: `50% ${img.vpos}`,
 							height: `${img.height}`
@@ -398,9 +398,9 @@ const isSketchbook = category === 'sketchbook';
 				<div class="gallery academic">
 					{imgGroup.map((img, imgIndex) => (
 						<div class="gallery-img academic"
-						onclick=`openPopup('/illustration/${img.path}.jpg', '${img.name}', '${img.details}')`,
+						onclick=`openPopup('/illustration/${img.path}-full.jpg', '${img.name}', '${img.details}')`,
 						style={{
-							backgroundImage: `url(/illustration/${img.path}.jpg)`,
+							backgroundImage: `url(/illustration/${img.path}-lowres.jpg)`,
 							'--flex-grow': `${img.width}`,
 							backgroundPosition: `50% ${img.vpos}`,
 							height: `${img.height}`
@@ -429,9 +429,9 @@ const isSketchbook = category === 'sketchbook';
 				<div class="gallery sketchbook">
 					{imgGroup.map((img, imgIndex) => (
 						<div class="gallery-img sketchbook"
-						onclick=`openPopup('/illustration/${img.path}.jpg', '${img.name}', '${img.details}')`,
+						onclick=`openPopup('/illustration/${img.path}-full.jpg', '${img.name}', '${img.details}')`,
 						style={{
-							backgroundImage: `url(/illustration/${img.path}.jpg)`,
+							backgroundImage: `url(/illustration/${img.path}-lowres.jpg)`,
 							'--flex-grow': `${img.width}`,
 							backgroundPosition: `50% ${img.vpos}`,
 							height: `${img.height}`
