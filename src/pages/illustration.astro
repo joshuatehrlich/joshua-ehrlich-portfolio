@@ -29,14 +29,29 @@ const imgDataIllust = [
 	["dive", "Dive", "Meditation in ink<br>2024", 2],
 	[null],[null],
 
+	["clouds", "", "", 2],
+	["fish", "", "", 1, "0%"],
+	["nomad", "", "", 2],
+	[null],
+
 	["knightcomic", "Knight Comic", "A wordless story. Created in Photoshop.<br>2023", 1.3],
 	["cookingathome", "Cooking at Home", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 3],
 	["washingmachine", "Machine Room", "Study from life, created in Procreate.<br>2024", 2],
 	["alpha", "Anthro Alphabet", "Created in Photoshop.<br>2023", 1],
 
+
+	["dportrait1", "", "", 1],
+	["dportrait2", "", "", 1.5],
+	["dportrait3", "", "", 1, '40%'],
+	[null],
+
+	
+
+	
+
 	["exile1", "Exile Part Two", "12 by 18 inches, ink and digital coloring.<br>2024", 4],
 	["exile2", "Exile Part Two", "12 by 18 inches, ink and digital coloring.<br>2024", 4],
-	[null],[null],[null],
+	[null],[null],
 ];
 
 const imgDataAcademic = [
@@ -47,7 +62,7 @@ const imgDataAcademic = [
 
   ["academic/jonathan", "Oil Portrait", "", 1],
 	["academic/asaro", "Oil Asaro Study", "", 1.5],
-	["academic/woman", "Oil Portrait", "", 1],
+	["academic/schmidstudy", "Digital Schmidt Study", "", 1],
 	
 	// ["academic/selfportrait", "Name", "",1],
 	[null],
@@ -80,6 +95,25 @@ const imgDataAcademic = [
 	["figure/11", "Figure Study", "", 2],
 	["figure/10", "Figure Study", "", 1],
 	["figure/14", "Figure Study", "", 1.5],
+
+	
+
+	
+	["academic/bnw1", "Digital Portrait Study", "", 1],
+	["academic/rock", "Digital Still Life", "", 1.5],
+	["academic/asarodigital", "Digital Still Life", "", 1],
+	[null],
+	
+
+	["academic/room", "Digital Environment Painting", "", 1],
+	["academic/sf", "Digital Environment Painting", "", 1],
+	[null],[null],
+
+	["academic/still3", "Oil Still Life", "", 1],
+	["academic/still2", "Oil Still Life", "", 2],
+	
+	["academic/still1", "Oil Still Life", "", 1],
+	[null],
 ];
 
 const imgDataSketchbook = [
@@ -333,7 +367,7 @@ const isSketchbook = category === 'sketchbook';
 				<div class="gallery illustration">
 					{imgGroup.map((img, imgIndex) => (
 						<div class="gallery-img illustration"
-						onclick=`openPopup('/illustration/${img.path}.jpg', '${img.name}', '${img.details}')`,
+						onclick=`openPopup('/illustration/${img.path}-full.jpg', '${img.name}', '${img.details}')`,
 						style={{
 							backgroundImage: `url(/illustration/${img.path}.jpg)`,
 							'--flex-grow': `${img.width}`,
