@@ -18,7 +18,10 @@
 	justify-content: space-between;
 	align-items: flex-start;
 
-	overflow-x: clip;
+	@media (min-width: 1200px) {
+		overflow-x: clip;
+	}
+	
 
   display: flex;
   /* You can also use relative/absolute here if you want to stay on the top */
