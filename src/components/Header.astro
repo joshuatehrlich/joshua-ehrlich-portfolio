@@ -11,7 +11,7 @@ import '../styles/header.scss'
 
 		document.addEventListener('scroll', function() {
 			const checkbox = document.getElementById('menuCheckbox');
-			if (checkbox.checked) { //  && window.innerWidth > 720
+			if (checkbox.checked && window.innerWidth > 720) {
 				checkbox.checked = false;
 			}
 		});
