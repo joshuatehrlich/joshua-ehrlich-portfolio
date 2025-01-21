@@ -149,6 +149,13 @@
 		margin: 0;
 		padding: 0;
 	}
+	h3 {
+		font-family: 'naot';
+		font-size: 4em;
+	}
+	p {
+		margin-top: -15px;
+	}
 	@media (max-width: 1080px) {
 		padding-bottom: 13vw;
 	}
@@ -156,6 +163,10 @@
 		padding-bottom: 57px;
 		margin-top: -100px;
 		font-size: 0.8em;
+		h3 {
+			font-family: 'naot';
+			font-size: 3em;
+		}
 	}
 }
 
