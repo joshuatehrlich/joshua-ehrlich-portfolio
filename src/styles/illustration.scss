@@ -163,6 +163,9 @@
 	}
 	@media (max-width: 1080px) {
 		padding-bottom: 13vw;
+		h3 {
+			font-size: 2.7em;
+		}
 	}
 	@media (max-width: 720px) {
 		padding-bottom: 57px;
@@ -237,7 +240,7 @@
 		
 	}
 	@media (max-width: 720px) {
-		width: 85%;
+		width: fit-content;
 		column-gap: 2vw;
 		.selector {
 			padding: 2vw 7vw;
