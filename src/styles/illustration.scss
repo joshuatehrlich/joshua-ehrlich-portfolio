@@ -13,6 +13,11 @@
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.903);
 	transition: opacity 250ms;
+
+	a {
+		color: rgb(146, 146, 255);
+		font-weight: 900;
+	}
 }
 
 .popup-flexbox {
@@ -184,6 +189,7 @@
 	align-items: center;
 
 	column-gap: 0.5vw;
+	
 
 	border-radius: 10px !important;
 
@@ -199,6 +205,7 @@
 
 		flex-grow: 1;
 		flex-shrink: 1;
+		flex-basis: 10%;
 
 		display: flex;
 		justify-content: center;
@@ -276,8 +283,6 @@
 	align-items: center;
 	align-content: stretch;
 	flex-wrap: wrap;
-	
-	
 }
 .gallery-img {
 	height: 20vw;
