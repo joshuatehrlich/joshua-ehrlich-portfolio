@@ -42,14 +42,14 @@ const imgDataIllust = [
 	[null],
 
 	
-	["tower", "Knight Comic", "A wordless story. Created in Photoshop.<br>2023", 1],
+	["tower", "Tower", "24 by 11 inches, graphite on Strathmore 400 paper.<br>2023", 1],
 	["cookingathome", "Cooking at Home", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 1],
 	["race", "Kick", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 1],
 	[null],
 
 	["knightcomic", "Knight Comic", "A wordless story. Created in Photoshop.<br>2023", 2],
 	["clouds", "Pilgrimage", "Digital landscape painting inspired by Krenz Cushart<br>2022", 4],
-	["fish", "RISD Assignment", 'In response to the themes "ephemeral" and "intangible"<br>2022', 1.5],
+	["fish", "RISD Assignment", 'Created in response to the themes "ephemeral" and "intangible"<br>Made in Photoshop<br>2022', 1.5],
 	["nomad", "Nomad", "Created in Photoshop<br>2022", 2],
 
 	["dportrait1", "Digital Portrait", "Created in Photoshop<br>2022", 1],
@@ -71,7 +71,7 @@ const imgDataAcademic = [
 
   ["academic/jonathan", "Oil Portrait", "", 1],
 	["academic/asaro", "Oil Asaro Study", "", 1.5],
-	["academic/schmidstudy", "Digital Schmidt Study", "", 1],
+	["academic/schmidstudy", "Richard Schmidt Study", "Created in Photoshop<br>2022", 1],
 	
 	// ["academic/selfportrait", "Name", "",1],
 	[null],
@@ -340,7 +340,7 @@ const isSketchbook = category === 'sketchbook';
 		<div class="category-selector">
 			<div class=`selector illustration ${isIllustration ? 'active' : ''}` onclick=`setCategory('illustration')`>
 				<p>
-					Concept
+					Imaginative
 				</p>
 			</div>
 			<div class=`selector academic ${isAcademic ? 'active' : ''}` onclick=`setCategory('academic')`>
@@ -389,7 +389,7 @@ const isSketchbook = category === 'sketchbook';
 							backgroundPosition: `50% ${img.vpos}`,
 							height: `${img.height}`
 						}}>
-							<div class="gallery-content-container">
+							<div class="gallery-content-container illustration">
 								<h3 class="gallery-content">{img.name}</h3>
 							</div>
 						</div>
@@ -420,7 +420,7 @@ const isSketchbook = category === 'sketchbook';
 							backgroundPosition: `50% ${img.vpos}`,
 							height: `${img.height}`
 						}}>
-							<div class="gallery-content-container">
+							<div class="gallery-content-container academic">
 								<h3 class="gallery-content">{img.name}</h3>
 							</div>
 						</div>
@@ -451,7 +451,7 @@ const isSketchbook = category === 'sketchbook';
 							backgroundPosition: `50% ${img.vpos}`,
 							height: `${img.height}`
 						}}>
-							<div class="gallery-content-container">
+							<div class="gallery-content-container sketchbook">
 								<h3 class="gallery-content">{img.name}</h3>
 							</div>
 						</div>
