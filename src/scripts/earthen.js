@@ -1,10 +1,13 @@
 const imageSets = {
 	screenshot: [
-			'/earthen/screenshots/forest-1.jpg',
-			'/earthen/screenshots/bball.jpg',
-			'/earthen/screenshots/danger.jpg',
 			'/earthen/screenshots/house.jpg',
-			'/earthen/screenshots/glade.jpg'
+			'/earthen/screenshots/bball.jpg',
+			'/earthen/screenshots/puzz2.jpg',
+			'/earthen/screenshots/pod-broken.jpg',
+			'/earthen/screenshots/danger.jpg',
+			'/earthen/screenshots/robot.jpg',
+			'/earthen/screenshots/glade.jpg',
+			'/earthen/screenshots/ladder.jpg'
 	],
 	conceptart: [
 			'/earthen/concept-art/house.jpg',
