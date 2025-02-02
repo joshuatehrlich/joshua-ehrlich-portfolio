@@ -28,9 +28,6 @@
 		
 		
 		position: relative;
-		-webkit-transform-style: preserve-3d;
-		transform-style: preserve-3d;
-		z-index: -1;
 		&.bread {
 			height: 60vw;
 		}
