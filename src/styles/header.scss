@@ -18,9 +18,7 @@
 	justify-content: space-between;
 	align-items: flex-start;
 
-	@media (min-width: 1200px) {
-		overflow-x: clip;
-	}
+	
 	
 
   display: flex;
@@ -38,6 +36,10 @@
   
   -webkit-user-select: none;
   user-select: none;
+
+	@media (min-width: 1200px) {
+		overflow-x: clip;
+	}
 
 	@media (max-width: 720px) {
 		position: fixed;
