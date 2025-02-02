@@ -1,45 +1,3 @@
-.parallax {
-	height: 500px; /* fallback for older browsers */
-	height: 100vh;
-	overflow-x: hidden;
-	overflow-y: auto;
-	-webkit-perspective: 300px;
-	perspective: 300px;
-	perspective-origin: 50% 0;
-}
-
-
-.intro {
-
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-
-	width: 100%;
-	height: 35vw;
-	
-	text-align: center;
-
-	* {
-		margin: 0;
-	}
-	h1 {
-		text-align: center;
-		font-family: 'naot';
-	}
-	p {
-		line-height: 120%;
-		font-weight: 600;
-	}
-	transform: translateZ(-600px) scale(3) translateY(10vw);
-
-	@media (max-width: 1080px) {
-		height: 35vw;
-		transform: translateZ(-600px) scale(2.5) translateY(27vw);
-	}
-}
-
 .jams-section {
 
 	// background: rgba(255, 219, 225, 0.272);
@@ -51,22 +9,12 @@
 	margin: 0 auto 8vw auto;
 	width: 100%;
 
+	margin-top: -12vw;
+
 	@media (min-width: 1400px) {
 		// transform: scale(0.8);
-		margin-top: -12vw;
+		
 		margin-bottom: 0;
-	}
-
-	// row-gap: 5vw;
-
-	-webkit-transform-style: preserve-3d;
-	transform-style: preserve-3d;
-
-	@media (max-width: 1080px) {
-		padding: 0 0vw;
-		row-gap: 0;
-		margin-bottom: 0;
-		width: 100%;
 	}
 
 	.jam {
@@ -83,7 +31,9 @@
 		-webkit-transform-style: preserve-3d;
 		transform-style: preserve-3d;
 		z-index: -1;
-
+		&.bread {
+			height: 60vw;
+		}
 	
 		* {
 			color: white;
@@ -148,8 +98,7 @@
 
 			// JAM CONTENT SPECIFICS
 			&.bread {
-				
-
+				padding-top: 10vw;
 				* {
 					font-size: 1vw;
 				}
@@ -202,50 +151,6 @@
 					}
 				}
 			}
-			&.dungeon {
-				background-color: rgba(0, 0, 0, 0.445);
-				grid-template-columns: 1fr 55%;
-
-				* {
-					font-family: "dungeon";
-					line-height: 80%;
-					margin: 0;
-				}
-
-				.video {
-					img {
-						transition: 200ms;
-					}
-					img:hover {
-						transform: scale(1.03);
-					}
-				}
-
-				button {
-					p {
-						font-size: 1.5vw;
-					}
-				}
-				.content {
-					row-gap: 2vw;
-					transform: scale(0.8);
-
-					
-					p {
-						font-size: 2.5vw;
-					}
-					h1 {
-						font-size: 4.5vw;
-					}
-					h2 {
-						font-size: 3vw;
-					}
-				}
-				
-				
-			}
-			// STILL JAMN CONTENT FOR MOBVILE
-
 		}
 
 		&::before {
@@ -272,14 +177,6 @@
 		&.crush::before {
 			background-image: url(/narrative-work/crush/sc-1.jpg);
 		}
-		&.dungeon::before {
-			background-image: url(/game-jams/dungeon/bg.jpg);
-		}
-		// &:hover {
-		// 	&::before {
-		// 		transform: scale(1);
-		// 	}
-		// }
 
 		&:hover {
 			background-size: 100%;
@@ -327,6 +224,7 @@
 				&.bread {
 					background-color: rgba(5, 0, 34, 0.889);
 					flex-direction: column-reverse;
+					padding-top: 30vw;
 
 					img {
 						// transform: scale(2);
