@@ -2,6 +2,9 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+
+import Comics from './comics.astro';
+
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 import '../styles/illustration.scss';
@@ -238,6 +241,7 @@ let category = 'illustration'; // your category value
 const isIllustration = category === 'illustration';
 const isAcademic = category === 'academic';
 const isSketchbook = category === 'sketchbook';
+const isComic = category === 'comics';
 ---
 
 <!doctype html>
@@ -356,19 +360,12 @@ const isSketchbook = category === 'sketchbook';
 					Sketchbook
 				</p>
 			</div>
+			<div class=`selector comics ${isComic ? 'active' : ''}` onclick=`setCategory('comics')`>
+				<p>
+					Comics
+				</p>
+			</div>
 		</div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 		<div class="gallery-group illustration">
 			{imgsIllust.reduce((acc, img, index) => {
@@ -461,6 +458,10 @@ const isSketchbook = category === 'sketchbook';
 					))}
 				</div>
 			)))}
+		</div>
+
+		<div class="gallery-group comics">
+			<Comics />
 		</div>
 
 		<!-- <div class="foot-div flex flex-1 flex-col justify-start items-center w-100% mt-12 mb-20">

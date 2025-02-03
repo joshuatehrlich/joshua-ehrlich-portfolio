@@ -1,0 +1,82 @@
+---
+import '../styles/comics.scss';
+
+const comics = [
+  {
+    className: "exile",
+		description: "abndoned in the sands",
+    title: "Exile",
+    // sketches: `
+    //   <div class="sketch">
+    //     <img src="/sketches/exile1.jpg" alt="Exile Sketch 1" />
+    //     <p>Exile Sketch 1 Description</p>
+    //   </div>
+    //   <div class="sketch">
+    //     <img src="/sketches/exile2.jpg" alt="Exile Sketch 2" />
+    //     <p>Exile Sketch 2 Description</p>
+    //   </div>
+    // `,
+  },
+  {
+    className: "teotw",
+		description: "...",
+    title: "Exile",
+    sketches: ``,
+  },
+  {
+    className: "oatmeal",
+		description: "...",
+    title: "Oatmeal",
+    sketches: ``,
+  },
+	{
+    className: "recipe",
+		description: "...",
+    title: "Recipe",
+    sketches: ``,
+  },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+	</head>
+	<body>
+
+		<!-- MAKES CAROUSELS FUNCTION -->
+		<script src="../scripts/comics.js"></script>
+		
+		<div class="comics-section">
+
+			{comics.map((comic) => (
+				<div class={`comic-container ${comic.className}`}>
+					<div class={`title-wrapper ${comic.className}`}>
+						<h1>{comic.title}</h1>
+					</div>
+					<div class="content_wrapper">
+						<div class="comic">
+							<div class={`carousel ${comic.className}`}>
+								<button class={`carousel__button left is-hidden ${comic.className}`}>
+									<img src="/ui/left.svg" />
+								</button>
+								<div class="carousel__track-container">
+									<ul class="carousel__track"></ul>
+								</div>
+								<button class={`carousel__button right ${comic.className}`}>
+									<img src="/ui/right.svg" />
+								</button>
+								<div class={`carousel__nav ${comic.className}`}></div>
+							</div>
+						</div>
+						<div class="sketches" set:html={comic.sketches}></div>
+					</div>
+				</div>
+			))}
+
+			
+
+		</div>
+
+	</body>
+</html>
