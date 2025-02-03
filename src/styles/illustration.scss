@@ -247,7 +247,7 @@
 			padding: 2vw 7vw;
 			flex-basis: 40%;
 		p {
-			font-size: 0.7em;
+			font-size: 0.8em;
 			font-weight: 200;
 		}
 		}
@@ -274,6 +274,12 @@
 	overflow: hidden;
 	&.academic, &.sketchbook{
 		display: none;
+	}
+	@media (max-width: 720px) {
+		&.comics {
+			width: 100%;
+			border-radius: 0;
+		}
 	}
 }
 
