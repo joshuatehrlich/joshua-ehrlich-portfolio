@@ -258,6 +258,11 @@ const isComic = category === 'comics';
 
 		<script client:load> // for some reason, this is read as typescript unless i use client:load
 
+		// FOR SOME REASON SETTING THE COMICS TO DISPLAY NONE FM THE START FUCKS UP{ THE CAROUSELS
+		window.onload = function() {
+      document.getElementById('comics').style.display = 'none';
+    };
+
 			function openPopup(imageSrc, imageTitle, imageDesc) {
 				document.getElementById('popup').style.display = 'flex';
 
@@ -338,12 +343,6 @@ const isComic = category === 'comics';
 			</div>
 		</div>
 
-
-
-
-
-
-
 		<div class="category-selector">
 			<div class=`selector illustration ${isIllustration ? 'active' : ''}` onclick=`setCategory('illustration')`>
 				<p>
@@ -366,6 +365,8 @@ const isComic = category === 'comics';
 				</p>
 			</div>
 		</div>
+
+		
 
 		<div class="gallery-group illustration">
 			{imgsIllust.reduce((acc, img, index) => {
@@ -460,7 +461,7 @@ const isComic = category === 'comics';
 			)))}
 		</div>
 
-		<div class="gallery-group comics">
+		<div class="gallery-group comics" id="comics">
 			<Comics />
 		</div>
 

@@ -272,7 +272,7 @@
   row-gap: 10px;
 	border-radius: 10px;
 	overflow: hidden;
-	&.academic, &.sketchbook{
+	&.academic, &.sketchbook {
 		display: none;
 	}
 	@media (max-width: 720px) {
