@@ -242,15 +242,17 @@
 	@media (max-width: 720px) {
 		width: fit-content;
 		column-gap: 2vw;
+		row-gap: 2vw;
 		.selector {
 			padding: 2vw 7vw;
+			flex-basis: 40%;
 		p {
 			font-size: 0.7em;
 			font-weight: 200;
 		}
 		}
-		margin: 9vw auto 9vw auto;
-		
+		margin: 9vw 10vw;
+		flex-wrap: wrap;
 	}
 }
 
