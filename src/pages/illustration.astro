@@ -260,7 +260,9 @@ const isComic = category === 'comics';
 
 		// FOR SOME REASON SETTING THE COMICS TO DISPLAY NONE FM THE START FUCKS UP{ THE CAROUSELS
 		window.onload = function() {
-      document.getElementById('comics').style.display = 'none';
+			if (category != "comics") {
+				document.getElementById('comics').style.display = 'none';
+			};
     };
 
 			function openPopup(imageSrc, imageTitle, imageDesc) {
