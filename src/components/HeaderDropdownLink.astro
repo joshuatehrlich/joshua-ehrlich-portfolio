@@ -3,15 +3,24 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'>;
 
-const { href, class: className, ...props } = Astro.props;
+const {
+	href,
+	class: className, ...props 
+	} = Astro.props;
+
 const pathname = Astro.url.pathname.replace(import.meta.env.BASE_URL, '');
 const subpath = pathname.match(/[^\/]+/g);
 const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 ---
 <div class="linkbox">
-	<a href={href} class:list={[className, { active: isActive }]} {...props}>
+	<div class="clickable">
 		<slot />
-	</a>
+		<div class="dropdown">
+			<a class="link-3" href="/game-jams">Game Jams</a>
+			<a class="link-1" href="/dust">Dust</a>
+			<a class="link-2" href="/earthen">Earthen</a>
+		</div>
+	</div>
 	
 </div>
 
@@ -23,8 +32,10 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		display: flex;
 		justify-content: center;
 		align-items: center;
+
+		position: relative;
 	}
-	a {
+	.clickable {
 		padding: 30px 0px 16px 0px;
 		border-radius: 0px 0px 5px 5px;
 		display: block;
@@ -40,14 +51,43 @@ const isActive = href === pathname || href === '/' + (subpath?.[0] || '');
 		opacity: 0.7;
 		transition: 250ms;
 	}
-	a:hover {
-		/* background-color: rgb(188, 188, 188); */
-		opacity: 0.3;
-		/* color: rgb(255, 255, 255); */
+	.clickable:hover, .clickable.active {
+		color: var(--light);
 	}
-	a.active {
+
+	.dropdown {
+		border-radius: 0px 0px 5px 5px;
+		position: absolute;
+		top: 0;
+		padding-top: 80px;
+		display: flex;
+		opacity: 0;
+		pointer-events: none;
+		transition: 250ms;
+		width: 100%;
+		text-align: center;
+		overflow: hidden;
+		flex-direction: column;
+		z-index: -1;
+	}
+
+	.clickable:hover > .dropdown {
 		opacity: 1;
+		pointer-events: all;
 		background-color: var(--dark);
 		color: var(--light);
+	}
+
+	.dropdown > a {
+		padding: 10px;
+		transition: 250ms;
+		color: var(--light);
+		margin: 0;
+	}
+
+	.dropdown > a:hover {
+		opacity: 1;
+		color: var(--dark);
+		background-color: var(--light);
 	}
 </style>

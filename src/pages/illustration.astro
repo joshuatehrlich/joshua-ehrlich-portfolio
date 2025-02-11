@@ -329,7 +329,7 @@ const isComic = category === 'comics';
 
 		<div class="parallax-viewport">
 			<div class="parallax-content">
-				<h3>Illustrations</h3>
+				<h3>Art and Design</h3>
 				<p>click on any image for details</p>
 			</div>
 		</div>
@@ -349,24 +349,27 @@ const isComic = category === 'comics';
 		<div class="category-selector">
 			<div class=`selector illustration ${isIllustration ? 'active' : ''}` onclick=`setCategory('illustration')`>
 				<p>
-					Imaginative
+					Design
 				</p>
 			</div>
-			<div class=`selector academic ${isAcademic ? 'active' : ''}` onclick=`setCategory('academic')`>
-				<p>
-					Academic
-				</p>
-			</div>
+
 			<div class=`selector sketchbook ${isSketchbook ? 'active' : ''}` onclick=`setCategory('sketchbook')`>
 				<p>
 					Sketchbook
 				</p>
 			</div>
-			<div class=`selector comics ${isComic ? 'active' : ''}` onclick=`setCategory('comics')`>
+
+			<div class=`selector academic ${isAcademic ? 'active' : ''}` onclick=`setCategory('academic')`>
+				<p>
+					Studies
+				</p>
+			</div>
+			
+			<!-- <div class=`selector comics ${isComic ? 'active' : ''}` onclick=`setCategory('comics')`>
 				<p>
 					Comics
 				</p>
-			</div>
+			</div> -->
 		</div>
 
 		

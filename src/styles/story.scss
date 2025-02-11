@@ -1,0 +1,389 @@
+/* Popup styling */
+
+.popup {
+	display: none;
+	align-items: center;
+	justify-content: center;
+	left: 0;
+  top: 0;
+	position: fixed;
+  z-index: 10;
+	overflow: none;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.903);
+	transition: opacity 250ms;
+
+	a {
+		color: rgb(146, 146, 255);
+		font-weight: 900;
+	}
+}
+
+.popup-flexbox {
+  display: flex;
+	flex-direction: row;
+	column-gap: 50px;
+  align-items: center;
+	justify-content: center;
+  // height: fit-content;
+	
+	max-width: 90%;
+	height: 90%;
+  
+	flex-shrink: 1;
+	// background-color: rgba(255, 0, 0, 0.349);
+	
+	.popup-flexbox > * {
+		flex-shrink: 1;
+	}
+	
+
+	img {
+		max-height: 90vh;
+		max-width: 80%;
+		
+		height: auto;
+		object-fit: cover;
+		
+		border-radius: 10px;
+	}
+	.popup-text {
+		font-size: 1rem;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-shrink: 1;
+		max-width: 40%;
+
+		h1, p {
+			color: white;
+			// width: 100%;
+		}
+		p {
+			font-size: 1.3rem;
+		}
+	}
+
+	@media (max-width: 1200px) {
+		flex-direction: column;
+		width: fit-content;
+		max-width: 90%;
+		max-height: 75%;
+		row-gap: 20px;
+		img {
+			max-width: 100%;
+			width: fit-content;
+		}
+		.popup-text {
+			width: 100%;
+			max-width: 100%;
+			h1, p {
+				flex-shrink: 1;
+				flex-basis: 0;
+			}
+
+		}
+	}
+}
+
+.close-btn {
+  position: absolute;
+  top: -10px;
+  right: 35px;
+  color: rgb(255, 255, 255);
+  font-size: 4rem;
+  font-weight: bold;
+  cursor: pointer;
+
+	transition: 250ms;
+
+	&:hover {
+		opacity: 0.5;
+	}
+}
+
+/* -------------------- PARALLAX -------------------- */
+
+/* viewport */
+.parallax-viewport {
+	pointer-events: none;
+	margin: -70px auto 0px auto;
+
+	width: 100%;
+	position: relative;
+	
+  height: 30vw;
+  z-index: 0;
+	
+	background-image: url('/illustration/carride-dark.jpg');
+	background-size: 130%;
+  // animation: parallaxScroll linear forwards;
+	animation-fill-mode: both;
+	animation-duration: 1ms;
+  animation-timeline: view();
+	animation-range-start: contain 70%;
+	animation-range-end: cover;
+
+	background-position: 50% 10%;
+
+	@media (max-width: 1080px) {
+		height: 40vw;
+	}
+	@media (max-width: 720px) {
+		height: 225px;
+	}
+}
+
+.parallax-content{
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	padding-bottom: 10vw;
+	animation: parallaxScrollSlow linear forwards;
+  animation-timeline: view();
+	animation-range-start: contain 90%;
+	animation-range-end: cover;
+
+	p, h3 {
+		color: white;
+		margin: 0;
+		padding: 0;
+	}
+	h3 {
+		font-family: 'naot';
+		font-size: 3em;
+	}
+	p {
+		margin-top: -15px;
+	}
+	@media (max-width: 1080px) {
+		padding-bottom: 13vw;
+		h3 {
+			font-size: 2.7em;
+		}
+	}
+	@media (max-width: 720px) {
+		padding-bottom: 57px;
+		margin-top: -100px;
+		font-size: 0.8em;
+		h3 {
+			font-family: 'naot';
+			font-size: 3em;
+		}
+	}
+}
+
+/* -------------------- GALLERY -------------------- */
+
+
+
+
+.category-selector {
+	margin: 5vw auto 0 auto;
+	display: flex;
+	width: 70%;
+	max-width: 900px;
+	justify-content: center;
+	align-items: center;
+
+	column-gap: 0.5vw;
+	
+
+	border-radius: 10px !important;
+
+	overflow: hidden;
+
+	.selector {
+		cursor: pointer;
+		text-align: center;
+		background-color: rgba(0, 0, 0, 0.079);
+		// width: 100%;
+
+		margin: 0;
+
+		flex-grow: 1;
+		flex-shrink: 1;
+		flex-basis: 10%;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		padding: 1vw 0;
+
+		transition: 400ms;
+
+		&.active {
+			background-color: black;
+			color: white;
+		}
+
+		p {
+			font-size: 1em;
+			margin: 0;
+			font-weight: 600;
+			
+			transition: 200ms ease-out;
+		}
+		&:hover {
+			p {
+				transform: scale(1.1);
+			}
+			flex-grow: 1.3 !important;
+		}
+
+		
+	}
+	@media (max-width: 720px) {
+		width: fit-content;
+		column-gap: 2vw;
+		row-gap: 2vw;
+		.selector {
+			padding: 2vw 7vw;
+			flex-basis: 40%;
+		p {
+			font-size: 0.8em;
+			font-weight: 200;
+		}
+		}
+		margin: 9vw 10vw;
+		flex-wrap: wrap;
+	}
+}
+
+
+
+
+
+
+
+
+
+.gallery-group {
+	display: flex;
+	flex-direction: column;
+	width: 90%;
+	margin: 5vw auto 100px auto;
+  row-gap: 10px;
+	border-radius: 10px;
+	overflow: hidden;
+	&.academic, &.sketchbook {
+		display: none;
+	}
+	@media (max-width: 720px) {
+		&.comics {
+			width: 100%;
+			border-radius: 0;
+		}
+	}
+}
+
+.gallery {
+	display: flex;
+	margin: 0px auto 0px auto;
+	column-gap: 10px;
+	row-gap: 10px;
+	width: 100%;
+	max-width: 1500px;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+	flex-wrap: wrap;
+}
+.gallery-img {
+	height: 20vw;
+	margin: 0;
+	padding: 0;
+	border-radius: 2px;
+
+	&.academic {
+		height: 25vw !important;
+	}
+	
+	flex-shrink:2;
+	flex-basis: 0;
+	min-width: 0;
+	transition: 600ms;
+
+	background-size: cover;
+	background-position: center;
+	
+	flex-grow: var(--flex-grow);
+	cursor: pointer;
+
+	&:hover {
+		&.illustration {
+			flex-grow: calc(var(--flex-grow) + 0.5) !important;
+		}
+		&.academic, &.sketchbook {
+			flex-grow: calc(var(--flex-grow) + 0.2) !important;
+		}
+	}
+
+	@media (max-width: 1080px) {
+		flex-basis: 34%;
+		&.academic {
+			flex-grow: 1;
+		}
+		
+		height: 30vw !important;
+
+		&.academic {
+			height: 60vw !important;
+		}
+	}
+	// @media (max-width: 720px) {
+	// 	flex-basis: 50%;
+	// 	height: 60vw !important;
+	// }
+}
+
+.gallery-content-container {
+	width: 100%;
+	height: 100%;
+
+	opacity: 0;
+	background: linear-gradient(
+		to top,
+		rgba(255, 255, 255, 0.783),
+		rgba(255, 255, 255, 0) 100%
+		);
+	transition: 350ms;
+	
+	display: flex;
+	justify-content: flex-start;
+	align-items: flex-end;
+
+	&.illustration:hover {
+		opacity: 1;
+
+		.gallery-content {
+			opacity: 1;
+		}
+	}
+}
+
+.gallery-content {
+	color: rgba(56, 56, 56, 0.836);
+	transition: 150ms;
+	text-align: center;
+	white-space: nowrap;
+	opacity: 0;
+	transition: 250ms;
+	font-size: 1.7rem;
+	margin: 0px 0px 20px 30px;
+	@media (max-width:1080px) {
+		font-size: 1.6rem;
+		margin: 0px 0px 15px 24px;
+	}
+	@media (max-width:720px) {
+		font-size: 1.3rem;
+		margin: 0px 0px 15px 24px;
+	}
+}
+

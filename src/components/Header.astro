@@ -1,5 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
+import HeaderDropdownLink from './HeaderDropdownLink.astro';
 import { SITE_TITLE } from '../consts';
 import '../styles/header.scss'
 ---
@@ -41,13 +42,14 @@ import '../styles/header.scss'
 
 		<div class="internal-links">
 			<HeaderLink class="header-link" href="/">
-				<span class="full-text">llustrations</span>
-				<span class="short-text">Illust</span>
+				<span class="full-text">Art</span>
+				<span class="short-text">Art</span>
 			</HeaderLink>
-			<HeaderLink class="header-link" href="/animations">Animations</HeaderLink>
-			<HeaderLink class="header-link" href="/dust">Dust</HeaderLink>
-			<HeaderLink class="header-link" href="/earthen">Earthen</HeaderLink>
-			<HeaderLink class="header-link" href="/game-jams">Game Jams</HeaderLink>
+			<HeaderLink class="header-link" href="/story">Story</HeaderLink>
+			<HeaderLink class="header-link" href="/animations">Animation</HeaderLink>
+			<!-- <HeaderLink class="header-link" href="/dust">Dust</HeaderLink> -->
+			<!-- <HeaderLink class="header-link" href="/earthen">Earthen</HeaderLink> -->
+			<HeaderDropdownLink class="header-link" href="/game-jams">Games</HeaderDropdownLink>
 			<HeaderLink class="header-link" href="/about">
 				<span class="full-text">About</span>
 				<span class="short-text">About</span>
@@ -63,11 +65,12 @@ import '../styles/header.scss'
 		</div>
 
 		<ul id="dropdown">
-			<li><label for="Illustrations"><a href="/illustration/">Illustrations</a></label></li>
-			<li><label for="Dust"><a href="/animations/">Animations</a></label></li>
+			<li><label for="Illustrations"><a href="/illustration/">Art</a></label></li>
+			<li><label for="Illustrations"><a href="/story/">Story</a></label></li>
+			<li><label for="Dust"><a href="/animations/">Animation</a></label></li>
+			<li><label for="Dust"><a href="/game-jams/">Game Jams</a></label></li>
 			<li><label for="Dust"><a href="/dust/">Dust</a></label></li>
 			<li><label for="Illustrations"><a href="/earthen/">Earthen</a></label></li>
-			<li><label for="Dust"><a href="/game-jams/">Game Jams</a></label></li>
 			<li><label for="Dust"><a href="/about/">About</a></label></li>
 		</ul>
 	</div>
