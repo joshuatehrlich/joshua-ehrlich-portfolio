@@ -245,14 +245,14 @@
 		row-gap: 2vw;
 		.selector {
 			padding: 2vw 7vw;
-			flex-basis: 20%;
+			flex-basis: 40%;
 		p {
 			font-size: 0.8em;
 			font-weight: 200;
 		}
 		}
 		margin: 9vw 10vw;
-		flex-wrap: none;
+		flex-wrap: wrap;
 	}
 }
 
@@ -272,7 +272,7 @@
   row-gap: 10px;
 	border-radius: 10px;
 	overflow: hidden;
-	&.academic, &.sketchbook {
+	&.academic, &.sketchbook, &.character {
 		display: none;
 	}
 	@media (max-width: 720px) {
@@ -304,6 +304,9 @@
 	&.academic {
 		height: 25vw !important;
 	}
+	&.character {
+		height: 30vw !important;
+	}
 	
 	flex-shrink:2;
 	flex-basis: 0;
@@ -320,7 +323,7 @@
 		&.illustration {
 			flex-grow: calc(var(--flex-grow) + 0.5) !important;
 		}
-		&.academic, &.sketchbook {
+		&.academic, &.sketchbook, &.character {
 			flex-grow: calc(var(--flex-grow) + 0.2) !important;
 		}
 	}

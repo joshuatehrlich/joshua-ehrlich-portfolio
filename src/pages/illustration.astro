@@ -8,63 +8,96 @@ import Comics from './comics.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 import '../styles/illustration.scss';
+import { makeIssue, undefined } from 'astro:schema';
 
 
 // SETUP IMAGE IMPORTS
 const categories = ["path", "name", "details", "width", "vpos", "height"] as const;
 
 const imgDataIllust = [
-  ["giant", "Giant", "40 by 60 inches, copic on illustration board. Winner of Silver award in Illustration West 63.<br>2024", 3],
+  ["giant", "Giant", "40 by 60 inches, copic on illustration board. Winner of Silver award in Illustration West 63.<br>2024", 3, "20%"],
   
-	["alice", "Alice Redesign", 'A redesign of Alice in Wonderland, in response to the theme "Alice in Space."<br>2024'],
+	// ["alice", "Alice Redesign", 'A redesign of Alice in Wonderland, in response to the theme "Alice in Space."<br>2024'],
 	["desert", "Alice Abandoned",
 		"An exploration of an Alice in Wonderland redesign, set on an alien planet. Created in photoshop.<br>2024"
 	, 2.5, "60%"],
-	[null],
+	[null],[null],
 
-	["siftmask", "Sift Concept", 'Character concept for a top-down action project called "Sift".<br>2023'],
-	["siftgun", "Sift Concept", 'Character concept for a top-down action project called "Sift".<br>2023', 3, "0%"],
-	["eye", "Untitled", "Created in Photoshop<br>2024", 2],[null],
+	
 
 	["camp", "Camp", "Created in Photoshop<br>2024", 2],
 	["carride", "The Move", "Created in Photoshop<br>2024", 3],
-	["balloon", "Escape", "Created in photoshop.<br>2024", 1],
+	["balloon", "Escape", "Created in photoshop.<br>2024", 1.3],
 	[null],
 
 	
 
-	["kaiju", "Kaiju", "40 by 60 inches, copic on illustration board.<br>2024", 4],
-	["dive", "Dive", "Meditation in ink<br>2024", 2],
+	// ["siftmask", "Sift Concept", 'Character concept for a top-down action project called "Sift".<br>2023'],
+	["eye", "Untitled", "Created in Photoshop<br>2024", 2],
+	["siftgun", "Sift Concept", 'Character concept for a top-down action project called "Sift".<br>2023', 3, "0%"],
 	[null],[null],
 
-	["exile1b", "Exile Part One", "12 by 18 inches, ink and digital coloring.<br>2024", 2],
-	["exile1", "Exile Part One", "12 by 18 inches, ink and digital coloring.<br>2024", 4],
+	// ["exile1b", "Exile Part One", "12 by 18 inches, ink and digital coloring.<br>2024", 2, undefined, "20vw"],
+	// ["exile1", "Exile Part One", "12 by 18 inches, ink and digital coloring.<br>2024", 4, undefined, "20vw"],
 	
-	["exile2", "Exile Part Two", "12 by 18 inches, ink and digital coloring.<br>2024", 4],
+	// ["exile2", "Exile Part Two", "12 by 18 inches, ink and digital coloring.<br>2024", 4, undefined, "20vw"],
 	// ["exile2b", "Exile Part Two", "12 by 18 inches, ink and digital coloring.<br>2024", 2],
+	// [null],
+
+	
+	["tower", "Tower", "24 by 11 inches, graphite on Strathmore 400 paper.<br>2023", 1.5, undefined, "30vw"],
+	["cookingathome", "Cooking at Home", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 3.9, undefined, "30vw"],
+	// ["exile1", "Exile Part One", "12 by 18 inches, ink and digital coloring.<br>2024", 3],
+	["fish", "RISD Assignment", 'Created in response to the themes "ephemeral" and "intangible"<br>Made in Photoshop<br>2022', 1.8, undefined, "30vw"],
+	// ["race", "Kick", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 3],
 	[null],
 
 	
-	["tower", "Tower", "24 by 11 inches, graphite on Strathmore 400 paper.<br>2023", 1],
-	["cookingathome", "Cooking at Home", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 1],
-	["race", "Kick", "18 by 24 inches, graphite on Strathmore 400 paper.<br>2023", 1],
-	[null],
 
-	["knightcomic", "Knight Comic", "A wordless story. Created in Photoshop.<br>2023", 2],
-	["clouds", "Pilgrimage", "Digital landscape painting inspired by Krenz Cushart<br>2022", 4],
-	["fish", "RISD Assignment", 'Created in response to the themes "ephemeral" and "intangible"<br>Made in Photoshop<br>2022', 1.5],
-	["nomad", "Nomad", "Created in Photoshop<br>2022", 2],
+	// ["knightcomic", "Knight Comic", "A wordless story. Created in Photoshop.<br>2023", 2],
+	["nomad", "Nomad", "Created in Photoshop<br>2022", 3],
+	["clouds", "Pilgrimage", "Digital landscape painting inspired by Krenz Cushart<br>2022", 2],
+	
+	[null],[null],
+	
+	// ["kaiju", "Kaiju", "40 by 60 inches, copic on illustration board.<br>2024", 4, undefined, "30vw"],
+	// ["dive", "Dive", "Meditation in ink<br>2024", 2, undefined, "30vw"],
+	// [null],[null],
+	
 
-	["dportrait1", "Digital Portrait", "Created in Photoshop<br>2022", 1],
-	["dportrait2", "Digital Portrait", "Created in Photoshop<br>2022", 1.5],
-	["dportrait3", "Digital Portrait", "Created in Photoshop<br>2022", 1, '40%'],
-	[null],
+	// ["bread/2", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1.5],
+	// ["bread/3", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1],
+	// // ["bread/1", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1.5],
+	// ["bread/4", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1.5],
+	// [null],
+	
+	["earthenconcept/sky", "Concept for Earthen", "...", 2.9, undefined, "27vw"],
+	["earthenconcept/house", "Concept for Earthen", "...", 4, undefined, "27vw"],
+	[null],[null],
 
-	["bread/2", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1.5],
-	["bread/3", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1],
-	// ["bread/1", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1.5],
-	["bread/4", "Screenshot from Bread", '"Bread" is a short film I created in Freshman year. <a href="https://www.youtube.com/watch?v=K-TRRPV8mhc" target="_blank">Watch it here!</a><br>2023', 1.5],
+	["earthenconcept/pad-concept", "Concept for Earthen", "...", 3],
+	
+	["earthenconcept/bnw-puzzle", "Concept for Earthen", "...", 3],
+	["earthenconcept/roma", "Concept for Earthen", "...", 3],
 	[null],
+];
+
+const imgDataCharacter = [
+  ["character/alice-final", "Name", "...", 1, '30%'],
+	["character/alice-concept-1", "Name", "...", 2],
+	[null],[null],
+
+	["character/alice-concept-2", "Name", "...", 2],
+	["character/alice-concept-3", "Name", "...", 2],
+	[null],[null],
+
+	["character/sift-mask", "Name", "...", 1.3],
+	["character/sift-concept", "Name", "...",2],
+	[null],[null],
+
+
+	["earthenconcept/character", "Name", "...", 2],
+	["earthenconcept/ladder", "Name", "...", 1.2],
 	
 	
 ];
@@ -132,14 +165,18 @@ const imgDataAcademic = [
 
 	["washingmachine", "Oil Still Life", "", 3],
 	["academic/coffee", "Oil Still Life", "", 3],
-	
 	[null],
+	[null],
+
+	["dportrait1", "Digital Portrait", "Created in Photoshop<br>2022", 1],
+	["dportrait2", "Digital Portrait", "Created in Photoshop<br>2022", 1.5],
+	["dportrait3", "Digital Portrait", "Created in Photoshop<br>2022", 1, '40%'],
 	[null],
 ];
 
 const imgDataSketchbook = [
-	["sketchbook/1a", "Giant Sketch", "", 1],
-	["sketchbook/1b", "Kaiju Sketch", "", 1],
+	["sketchbook/1a", "Giant Sketch", "", 1, undefined, "25vw"],
+	["sketchbook/1b", "Kaiju Sketch", "", 1, undefined, "25vw"],
 	[null],[null],
 
 	["sketchbook/2a", "Digital Sketch 2024", "", 1],
@@ -205,6 +242,19 @@ const imgsIllust: Image[] = imgDataIllust.map(data => {
     details: data[2] as string, // Details provided in imgData
     width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
     vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
+		height: (data[5] !== undefined ? data[5] : "25vw") as string,
+  } as Image;
+
+  return image;
+});
+
+const imgsCharacter: Image[] = imgDataCharacter.map(data => {
+  const image = {
+    path: data[0] as string,
+    name: data[1] as string,
+    details: data[2] as string, // Details provided in imgData
+    width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
+    vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
 		height: (data[5] !== undefined ? data[5] : "20vw") as string,
   } as Image;
 
@@ -239,6 +289,7 @@ const imgsSketchbook: Image[] = imgDataSketchbook.map(data => {
 
 let category = 'illustration'; // your category value
 const isIllustration = category === 'illustration';
+const isCharacter = category === 'character';
 const isAcademic = category === 'academic';
 const isSketchbook = category === 'sketchbook';
 const isComic = category === 'comics';
@@ -349,7 +400,13 @@ const isComic = category === 'comics';
 		<div class="category-selector">
 			<div class=`selector illustration ${isIllustration ? 'active' : ''}` onclick=`setCategory('illustration')`>
 				<p>
-					Design
+					Concept Art
+				</p>
+			</div>
+
+			<div class=`selector character ${isCharacter ? 'active' : ''}` onclick=`setCategory('character')`>
+				<p>
+					Character
 				</p>
 			</div>
 
@@ -404,6 +461,39 @@ const isComic = category === 'comics';
 				</div>
 			)))}
 		</div>
+
+		<div class="gallery-group character">
+			{imgsCharacter.reduce((acc, img, index) => {
+				acc = acc as {}[][];
+				
+				// Start a new flexbox for every 4 images
+				if (index % 4 === 0 || img.path === null) {
+					acc.push([]);
+				}
+				acc[acc.length - 1].push(img);
+				return acc;
+			}, [] as {}[][])
+			.map((imgGroup, groupIndex) => ( imgGroup.some(img => img.path !== null)
+			&& (
+				<div class="gallery character">
+					{imgGroup.map((img, imgIndex) => (
+						<div class="gallery-img character"
+						onclick=`openPopup('/illustration/${img.path}-full.jpg', '${img.name}', '${img.details}')`,
+						style={{
+							backgroundImage: `url(/illustration/${img.path}-lowres.jpg)`,
+							'--flex-grow': `${img.width}`,
+							backgroundPosition: `50% ${img.vpos}`,
+							height: `${img.height}`
+						}}>
+							<div class="gallery-content-container character">
+								<h3 class="gallery-content">{img.name}</h3>
+							</div>
+						</div>
+					))}
+				</div>
+			)))}
+		</div>
+		
 
 		<div class="gallery-group academic">
 			{imgsAcademic.reduce((acc, img, index) => {
