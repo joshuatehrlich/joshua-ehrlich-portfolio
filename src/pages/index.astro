@@ -1,5 +1,43 @@
 ---
-import Illustration from '../pages/illustration.astro';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/index.scss'
 ---
 
-<Illustration />
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={'About Me'} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<!-- <Header />
+		<div class="spacer"></div> -->
+
+		<div class="background">
+			<div class="category-container">
+
+				<!-- <div class="greeting">
+					<h1>Joshua Ehrlich</h1>
+				</div> -->
+	
+				<!-- <h1>Joshua Ehrlich</h1> -->
+	
+				<a href="/illustration" class="category"><h3>Art & Design</h3></a>
+				<a href="/story" class="category"><h3>Story</h3></a>
+				<a href="/animations" class="category"><h3>Animation</h3></a>
+				<a href="/gameselect" class="category"><h3>Games</h3></a>
+				<!-- <a href="/dust" class="category"><h3>Dust - Card Game</h3></a>
+				<a href="/earthen" class="category"><h3>Earthen - Video Game</h3></a> -->
+				<a href="/about" class="category"><h3>About</h3></a>
+			</div>
+		</div>
+
+		
+		
+
+		<!-- <Footer /> -->
+	</body>
+</html>

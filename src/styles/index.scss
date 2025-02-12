@@ -1,0 +1,74 @@
+.background {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	background-image: url(/illustration/desert.jpg);
+	background-size: cover;
+}
+
+.category-container {
+	width: 450px;
+	background-color: rgba(255, 255, 255, 0.778);
+	// padding: 0 20%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+
+	position: relative;
+
+	color: black;
+}
+
+h1 {
+	position: absolute;
+	top: 30px;
+	// right: 20px;
+	font-size: 3em;
+	opacity: 0.5;
+	font-weight: 900;
+	font-family: "naot";
+}
+
+h2 {
+	font-size: 1.1em;
+	margin-bottom: 70px;
+	font-weight: 600;
+}
+
+h3, h4 {
+	font-size: 1.2em;
+	width: 100%;
+	padding: 20px;
+	margin: 0;
+	transition: 200ms;
+	transform-origin: right;
+}
+
+h4 {
+	color: rgba(0, 0, 0, 0.52);
+	font-weight: 100;
+}
+
+a {
+	width: 100%;
+	text-align: right;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&:hover {
+		background-color: black;
+		&.back {
+			background-color: rgba(0, 0, 0, 0.542);
+		}
+		h3, h4 {
+			
+			transform: scale(1.1);
+		}
+		h3 {color: white;}
+		h4 {color: rgba(255, 255, 255, 0.49);}
+	}
+}
