@@ -72,3 +72,15 @@ a {
 		h4 {color: rgba(255, 255, 255, 0.49);}
 	}
 }
+
+@media (max-width: 720px) {
+	a {
+		text-align: center;
+	}
+	.category-container {
+		width: 100%;
+	}
+	h3, h3 {
+		transform-origin: center;
+	}
+}
