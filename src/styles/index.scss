@@ -74,6 +74,7 @@ a {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	border-radius: 5px;
 	&:hover {
 		background-color: black;
 		&.back {
@@ -92,6 +93,7 @@ a {
 	a {
 		text-align: center;
 		width: 100%;
+		border-radius: 0px;
 	}
 	.category-container {
 		width: 100%;
