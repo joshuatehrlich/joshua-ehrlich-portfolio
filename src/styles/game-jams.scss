@@ -147,6 +147,41 @@
 			}
 
 			// JAM CONTENT SPECIFICS
+			&.blade {
+				grid-template-columns: 50% 1fr;
+
+				* {
+					font-family: "dust-calli";
+					font-size: 2vw;
+					margin-top: 0;
+					line-height: 1;
+					text-align: center;
+				}
+
+				h2 {
+					font-size: 3vw;
+				}
+				.content {
+					align-items: center !important;
+					img{
+						transform:scale(1.1);
+						// margin-bottom: -1vw;
+						// margin-top: -2vw;
+					}
+				}
+
+				
+				.video {
+					img {
+						transition: 200ms;
+					}
+					img:hover {
+						transform: scale(1.03);
+					}
+				}
+	
+				background-color: rgba(0, 0, 0, 0.422);
+			}
 			&.lithic {
 				grid-template-columns: 1fr 55%;
 
@@ -280,6 +315,9 @@
 
 			transition: 500ms ease-out;
 		}
+		&.blade::before {
+			background-image: url(/game-jams/bladebearer/bg.jpg);
+		}
 		&.lithic::before {
 			background-image: url(/game-jams/lithic/bg.jpg);
 		}
@@ -337,7 +375,23 @@
 					margin-top: 2vw !important;
 					padding: 3vw 5vw !important;
 				}
-
+				&.blade {
+					background-color: rgba(34, 21, 0, 0.833);
+					p {
+						font-size: 7vw;
+					}
+					h2 {
+						font-size: 9vw;
+					}
+					.content {
+						row-gap: 5vw;
+					}
+					button {
+						p {
+							font-size: 8vw !important;
+						}
+					}
+				}
 				&.lithic {
 					background-color: rgba(34, 21, 0, 0.781);
 
