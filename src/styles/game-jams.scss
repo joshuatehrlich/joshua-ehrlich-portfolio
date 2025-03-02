@@ -179,6 +179,11 @@
 						transform: scale(1.03);
 					}
 				}
+				button {
+					p {
+						margin: -0vw 0;
+					}
+				}
 	
 				background-color: rgba(0, 0, 0, 0.422);
 			}
@@ -376,15 +381,18 @@
 					padding: 3vw 5vw !important;
 				}
 				&.blade {
-					background-color: rgba(34, 21, 0, 0.833);
+					flex-direction: column-reverse;
+					background-color: rgba(0, 0, 0, 0.407);
 					p {
 						font-size: 7vw;
+						margin-bottom: 5vw;
+						margin-top: 8vw;
 					}
 					h2 {
 						font-size: 9vw;
 					}
 					.content {
-						row-gap: 5vw;
+						row-gap: 2vw;
 					}
 					button {
 						p {
