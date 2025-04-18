@@ -15,18 +15,21 @@ import '../styles/illustration.scss';
 const categories = ["path", "name", "details", "width", "vpos", "height"] as const;
 
 const imgDataIllust = [
-  ["giant", "Giant", "40 by 60 inches, copic on illustration board. Winner of Silver award in Illustration West 63.<br>2024", 3, "20%"],
+  	["giant", "Giant", "40 by 60 inches, copic on illustration board. Winner of Silver award in Illustration West 63.<br>2024", 3, "20%"],
   
 	// ["alice", "Alice Redesign", 'A redesign of Alice in Wonderland, in response to the theme "Alice in Space."<br>2024'],
-	["desert", "Alice Abandoned",
-		"An exploration of an Alice in Wonderland redesign, set on an alien planet. Created in photoshop.<br>2024"
-	, 2.5, "60%"],
+	
+	["carride", "The Move", "Created in Photoshop<br>2024", 2.5],
 	[null],[null],
 
-	
+	["exodus", "Exodus", "", 3],
+	["leitt", "Leitt Character Design", "", 3.2],
+	[null],[null],
 
 	["camp", "Camp", "Created in Photoshop<br>2024", 2],
-	["carride", "The Move", "Created in Photoshop<br>2024", 3],
+	["desert", "Alice Abandoned",
+		"An exploration of an Alice in Wonderland redesign, set on an alien planet. Created in photoshop.<br>2024"
+	, 3, "60%"],
 	["balloon", "Escape", "Created in photoshop.<br>2024", 1.3],
 	[null],
 
@@ -83,11 +86,13 @@ const imgDataIllust = [
 ];
 
 const imgDataCharacter = [
-  ["character/alice-final", "Name", "...", 1, '30%'],
-	["character/alice-concept-1", "Name", "...", 2],
-	[null],[null],
+	["character/leitt", "Leitt Character Design", "...", 3, undefined, "45vw"],
+	// ["character/alice-final", "Name", "...", 1, '30%'],
+	// ["character/alice-concept-1", "Name", "...", 2],
+	[null],[null],[null],
 
-	["character/alice-concept-2", "Name", "...", 2],
+	// ["character/alice-concept-2", "Name", "...", 2],
+	["character/alice-final", "Name", "...", 1, '30%'],
 	["character/alice-concept-3", "Name", "...", 2],
 	[null],[null],
 
@@ -255,7 +260,7 @@ const imgsCharacter: Image[] = imgDataCharacter.map(data => {
     details: data[2] as string, // Details provided in imgData
     width: (data[3] !== undefined ? data[3] : defaultWidth) as number,
     vpos: (data[4] !== undefined ? data[4] : defaultVPos) as string,
-		height: (data[5] !== undefined ? data[5] : "20vw") as string,
+	height: (data[5] !== undefined ? data[5] : "30vw") as string,
   } as Image;
 
   return image;
