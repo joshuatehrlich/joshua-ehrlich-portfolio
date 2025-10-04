@@ -1,0 +1,194 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/earthen.scss';
+---
+
+<!doctype html>
+<html lang="en" class="invert-colors">
+	<head>
+		<BaseHead title={'Earthen'} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+
+		<!-- Handles Animations -->
+		<script src="../components/animation/AnimEarthen.js"></script>
+
+		
+		<Header />
+		<div class="spacer"></div>
+		
+		<div class="earthen">
+
+			<div class="header-group">
+				<div class="title-one title-container">
+					<div class="text-flex">
+						<h1>Earthen</h1>
+						<h2 class="in-dev">Currently in development</h2>
+					</div>
+					<img class="bg-image forest" src="/earthen/forest-edit.jpg">
+				</div>
+				<div class="title-two title-container">
+					<div class="text-flex">
+						<a href="https://lukko.digital" target="_blank">
+							<h2 class="adv-by">an adventure by</h2>
+							<img class="lukko-digi" src="/earthen/lukko-text.png">
+						</a>
+					</div>
+					<img class="bg-image rockroom" src="/earthen/rockroom-edit.jpg">
+				</div>
+			</div>
+
+			<div class="introduction">
+				<!-- <div class="player-holder">
+					<canvas id="player"></canvas>
+				</div> -->
+				
+				
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/bBtUL98uTz4?si=tpxeaRXr533Y31D5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				<div class="text-flex">
+					<h2>An Open World Discovery <span class="line-break"><br></span>Based Adventure</h2>
+					
+
+					
+					<p>
+						You awaken deep underground. Humanity has not seen the surface for eons. <b>The Creators</b> have long past. Can you uncover the <b>mysteries of Rustaveli,</b> and <b>escape to the surface?</b><br><br>
+
+						<span class="wide-only-text">
+						Meet strange characters, and explore the underground, learning both it's dangers and secrets. Use the telephone system to call <b>tunneling pods</b> to travel between regions, and <b>learn their true mechanics</b> to unlock new areas. Interface with ancient technology, and learn it's inner workings in order to solve puzzles left behind by your ancestors.<br><br>
+						</span>
+
+						Earthen is a <b>pure discovery game.</b> All abilities are present from the moment the game begins. You just have to uncover them. <b>Seek the surface, and the truth.</b>
+					</p>
+				</div>
+			</div>
+
+
+
+
+
+			<div class="open-world">
+				<div class="text-flex">
+					<h2>Non-linear Level Design</h2>
+					<p>
+						Like all of the scout's technology, your <b>pod</b> was designed to
+						explore and research the world left behind by the <b>Creators.</b>
+					</p>
+					<img src="/earthen/pod-edit.png">
+					<p>
+						Use your pod to travel between the underground pockets of Rustaveli.
+						As you visit locations, <b>gather intel</b> and store it in your logs for later use.
+						<b>Preserve your fuel.</b> Fly safely, and don't crash!
+					</p>
+				</div>
+				
+			</div>
+
+
+
+
+
+			<div class="features">
+				
+				<div class="features-inner">
+
+					<div class="features-title">
+
+						<div class="line"></div>
+						<h1>Features</h1>
+						<div class="line"></div>
+
+					</div>
+
+					<div class="feature-grid">
+
+						<div class="feature ft1">
+							<img src="/earthen/screenshots/bball.jpg">
+							<h3>Handcrafted Puzzles</h3>
+							<p>Strange statues litter the underground. How can you use them to unlock new regions?</p>
+						</div>
+
+						<div class="feature ft2">
+							<img src="/earthen/screenshots/scientist-dialogue.jpg">
+							<h3>Impactful Dialogue</h3>
+							<p>Meet the residents of Rustaveli. From scouts, to shut-ins, to robots, the underground is home to all kinds.</p>
+						</div>
+
+						<div class="feature ft3">
+							<img src="/earthen/screenshots/screen-puzz.jpg">
+							<h3>File-System Puzzles</h3>
+							<p>Screens are built into the walls near Creator technology, harboring a strange file-system with even stranger information buried beneath.</p>
+						</div>
+
+						<div class="feature ft4">
+							<img src="/earthen/screenshots/forest-4.jpg">
+							<h3>Layered Discoveries</h3>
+							<p>The truth has been in front of your eyes the entire time. Connect seemingly disparate gameplay elements to unlock pivotal abilities, and uncover the truth.</p>
+						</div>
+
+					</div>
+
+				</div>
+
+			</div>
+
+
+			<!-- CAROUSELS -->
+			
+			<div class="screenshots disable-dbl-tap-zoom">
+
+				<h1 class="screenshots-title">Screenshots</h1>
+
+				<div class="carousel screenshot">
+					<button class="carousel__button left is-hidden">
+						<img src="/ui/left.svg">
+					</button>
+					<div class="carousel__track-container">
+						<ul class="carousel__track"></ul>
+					</div>
+					<button class="carousel__button right">
+						<img src="/ui/right.svg">
+					</button>
+
+					<div class="carousel__nav">
+					</div>
+				</div>
+
+				
+
+				<h1 class="concept-art-title">Concept Art</h1>
+
+				<div class="carousel conceptart">
+					<button class="carousel__button left is-hidden">
+						<img src="/ui/left.svg">
+					</button>
+					<div class="carousel__track-container">
+						<ul class="carousel__track"></ul>
+					</div>
+					<button class="carousel__button right">
+						<img src="/ui/right.svg">
+					</button>
+
+					<div class="carousel__nav">
+					</div>
+				</div>
+
+				
+
+				
+
+			</div>
+
+			<!-- Handles Carousels and other scripting needs -->
+			<script src="../scripts/earthen.js"></script>
+
+			
+
+		</div>
+		<Footer />
+
+	</body>
+</html>

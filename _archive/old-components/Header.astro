@@ -1,0 +1,77 @@
+---
+import HeaderLink from './HeaderLink.astro';
+import HeaderDropdownLink from './HeaderDropdownLink.astro';
+import { SITE_TITLE } from '../consts';
+import '../styles/header.scss'
+---
+
+<header>
+
+
+	<script>
+
+		document.addEventListener('scroll', function() {
+			const checkbox = document.getElementById('menuCheckbox');
+			if (checkbox.checked && window.innerWidth > 720) {
+				checkbox.checked = false;
+			}
+		});
+
+
+		const dropdown = document.getElementById('dropdown');
+
+		dropdown.addEventListener('mouseout', function(event) {
+			if (!dropdown.contains(event.relatedTarget)) {
+
+				const checkbox = document.getElementById('menuCheckbox');
+				if (checkbox.checked) {
+					checkbox.checked = false;
+				}
+			}
+		});
+
+
+
+
+	</script>
+
+	<!-- <div class="spacer"></div> -->
+	<div id="header">
+
+		<h2 class="site-title navitem"><a href="/">{SITE_TITLE}</a></h2>
+
+		<div class="internal-links">
+			<HeaderLink class="header-link" href="/illustration">
+				<span class="full-text">Art</span>
+				<span class="short-text">Art</span>
+			</HeaderLink>
+			<HeaderLink class="header-link" href="/story">Story</HeaderLink>
+			<HeaderLink class="header-link" href="/animations">Animation</HeaderLink>
+			<!-- <HeaderLink class="header-link" href="/dust">Dust</HeaderLink> -->
+			<!-- <HeaderLink class="header-link" href="/earthen">Earthen</HeaderLink> -->
+			<HeaderDropdownLink class="header-link" href="/game-jams">Games</HeaderDropdownLink>
+			<HeaderLink class="header-link" href="/about">
+				<span class="full-text">About</span>
+				<span class="short-text">About</span>
+			</HeaderLink>
+		</div>
+
+		<input type="checkbox" id="menuCheckbox" />
+		
+		<div class="spans navitem">
+			<span class="hamburger-span" style="order:2"></span>
+			<span class="hamburger-span" style="order:3"></span>
+			<span class="hamburger-span" style="order:1"></span>
+		</div>
+
+		<ul id="dropdown">
+			<li><label for="Illustrations"><a href="/illustration/">Art</a></label></li>
+			<li><label for="Illustrations"><a href="/story/">Story</a></label></li>
+			<li><label for="Dust"><a href="/animations/">Animation</a></label></li>
+			<li><label for="Dust"><a href="/game-jams/">Game Jams</a></label></li>
+			<li><label for="Dust"><a href="/dust/">Card Game</a></label></li>
+			<li><label for="Illustrations"><a href="/earthen/">Earthen</a></label></li>
+			<li><label for="Dust"><a href="/about/">About</a></label></li>
+		</ul>
+	</div>
+</header>

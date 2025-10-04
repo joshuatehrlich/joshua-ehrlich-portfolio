@@ -1,104 +1,115 @@
-html, body {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	overflow: hidden; /* Prevent scrolling */
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.autoscroll-gallery {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.background {
-	width: 100%;
-	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-image: url(/illustration/giant.jpg);
-	background-size: cover;
-
-	overflow-x: hidden;
-	overflow-y: auto;
+.slideshow-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
 }
 
-.category-container {
-	width: 100%;
-	max-width: 100%;
-	background-color: rgba(255, 255, 255, 0.812);
-	// padding: 0 20%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-
-	position: relative;
-
-	color: black;
+.gallery-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  
+  &.active {
+    opacity: 1;
+  }
 }
 
-h1 {
-	position: absolute;
-	top: 30px;
-	// right: 20px;
-	font-size: 3em;
-	opacity: 0.5;
-	font-weight: 900;
-	font-family: "naot";
+.image-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.837), rgba(0, 0, 0, 0) 30%);
+  }
+  
+  .gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    // display: none;
+
+  }
 }
 
-h2 {
-	font-size: 1.1em;
-	margin-bottom: 70px;
-	font-weight: 600;
+.image-info {
+  z-index: 10;
+  position: absolute;
+  bottom: 2rem;
+  left: 3rem;
+  color: var(--text-secondary);
+
+  p {
+    font-size: 1.3rem;
+    opacity: 0.7;
+  }
 }
 
-h3, h4 {
-	font-size: 1.2em;
-	width: 100%;
-	padding: 20px;
-	margin: 0;
-	transition: 200ms;
-	transform-origin: center;
+.slide-indicators {
+  position: absolute;
+  bottom: 2rem;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 10;
 }
 
-h4 {
-	color: rgba(0, 0, 0, 0.52);
-	font-weight: 100;
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: background 0.3s ease;
+  
+  &.active {
+    background: rgba(255, 255, 255, 0.9);
+  }
 }
 
-a {
-	width: 500px;
-	max-width: 100%;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	border-radius: 5px;
-	&:hover {
-		background-color: black;
-		&.back {
-			background-color: rgba(0, 0, 0, 0.542);
-		}
-		h3, h4 {
-			
-			transform: scale(1.1);
-		}
-		h3 {color: white;}
-		h4 {color: rgba(255, 255, 255, 0.49);}
-	}
-}
-
-@media (max-width: 720px) {
-	a {
-		text-align: center;
-		width: 100%;
-		border-radius: 0px;
-	}
-	.category-container {
-		width: 100%;
-	}
-	h3, h4 {
-		transform-origin: center;
-	}
+@media (max-width: 768px) {
+  .image-info {
+    left: 1rem;
+    bottom: 1rem;
+    padding: 1rem;
+    max-width: calc(100vw - 2rem);
+    
+    h2 {
+      font-size: 1.4rem;
+    }
+    
+    .description {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .slide-indicators {
+    right: 1rem;
+    bottom: 0.5rem;
+  }
 }

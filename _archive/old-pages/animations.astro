@@ -1,0 +1,91 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/animations.scss';
+---
+
+<!doctype html>
+<html class="gamejamstyle" lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<div class="invert-colors"><Header class="header"/></div>
+		
+			
+
+			<!-- <div class="intro">
+				<h1>Animations</h1>
+				<p>
+					Check out my short animations below!
+				</p>
+			</div>
+			 -->
+			<div class="animations-section">
+
+				<div class="jam bread">
+					<div class="jam-content bread">
+						<div class="iframe-wrapper">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/K-TRRPV8mhc?si=0bICeT627p63XRz-" title="YouTube iframe-wrapper player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+						</div>
+						<div class="description">
+							<h1>Bread</h1>
+							<h2>A short film about a hard day.</h2>
+							<p>Additional credits:<br>Eli Smirin - Soundtrack<br>Anjali Gauld - Protagonist's Voice</p>
+						</div>
+						<div class="details bread">
+							<div class="screenshots">
+								<img class="three" src="/narrative-work/bread/gifs/title-day.gif">
+								<img class="three" src="/narrative-work/bread/gifs/title-night.gif">
+								<img class="three" src="/narrative-work/bread/gifs/sad.gif">
+
+								<img class="two" src="/narrative-work/bread/gifs/emerge.gif">
+								<img class="two" src="/narrative-work/bread/gifs/run.gif">
+
+								<img class="three" src="/narrative-work/bread/gifs/stall-day.gif">
+								<img class="three" src="/narrative-work/bread/gifs/stall-night.gif">
+								<img class="three" src="/narrative-work/bread/gifs/kneel.gif">
+
+								<img class="two" src="/narrative-work/bread/gifs/encounter.gif">
+								<img class="two" src="/narrative-work/bread/character-design.jpg">
+							</div>
+							<div class="storyboard">
+								<img src="/narrative-work/bread/storyboards.jpg">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+
+				<div class="jam crush">
+					<div class="jam-content crush">
+						<div class="iframe-wrapper">
+							<iframe width="560" height="315" src="https://www.youtube.com/embed/3POi_rnWniw?si=qsgf3RNzpXAxYNbK" title="YouTube iframe-wrapper player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>						</div>
+						<div class="description">
+							<h1>CRUSH</h1>
+							<h2>A love letter to transit</h2>
+						</div>
+						<div class="details crush">
+							<div class="screenshots">
+								<img src="/narrative-work/crush/gifs/train.gif">
+								<img src="/narrative-work/crush/gifs/squeeze.gif">
+								<img src="/narrative-work/crush/gifs/entrance.gif">
+								<img src="/narrative-work/crush/gifs/climax.gif">
+							</div>
+							<div class="storyboard">
+								<img src="/narrative-work/crush/bordscomp.jpg">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<Footer />
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,66 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+import Comics from './comics.astro';
+
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/story.scss';
+
+
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+
+		<!-- JAVASCRIPT ZONE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+		<!-- Handles Animations -->
+		<script src="../components/animation/AnimIllustration.js"></script>
+
+		
+
+
+
+		<!-- HTML BEGINS HERE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+
+		<div class="invert-colors"><Header class="header"/></div>
+		<div class="spacer"></div>
+
+		<div class="parallax-viewport">
+			<div class="parallax-content">
+				<h3>Story</h3>
+				<p>click the arrows to read through</p>
+			</div>
+		</div>
+
+		<div onclick="closePopup()" id="popup" class="popup">
+			<span class="close-btn" onclick="closePopup()">&times;</span>
+			<div class="popup-flexbox">
+				
+				<img id="popup-image" src="/illustration/siftmask.jpg">
+				<div class="popup-text" id="popup-text">
+					<h1 id="popup-title">Name</h1>
+					<p id="popup-desc">Desc</p>
+				</div>
+			</div>
+		</div>
+
+		<div class="gallery-group comics" id="comics">
+			<Comics />
+		</div>
+
+		<!-- <div class="foot-div flex flex-1 flex-col justify-start items-center w-100% mt-12 mb-20">
+			<img src="/illustration/treefull.jpg" class="foot-image mb-1 w-1/2 object-contain" style="max-height: 50vh">
+			<h4 class="foot-text mw-1/4">Thanks for stopping by!</h4>
+		</div> -->
+
+		<Footer />
+	</body>
+</html>

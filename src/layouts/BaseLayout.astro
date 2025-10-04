@@ -1,0 +1,64 @@
+---
+import BaseHead from '../components/common/BaseHead.astro';
+import Navbar from '../components/common/Navbar.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+  </head>
+  <body>
+    <div class="page-container">
+      <!-- Left sidebar (1/4) - Common navbar for all pages -->
+      <aside class="sidebar">
+        <Navbar />
+      </aside>
+      
+      <!-- Right content (3/4) - Page-specific content -->
+      <main class="content">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>
+
+<style lang="scss">
+  .page-container {
+    display: flex;
+    min-height: 100vh;
+    gap: 0;
+  }
+  
+  .sidebar {
+    flex: 0 0 25%;
+    background: var(--bg-light);
+    border-right: 1px solid var(--border-color);
+    padding: 2rem;
+  }
+  
+  .content {
+    flex: 1;
+    background: var(--bg-dark);
+    padding: 0;
+  }
+  
+  @media (max-width: 768px) {
+    .page-container {
+      flex-direction: column;
+    }
+    
+    .sidebar {
+      border-right: none;
+      border-bottom: 1px solid var(--border-color);
+    }
+  }
+</style>
+

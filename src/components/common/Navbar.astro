@@ -1,0 +1,50 @@
+---
+// Common navigation for all pages
+---
+
+<nav class="navbar">
+  <div class="nav-section">
+    <h2>Joshua Ehrlich</h2>
+  </div>
+  
+  <ul class="nav-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/illustration">Art & Design</a></li>
+    <li><a href="/story">Story</a></li>
+    <li><a href="/animation">Animation</a></li>
+    <li><a href="/games">Games</a></li>
+    <li><a href="/about">About</a></li>
+  </ul>
+</nav>
+
+<style lang="scss">
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+  
+  .nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    
+    a {
+      text-decoration: none;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      transition: opacity 0.2s;
+      
+      &:hover {
+        opacity: 0.6;
+      }
+    }
+  }
+</style>
+

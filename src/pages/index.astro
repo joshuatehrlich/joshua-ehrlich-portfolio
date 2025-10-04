@@ -1,43 +1,57 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { homepageArtwork } from '../data/index';
+import '../styles/index.scss';
 
-import '../styles/index.scss'
+// Import all images from assets/index
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/index/*');
+
+// Create a map of imagePath to actual imported image
+const imageMap = new Map();
+for (const [path, imageLoader] of Object.entries(images)) {
+  const filename = path.split('/').pop();
+  const image = await imageLoader();
+  imageMap.set(filename, image.default);
+}
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={'Joshua Ehrlich'} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<!-- <Header />
-		<div class="spacer"></div> -->
+<BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <div class="autoscroll-gallery">
+    <div class="slideshow-container">
+      {homepageArtwork.map((artwork, index) => {
+        const filename = artwork.imagePath.split('/').pop();
+        const image = imageMap.get(filename);
+        
+        return (
+          <div class={`gallery-slide ${index === 0 ? 'active' : ''}`}>
+            <div class="image-container">
+              <Image 
+                src={image} 
+                alt={artwork.title}
+                class="gallery-image"
+                loading="eager"
+                quality={90}
+              />
+            </div>
+            <div class="image-info">
+              <p>{artwork.title} • {artwork.year}</p>
+              {/* <p class="year-medium">{artwork.year} • {artwork.medium}</p>
+              <p class="description">{artwork.description}</p> */}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+    
+    <!-- Slide indicators -->
+    <div class="slide-indicators">
+      {homepageArtwork.map((_, index) => (
+        <div class={`indicator ${index === 0 ? 'active' : ''}`} data-slide={index}></div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
 
-		<div class="background">
-			<div class="category-container">
-
-				<!-- <div class="greeting">
-					<h1>Joshua Ehrlich</h1>
-				</div> -->
-	
-				<!-- <h1>Joshua Ehrlich</h1> -->
-	
-				<a href="/illustration" class="category"><h3>Art & Design</h3></a>
-				<a href="/story" class="category"><h3>Story</h3></a>
-				<a href="/animations" class="category"><h3>Animation</h3></a>
-				<a href="/gameselect" class="category"><h3>Games</h3></a>
-				<!-- <a href="/dust" class="category"><h3>Dust - Card Game</h3></a>
-				<a href="/earthen" class="category"><h3>Earthen - Video Game</h3></a> -->
-				<a href="/about" class="category"><h3>About</h3></a>
-			</div>
-		</div>
-
-		
-		
-
-		<!-- <Footer /> -->
-	</body>
-</html>
+<script src="../scripts/slideshow.js"></script>
