@@ -1,0 +1,94 @@
+---
+import { Image } from 'astro:assets';
+import '../styles/slideshow.scss';
+import type { Artwork } from '../data/types';
+
+interface Props {
+  artwork: Artwork[];
+}
+
+const { artwork } = Astro.props;
+
+// Import all images dynamically based on the artwork data
+const imagePaths = [...new Set(artwork.map(art => art.imagePath))];
+const imageMap = new Map();
+
+// Import each unique image path
+for (const imagePath of imagePaths) {
+  try {
+    const image = await import(`../assets/${imagePath}`);
+    const filename = imagePath.split('/').pop();
+    if (filename) {
+      imageMap.set(filename, image.default);
+    }
+  } catch (error) {
+    console.error(`Failed to load image: ${imagePath}`, error);
+  }
+}
+---
+
+<div class="slideshow-container">
+    <!-- Main centered image -->
+    <div class="main-image-container">
+      {artwork.map((art, index) => {
+        const filename = art.imagePath.split('/').pop();
+        const image = imageMap.get(filename);
+        
+        if (!image) return null;
+        
+        return (
+          <div class={`main-image ${index === 0 ? 'active' : ''}`} data-index={index}>
+            <div class="main-image-overlay">
+              <div class="selector left"></div>
+              <div class="selector right"></div>
+            </div>
+            <Image 
+              src={image} 
+              alt={art.title}
+              class="main-image-content"
+              loading={index === 0 ? "eager" : "lazy"}
+              quality={95}
+            />
+            <div class="image-info">
+              <em>{art.title}</em> | {art.year}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+
+    <div class="page-overlay">
+      <div class="selector left"></div>
+      <div class="selector right"></div>
+    </div>
+
+    <!-- Thumbnail navigation -->
+    <div class="thumbnail-container">
+      <div class="thumbnail-row">
+        {artwork.map((art, index) => {
+          const filename = art.imagePath.split('/').pop();
+          const image = imageMap.get(filename);
+          
+          if (!image) return null;
+          
+          return (
+            <div 
+              class={`thumbnail ${index === 0 ? 'active' : ''}`} 
+              data-index={index}
+              aria-label={`View ${art.title}`}
+            >
+              <Image 
+                src={image} 
+                alt={art.title}
+                class="thumbnail-image"
+                loading="lazy"
+                quality={20}
+              />
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/slideshow.js"></script>

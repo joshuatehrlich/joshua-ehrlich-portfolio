@@ -1,0 +1,48 @@
+.illustration-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  gap: 3rem;
+  padding: 5rem 0 3rem 0;
+}
+
+.category-selector {
+  flex: 0 0 auto; // Fixed height
+  // height: 60px; // Specific height for category selector
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  // background-color: red; // Temporary for debugging
+  font-size: 1.5rem;
+  z-index: 10;
+}
+
+.slideshow-container {
+  flex: 1; // Takes remaining space
+  min-height: 0; // Allows flex shrinking
+  // overflow: hidden; // Prevents overflow
+  margin: 0;
+  padding: 0;
+}
+
+.category-option {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 400;
+  opacity: 0.6;
+  
+  &:hover {
+    opacity: 0.2;
+  }
+  
+  &.active {
+    font-weight: 700;
+    opacity: 1;
+  }
+}
+
+.category-separator {
+  font-weight: 400;
+  opacity: 0.6;
+}

@@ -5,34 +5,34 @@ export const homepageArtwork: Artwork[] = [
   {
     id: 'giant',
     title: 'Giant',
-    year: 2024,
+    year: 2022,
     medium: 'Copic on illustration board',
     description: '40 by 60 inches. Winner of Silver award in Illustration West 63.',
     imagePath: 'index/whale.png'
   },
   {
-    id: 'dragon',
-    title: 'Dragon',
-    year: 2024,
-    medium: 'Digital',
-    description: 'Fantasy character illustration',
-    imagePath: 'index/dragon.png'
-  },
-  {
-    id: 'sketch',
-    title: 'Sketchbook Study',
-    year: 2024,
-    medium: 'Ink on paper',
-    description: 'Character exploration sketch',
-    imagePath: 'desert.jpg'
-  },
-  {
-    id: 'concept',
-    title: 'Environment Concept',
-    year: 2024,
+    id: 'car',
+    title: 'The Move',
+    year: 2023,
     medium: 'Digital',
     description: 'Environmental concept art',
     imagePath: 'index/car.png'
+  },
+  // {
+  //   id: 'dragon',
+  //   title: 'Dragon',
+  //   year: 2022,
+  //   medium: 'Copic on illustration board',
+  //   description: 'Fantasy character illustration',
+  //   imagePath: 'index/dragon.png'
+  // },
+  {
+    id: 'alice desert',
+    title: 'Alice Abandoned',
+    year: 2022,
+    medium: 'Digital',
+    description: 'Character exploration sketch',
+    imagePath: 'desert.jpg'
   },
   {
     id: 'forest',
@@ -44,8 +44,8 @@ export const homepageArtwork: Artwork[] = [
   },
   {
     id: 'pillars',
-    title: 'BaseCamp',
-    year: 2024,
+    title: 'Base Camp',
+    year: 2023,
     medium: 'Digital',
     description: 'Forest concept art',
     imagePath: 'index/pillars.PNG'

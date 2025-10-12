@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SlideshowLayout from '../components/SlideshowLayout.astro';
+import { editorialArtwork } from '../data/editorial';
+import { conceptArtArtwork } from '../data/concept-art';
+import { SITE_TITLE } from '../consts';
+import '../styles/illustration.scss';
+
+// Get category from URL params, default to editorial
+const url = new URL(Astro.request.url);
+const categoryParam = url.searchParams.get('category');
+const category = categoryParam || 'editorial';
+const artwork = category === 'concept-art' ? conceptArtArtwork : editorialArtwork;
+const isEditorial = category === 'editorial';
+console.log(categoryParam);
+---
+
+<BaseLayout title={`Illustration - ${SITE_TITLE}`} description="A collection of illustrations and artwork">
+  <div class="illustration-page">
+    <div class="category-selector">
+      <span class={`category-option ${isEditorial ? 'active' : ''}`} data-category="editorial">Editorial</span>
+      <span class="category-separator">•</span>
+      <span class={`category-option ${!isEditorial ? 'active' : ''}`} data-category="concept-art">Concept art</span>
+    </div>
+
+    <div class="slideshow-container">
+      <SlideshowLayout artwork={artwork} />
+    </div>
+  </div>
+</BaseLayout>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryOptions = document.querySelectorAll('.category-option');
+    
+    // Get current category from URL for debugging
+    const url = new URL(window.location.href);
+    const currentCategory = url.searchParams.get('category');
+    console.log('Current category from URL:', currentCategory);
+    
+    categoryOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const element = option as HTMLElement;
+        const category = element.dataset.category;
+        
+        const url = new URL(window.location.href);
+        url.searchParams.set('category', category || 'editorial');
+        window.location.href = url.toString();
+      });
+    });
+  });
+</script>

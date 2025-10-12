@@ -41,7 +41,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.837), rgba(0, 0, 0, 0) 30%);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.937), rgba(0, 0, 0, 0.778) 10%, rgba(0, 0, 0, 0) 40%);
   }
   
   .gallery-image {
@@ -63,6 +63,10 @@
   p {
     font-size: 1.3rem;
     opacity: 0.7;
+    .title {
+      font-size: 1.3rem;
+      font-style: italic;
+    }
   }
 }
 
@@ -75,7 +79,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.9rem;
   z-index: 10;
 }
 
@@ -85,7 +89,11 @@
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s;
+
+  &:hover {
+    transform: translateY(-0.2rem);
+  }
   
   &.active {
     background: rgba(255, 255, 255, 0.9);

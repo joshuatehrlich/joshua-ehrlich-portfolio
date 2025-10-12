@@ -1,105 +1,58 @@
-// Slideshow functionality - separated from Astro component
-console.log('Slideshow script loaded');
-
-let currentSlide = 0;
-let slideTimer = null;
-let isInitialized = false;
-
-const SLIDE_DURATION = 5000; // 5 seconds
-
-function initializeSlideshow() {
-  if (isInitialized) {
-    console.log('Slideshow already initialized, skipping');
-    return;
-  }
-
-  const slides = document.querySelectorAll('.gallery-slide');
-  const indicators = document.querySelectorAll('.indicator');
+// Slideshow functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const mainImages = document.querySelectorAll('.main-image');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  const selectors = document.querySelectorAll('.selector');
   
-  if (slides.length === 0) {
-    console.log('No slides found, retrying in 100ms');
-    setTimeout(initializeSlideshow, 100);
-    return;
-  }
-
-  console.log(`Initializing slideshow with ${slides.length} slides`);
-  isInitialized = true;
+  if (mainImages.length === 0 || thumbnails.length === 0) return;
   
-  function showSlide(index) {
-    console.log(`Showing slide ${index}`);
+  let currentIndex = 0;
+  
+  // Function to show specific image
+  function showImage(index) {
+
+    if (index < 0) index = mainImages.length - 1;
+    if (index >= mainImages.length) index = 0;
+
+    // Remove active class from all main images
+    mainImages.forEach(img => img.classList.remove('active'));
     
-    // Hide all slides
-    slides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
+    // Remove active class from all thumbnails
+    thumbnails.forEach(thumb => thumb.classList.remove('active'));
+    
+    // Add active class to current image and thumbnail
+    if (mainImages[index]) mainImages[index].classList.add('active');
+    if (thumbnails[index]) thumbnails[index].classList.add('active');
+    
+    currentIndex = index;
+  }
+  
+  // Add click event listeners to thumbnails
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', () => {
+      showImage(index);
     });
-    
-    // Update indicators
-    indicators.forEach((indicator, i) => {
-      indicator.classList.toggle('active', i === index);
-    });
-  }
-  
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }
-  
-  function startAutoAdvance() {
-    if (slideTimer) {
-      clearInterval(slideTimer);
-    }
-    
-    console.log('Starting auto-advance timer');
-    slideTimer = setInterval(nextSlide, SLIDE_DURATION);
-  }
-  
-  // Start the slideshow
-  showSlide(0);
-  startAutoAdvance();
-  
-  // Add click handlers to indicators
-  indicators.forEach((indicator, index) => {
-    indicator.addEventListener('click', () => {
-      console.log(`Indicator clicked: slide ${index}`);
-      currentSlide = index;
-      showSlide(currentSlide);
-      
-      // Reset timer when manually clicked
-      if (slideTimer) {
-        clearInterval(slideTimer);
+  });
+
+  selectors.forEach((selector) => {
+    selector.addEventListener('click', () => {
+      if (selector.classList.contains('left')) {
+        showImage(currentIndex - 1);
+      } else if (selector.classList.contains('right')) {
+        showImage(currentIndex + 1);
       }
-      setTimeout(startAutoAdvance, 1000);
     });
   });
   
-  // Pause on hover
-  const gallery = document.querySelector('.autoscroll-gallery');
-  if (gallery) {
-    gallery.addEventListener('mouseenter', () => {
-      console.log('Mouse enter - pausing slideshow');
-      if (slideTimer) {
-        clearInterval(slideTimer);
-        slideTimer = null;
-      }
-    });
-    
-    gallery.addEventListener('mouseleave', () => {
-      console.log('Mouse leave - resuming slideshow');
-      startAutoAdvance();
-    });
-  }
-}
-
-// Initialize when DOM is ready
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeSlideshow);
-} else {
-  initializeSlideshow();
-}
-
-// Clean up on page unload
-window.addEventListener('beforeunload', () => {
-  if (slideTimer) {
-    clearInterval(slideTimer);
-  }
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') {
+      showImage(currentIndex - 1);
+    } else if (e.key === 'ArrowRight') {
+      showImage(currentIndex + 1);
+    }
+  });
+  
+  // Initialize with first image
+  showImage(0);
 });

@@ -1,50 +1,37 @@
 ---
 // Common navigation for all pages
+import '../../styles/navbar.scss';
 ---
+<script src="../../scripts/navbar.js"></script>
 
 <nav class="navbar">
-  <div class="nav-section">
-    <h2>Joshua Ehrlich</h2>
+  <img src="/images/signature.png" class="signature"/>
+  <div class="title-section">
+    <a href="/">
+      <h1>Joshua Ehrlich</h1>
+      <h3>game designer and illustrator</h3>
+    </a>
   </div>
   
   <ul class="nav-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/illustration">Art & Design</a></li>
-    <li><a href="/story">Story</a></li>
-    <li><a href="/animation">Animation</a></li>
-    <li><a href="/games">Games</a></li>
-    <li><a href="/about">About</a></li>
+    <ul class="games">
+      <li><a href="/dust">Dust</a></li>
+      <li><a href="/blade-bearer">Blade Bearer</a></li>
+      <li><a href="/earthen">Earthen</a></li>
+      <li><a href="/game-jams">Name That!</a></li>
+    </ul>
+    <ul class="mics">
+      <li><a href="/illustration">Illustration</a></li>
+      <li><a href="/comics">Comics</a></li>
+      <li><a href="/animation">Animation</a></li>
+    </ul>
+    <ul class="websites">
+      <li><a href="/abeatingheart">abeatingheart.art</a></li>
+    </ul>
+    <ul class="info">
+      <li><a href="/about">About</a></li>
+    </ul>
   </ul>
 </nav>
 
-<style lang="scss">
-  .navbar {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-    }
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    
-    a {
-      text-decoration: none;
-      color: var(--text-primary);
-      font-size: 1.1rem;
-      transition: opacity 0.2s;
-      
-      &:hover {
-        opacity: 0.6;
-      }
-    }
-  }
-</style>
 

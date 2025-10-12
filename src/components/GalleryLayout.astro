@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE } from '../consts';
+import '../styles/gallery.scss';
+
+interface Props {
+  title: string;
+  description?: string;
+  artwork: any[];
+  rows: any[];
+  imageFolder: string;
+}
+
+const { title, description, artwork, rows, imageFolder } = Astro.props;
+
+// Import all images from the illustration folder
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/illustration/*');
+
+// Create a map of imagePath to actual imported image
+const imageMap = new Map();
+for (const [path, imageLoader] of Object.entries(images)) {
+  const filename = path.split('/').pop();
+  try {
+    const image = await imageLoader();
+    imageMap.set(filename, image.default);
+  } catch (error) {
+    console.error(`Failed to load image: ${filename}`, error);
+  }
+}
+
+// Helper function to get artwork by ID
+function getArtworkById(id: string) {
+  return artwork.find(art => art.id === id);
+}
+---
+
+<BaseLayout title={`${title} - ${SITE_TITLE}`} description={description}>
+  <div class="illustration-gallery">
+    {rows.map((row) => (
+      <div class="gallery-row" style={`height: ${row.height}`}>
+        {row.imageIds.map((imageId: string, index: number) => {
+          const artwork = getArtworkById(imageId);
+          if (!artwork) return null;
+          
+          const filename = artwork.imagePath.split('/').pop();
+          const image = imageMap.get(filename);
+          
+          if (!image) return null;
+          
+          return (
+            <div 
+              class="gallery-item" 
+              style={`flex-shrink: ${row.flexShrink[index]}`}
+            >
+              <div class="image-container">
+                <Image 
+                  src={image} 
+                  alt={artwork.title}
+                  class="gallery-image"
+                  loading="lazy"
+                  quality={90}
+                />
+              </div>
+              <div class="image-overlay">
+                <div class="image-info">
+                  <h3>{artwork.title}</h3>
+                  <p>{artwork.year} • {artwork.medium}</p>
+                  <p class="description">{artwork.description}</p>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    ))}
+  </div>
+</BaseLayout>

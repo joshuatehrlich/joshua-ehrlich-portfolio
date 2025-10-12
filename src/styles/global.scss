@@ -9,13 +9,15 @@
   --bg-dark: #f5f5f5;
   --text-primary: #1a1a1a;
   --text-secondary: #ffffff;
-  --border-color: #e0e0e0;
+  --border-color: #b9b9b9;
+  --accent-color: #ff8585;
 }
 
 html {
-  font-family: 'Crimson Text', sans-serif;
-  font-size: 16px;
+  font-family: 'Helvetica', 'Crimson Text', sans-serif;
+  font-size: 14px;
   line-height: 1.6;
+  font-weight: 400;
   color: var(--text-primary);
 }
 
