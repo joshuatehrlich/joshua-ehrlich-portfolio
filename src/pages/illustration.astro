@@ -1,32 +1,41 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import SlideshowLayout from '../components/SlideshowLayout.astro';
-import { editorialArtwork } from '../data/editorial';
-import { conceptArtArtwork } from '../data/concept-art';
-import { illustrationArtwork } from '../data/illustration';
+import { loadAllArtworkCollections } from '../data/loader';
 import { SITE_TITLE } from '../consts';
 import '../styles/illustration.scss';
 
-// Single configuration - just add/remove entries here
-// Each entry maps to: key -> { label, artwork }
-const CATEGORIES = [
-  { key: 'editorial', label: 'Editorial', artwork: editorialArtwork },
-  { key: 'concept-art', label: 'Concept Art', artwork: conceptArtArtwork },
-];
+// Auto-load ALL categories, then optionally filter to specific ones
+const allCategories = loadAllArtworkCollections();
+
+// Option 1: Show specific categories only
+const CATEGORIES = allCategories.filter(cat => 
+  ['concept-art', 'editorial'].includes(cat.key)
+);
+
+// Option 2: Show all categories EXCEPT certain ones
+// const CATEGORIES = allCategories.filter(cat => 
+//   !['comics'].includes(cat.key)
+// );
+
+// Option 3: Show ALL categories
+// const CATEGORIES = allCategories;
 
 // Get category from URL params, default to first category
 const url = new URL(Astro.request.url);
 const categoryParam = url.searchParams.get('category');
-const currentCategoryKey = categoryParam || CATEGORIES[0].key;
+const currentCategoryKey = categoryParam || CATEGORIES[0]?.key || 'illustration';
 
 // Find the current category config and get its artwork
 const currentCategory = CATEGORIES.find(cat => cat.key === currentCategoryKey) || CATEGORIES[0];
-const artwork = currentCategory.artwork;
+const artwork = currentCategory?.artwork || [];
 
+console.log('Available categories:', CATEGORIES.map(c => c.key));
 console.log('Current category:', currentCategoryKey);
+console.log('Artwork count:', artwork.length);
 ---
 
-<BaseLayout title={`Comics - ${SITE_TITLE}`} description="A collection of comics and artwork">
+<BaseLayout title={`Illustration - ${SITE_TITLE}`} description="A collection of illustrations and artwork">
   <div class="illustration-page">
     <div class="category-selector">
       {CATEGORIES.map((cat, index) => (

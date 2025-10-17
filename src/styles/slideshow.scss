@@ -81,7 +81,7 @@
 
 
 .main-image-content {
-  max-width: 80vw;
+  max-width: calc((100vw - var(--sidebar-width)) * 0.95);
   max-height: 70vh;
   width: auto;
   height: auto;
