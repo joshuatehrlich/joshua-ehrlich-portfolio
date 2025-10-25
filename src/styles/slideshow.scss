@@ -63,15 +63,25 @@
       z-index: 100;
       display: flex;
       .selector {
-        width: 50%;
         height: 100%;
         opacity: 0.0;
         transition: opacity 0.3s ease;
-        &.left {background: linear-gradient(to left, transparent, rgb(0, 0, 0));}
-        &.right {background: linear-gradient(to right, transparent, rgb(0, 0, 0));}
+        &.left {
+          background: linear-gradient(to left, transparent, rgb(0, 0, 0));
+          cursor: col-resize;
+          width: 25%;
+        }
+        &.center {
+          width: 50%;
+          cursor: pointer;
+        }
+        &.right {
+          background: linear-gradient(to right, transparent, rgb(0, 0, 0));
+          cursor: col-resize;
+          width: 25%;
+        }
         &:hover {
           opacity: 0.2;
-          cursor: pointer;
         }
       }
     }
@@ -79,6 +89,30 @@
   }
 }
 
+.highres-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  cursor: zoom-out;
+  display: none;
+  &.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  img {
+    max-width: 95vw;
+    max-height: 90vh;
+    object-fit: contain;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+}
 
 .main-image-content {
   max-width: calc((100vw - var(--sidebar-width)) * 0.95);

@@ -40,6 +40,7 @@ for (const imagePath of imagePaths) {
           <div class={`main-image ${index === 0 ? 'active' : ''}`} data-index={index}>
             <div class="main-image-overlay">
               <div class="selector left"></div>
+              <div class="selector center" data-image-src={image}></div>
               <div class="selector right"></div>
             </div>
             <Image 
