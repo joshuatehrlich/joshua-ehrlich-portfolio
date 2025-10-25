@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SlideshowVariableLayout from '../components/SlideshowVariableLayout.astro';
+import { loadAllArtworkCollections } from '../data/loader';
+import { SITE_TITLE } from '../consts';
+import '../styles/illustration.scss';
+import '../styles/bladebearer.scss';
+
+// Auto-load ALL categories from CSV files - completely dynamic!
+const allCategories = loadAllArtworkCollections();
+
+const CATEGORIES = ['bladebearer']
+  .map(key => allCategories.find(cat => cat.key === key))
+  .filter(cat => cat !== undefined);
+// Get category from URL params, default to first category
+const url = new URL(Astro.request.url);
+const categoryParam = url.searchParams.get('category');
+const currentCategoryKey = categoryParam || CATEGORIES[0]?.key || 'animation';
+
+// Find the current category config and get its artwork
+const currentCategory = CATEGORIES.find(cat => cat.key === currentCategoryKey) || CATEGORIES[0];
+const artwork = currentCategory?.artwork || [];
+
+console.log('Available categories:', CATEGORIES.map(c => c.key));
+console.log('Current category:', currentCategoryKey);
+console.log('Artwork count:', artwork.length);
+---
+
+<BaseLayout title={`Blade Bearer - ${SITE_TITLE}`} description="">
+  <div class="illustration-page">
+    <div class="category-selector">
+		<span class="category-option active">Gameplay</span>
+		<span class="category-separator">•</span>
+		<span class="category-option">About</span>
+		<span class="category-separator">•</span>
+		<span class="category-option">Game Jam Edition</span>
+    </div>
+
+    <div class="slideshow-container">
+      <SlideshowVariableLayout artwork={artwork} />
+    </div>
+  </div>
+</BaseLayout>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryOptions = document.querySelectorAll('.category-option');
+    
+    // Get current category from URL for debugging
+    const url = new URL(window.location.href);
+    const currentCategory = url.searchParams.get('category');
+    console.log('Current category from URL:', currentCategory);
+    
+    categoryOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const element = option as HTMLElement;
+        const category = element.dataset.category;
+        
+        const url = new URL(window.location.href);
+        url.searchParams.set('category', category || 'illustration');
+        window.location.href = url.toString();
+      });
+    });
+  });
+</script>

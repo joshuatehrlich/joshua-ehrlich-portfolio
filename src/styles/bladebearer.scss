@@ -1,0 +1,83 @@
+@font-face {
+	font-family: 'RINGM';
+	src: url('/fonts/Naot-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+	font-display: swap;
+}
+.content {
+	background-color: black !important;
+	color: white;
+	// font-family: 'RINGM', monospace;
+}
+
+.category-selector {
+	font-size: 2rem;
+	span {
+		opacity: 0.5 !important;
+		&:hover {
+			opacity: 1 !important;
+		}
+	}
+}
+
+.main-image-container {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.page-overlay {
+	z-index: 5;
+}
+.thumbnail-container {
+	// z-index: 1100;
+	img {
+		clip-path: inset(3px 3px 3px 3px);
+	}
+}
+
+.main-image {
+z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 0; margin: 0;
+  pointer-events: none;
+  overflow: hidden;	
+  .main-media-content {
+	padding: 0; margin: 0;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	pointer-events: none;
+	img {
+		pointer-events: none;
+		padding: 0; margin: 0;
+		// width: 100%;
+		height: 100%;
+		scale: 1.3;
+		// aspect-ratio: 16/10
+		// crop;
+		object-fit: cover;
+		clip-path: inset(3px 3px 3px 3px);
+	}
+  }
+}
+
+.main-image-overlay {
+	pointer-events: none;
+}
+
+.image-info {
+	display: none;
+}
+
+.selector.center {
+	display: none;
+}
