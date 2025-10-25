@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SlideshowLayout from '../components/SlideshowLayout.astro';
+import SlideshowVariableLayout from '../components/SlideshowVariableLayout.astro';
 import { loadAllArtworkCollections } from '../data/loader';
 import { SITE_TITLE } from '../consts';
 import '../styles/illustration.scss';
@@ -8,13 +8,13 @@ import '../styles/illustration.scss';
 // Auto-load ALL categories from CSV files - completely dynamic!
 const allCategories = loadAllArtworkCollections();
 
-const CATEGORIES = ['exile', 'oatmeal', 'banana-sandwich']
+const CATEGORIES = ['bread', 'crush']
   .map(key => allCategories.find(cat => cat.key === key))
   .filter(cat => cat !== undefined);
 // Get category from URL params, default to first category
 const url = new URL(Astro.request.url);
 const categoryParam = url.searchParams.get('category');
-const currentCategoryKey = categoryParam || CATEGORIES[0]?.key || 'illustration';
+const currentCategoryKey = categoryParam || CATEGORIES[0]?.key || 'animation';
 
 // Find the current category config and get its artwork
 const currentCategory = CATEGORIES.find(cat => cat.key === currentCategoryKey) || CATEGORIES[0];
@@ -25,7 +25,7 @@ console.log('Current category:', currentCategoryKey);
 console.log('Artwork count:', artwork.length);
 ---
 
-<BaseLayout title={`Comics - ${SITE_TITLE}`} description="A collection of comics and artwork">
+<BaseLayout title={`Animation - ${SITE_TITLE}`} description="A collection of animations and motion graphics">
   <div class="illustration-page">
     <div class="category-selector">
       {CATEGORIES.map((cat, index) => (
@@ -44,7 +44,7 @@ console.log('Artwork count:', artwork.length);
     </div>
 
     <div class="slideshow-container">
-      <SlideshowLayout artwork={artwork} />
+      <SlideshowVariableLayout artwork={artwork} />
     </div>
   </div>
 </BaseLayout>

@@ -1,20 +1,34 @@
-imagePath
-beach-1.jpg
-beach-2.jpg
-beach-3.jpg
-beach-4.jpg
-bg-home-day.jpg
-bg-home-eve.jpg
-bg-home-night.jpg
-character-design.jpg
-homefront-closeup-day.jpg
-homefront-closeup-night.jpg
-sc-emerge.jpg
-sc-jump.jpg
-sc-jumpscare.jpg
-sc-op.jpg
-sc-sunset.jpg
-storyboards.jpg
-title-day.jpg
-title-night.jpg
+imagePath,title,year
+gifs/title-day.gif,Title Day,2023
+
+gifs/emerge.gif,Character Emerges,2023
+gifs/encounter.gif,Encounter,2023
+gifs/kneel.gif,Kneeling Scene,2023
+gifs/pocket.gif,Pocket Check,2023
+gifs/run.gif,Running,2023
+gifs/sad.gif,Sad Moment,2023
+gifs/stall-day.gif,Stall Day,2023
+gifs/stall-night.gif,Stall Night,2023
+gifs/title-night.gif,Title Night,2023
+storyboards.jpg,Storyboards Overview,2023
+character-design.jpg,Character Design,2023
+
+https://www.youtube.com/embed/K-TRRPV8mhc?si=ScSx7cmuwl8ACozV,Bread,2023
+
+//beach-1.jpg,Beach Scene 1,2023
+//beach-2.jpg,Beach Scene 2,2023
+//beach-3.jpg,Beach Scene 3,2023
+//beach-4.jpg,Beach Scene 4,2023
+//bg-home-day.jpg,Home Background Day,2023
+//bg-home-eve.jpg,Home Background Evening,2023
+//bg-home-night.jpg,Home Background Night,2023
+//homefront-closeup-day.jpg,Home Closeup Day,2023
+//homefront-closeup-night.jpg,Home Closeup Night,2023
+//sc-emerge.jpg,Emerge Storyboard,2023
+//sc-jump.jpg,Jump Storyboard,2023
+//sc-jumpscare.jpg,Jumpscare Storyboard,2023
+//sc-op.jpg,Opening Storyboard,2023
+//sc-sunset.jpg,Sunset Storyboard,2023
+//title-day.jpg,Title Day,2023
+//title-night.jpg,Title Night,2023
 

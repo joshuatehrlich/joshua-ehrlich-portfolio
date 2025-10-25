@@ -1,9 +1,12 @@
-imagePath
-alpha-full.jpg
-bordscomp.jpg
-sc-1.jpg
-sc-2.jpg
-sc-3.jpg
-sc-4.jpg
-sc-5.jpg
-
+imagePath,title,year
+gifs/climax.gif,Climax Scene,2024
+gifs/entrance.gif,Entrance,2024
+gifs/squeeze.gif,Squeeze,2024
+gifs/train.gif,Train Scene,2024
+//alpha-full.jpg,Full Alpha Composite,2024
+//bordscomp.jpg,Boards Composite,2024
+//sc-1.jpg,Storyboard 1,2024
+//sc-2.jpg,Storyboard 2,2024
+//sc-3.jpg,Storyboard 3,2024
+//sc-4.jpg,Storyboard 4,2024
+//sc-5.jpg,Storyboard 5,2024

@@ -1,0 +1,213 @@
+---
+import { Image } from 'astro:assets';
+import '../styles/slideshow.scss';
+import type { Artwork } from '../data/types';
+
+interface Props {
+  artwork: Artwork[];
+}
+
+const { artwork } = Astro.props;
+
+// Helper to detect media type
+function getMediaType(imagePath: string) {
+  // Check if it's a URL (YouTube, Vimeo, or direct video link)
+  if (imagePath.startsWith('http://') || imagePath.startsWith('https://')) {
+    if (imagePath.includes('youtube.com') || imagePath.includes('youtu.be')) {
+      return 'youtube';
+    }
+    if (imagePath.includes('vimeo.com')) {
+      return 'vimeo';
+    }
+    // Assume it's a direct video link
+    return 'video-url';
+  }
+  
+  // Check file extension for local files
+  const ext = imagePath.split('.').pop()?.toLowerCase() || '';
+  if (ext === 'gif') return 'gif';
+  if (['mp4', 'webm', 'mov'].includes(ext)) return 'video';
+  return 'image';
+}
+
+// Helper to convert YouTube URL to embed URL
+function getYouTubeEmbedUrl(url: string) {
+  let videoId = '';
+  if (url.includes('youtube.com/watch?v=')) {
+    videoId = url.split('v=')[1].split('&')[0];
+  } else if (url.includes('youtu.be/')) {
+    videoId = url.split('youtu.be/')[1].split('?')[0];
+  }
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+}
+
+// Helper to convert Vimeo URL to embed URL
+function getVimeoEmbedUrl(url: string) {
+  const videoId = url.split('vimeo.com/')[1].split('/')[0].split('?')[0];
+  return `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1&loop=1`;
+}
+
+// Import all media files (images, gifs, videos)
+const allMedia = import.meta.glob<{ default: ImageMetadata }>('../assets/**/*.{jpg,jpeg,png,gif,webp,PNG,JPG,JPEG,GIF,mp4,webm,mov}');
+
+// Create a map of paths to imported media
+const mediaMap = new Map();
+for (const [path, mediaLoader] of Object.entries(allMedia)) {
+  const relativePath = path.replace('../assets/', '');
+  try {
+    const media = await mediaLoader();
+    mediaMap.set(relativePath, media.default);
+  } catch (error) {
+    console.error(`Failed to load media: ${relativePath}`, error);
+  }
+}
+
+// Prepare media data for each artwork
+const artworkMedia = artwork.map(art => {
+  const mediaType = getMediaType(art.imagePath);
+  let mediaSrc = null;
+  let embedUrl = null;
+  
+  if (mediaType === 'youtube') {
+    embedUrl = getYouTubeEmbedUrl(art.imagePath);
+  } else if (mediaType === 'vimeo') {
+    embedUrl = getVimeoEmbedUrl(art.imagePath);
+  } else if (mediaType === 'video-url') {
+    mediaSrc = art.imagePath;
+  } else {
+    // Local file
+    mediaSrc = mediaMap.get(art.imagePath);
+  }
+  
+  return {
+    ...art,
+    mediaType,
+    mediaSrc,
+    embedUrl
+  };
+});
+---
+
+<div class="slideshow-container">
+  <!-- Main centered media -->
+  <div class="main-image-container">
+    {artworkMedia.map((art, index) => {
+      if (!art.mediaSrc && !art.embedUrl) return null;
+      
+      return (
+        <div class={`main-image ${index === 0 ? 'active' : ''}`} data-index={index}>
+          <div class="main-image-overlay">
+            <div class="selector left"></div>
+            <div class="selector center"></div>
+            <div class="selector right"></div>
+          </div>
+          
+          <div class="main-media-content">
+            {art.mediaType === 'image' && art.mediaSrc && (
+              <Image 
+                src={art.mediaSrc} 
+                alt={art.title || 'Artwork'}
+                class="main-image-content"
+                loading={index === 0 ? "eager" : "lazy"}
+                quality={95}
+              />
+            )}
+            
+            {art.mediaType === 'gif' && art.mediaSrc && (
+              <img 
+                src={art.mediaSrc.src} 
+                alt={art.title || 'Animation'}
+                class="main-image-content"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+            )}
+            
+            {art.mediaType === 'video' && art.mediaSrc && (
+              <video 
+                src={art.mediaSrc.src}
+                class="main-video-content"
+                controls
+                autoplay={index === 0}
+                muted
+                loop
+                playsinline
+              />
+            )}
+            
+            {art.mediaType === 'video-url' && art.mediaSrc && (
+              <video 
+                src={art.mediaSrc}
+                class="main-video-content"
+                controls
+                autoplay={index === 0}
+                muted
+                loop
+                playsinline
+              />
+            )}
+            
+            {(art.mediaType === 'youtube' || art.mediaType === 'vimeo') && art.embedUrl && (
+              <iframe
+                src={art.embedUrl}
+                class="main-video-content"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                allowfullscreen
+              />
+            )}
+          </div>
+          
+          <div class="image-info">
+            <em>{art.title || 'Untitled'}</em>{art.year ? ` | ${art.year}` : ''}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+
+  <div class="page-overlay">
+    <div class="selector left"></div>
+    <div class="selector right"></div>
+  </div>
+
+  <!-- Thumbnail navigation -->
+  <div class="thumbnail-container">
+    <div class="thumbnail-row">
+      {artworkMedia.map((art, index) => {
+        if (!art.mediaSrc && !art.embedUrl) return null;
+        
+        return (
+          <div 
+            class={`thumbnail ${index === 0 ? 'active' : ''}`} 
+            data-index={index}
+            aria-label={`View ${art.title || 'artwork'}`}
+          >
+            {(art.mediaType === 'image' || art.mediaType === 'gif') && art.mediaSrc && (
+              <img
+                src={art.mediaSrc.src}
+                alt={art.title || 'Thumbnail'}
+                class="thumbnail-image"
+                loading="lazy"
+              />
+            )}
+            
+            {(art.mediaType === 'video' || art.mediaType === 'video-url') && (
+              <div class="thumbnail-video-indicator">
+                <span>▶</span>
+              </div>
+            )}
+            
+            {(art.mediaType === 'youtube' || art.mediaType === 'vimeo') && (
+              <div class="thumbnail-video-indicator">
+                <span>▶</span>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</div>
+
+<script src="../scripts/slideshowVariable.js"></script>
+

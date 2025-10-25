@@ -128,8 +128,10 @@ function parseCSV(csvContent: string, categoryKey: string): Artwork[] {
     });
     
     // Add folder prefix if it doesn't already have one
-    if (input.imagePath && !input.imagePath.includes('/') && config.folderPath) {
-      input.imagePath = config.folderPath + input.imagePath;
+    if (input.imagePath && config.folderPath) {
+      if (!input.imagePath.startsWith(config.folderPath)) {
+        input.imagePath = config.folderPath + input.imagePath;
+      }
     }
     
     if (!input.imagePath) {
