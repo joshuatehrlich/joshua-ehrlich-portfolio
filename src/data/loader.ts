@@ -128,7 +128,9 @@ function parseCSV(csvContent: string, categoryKey: string): Artwork[] {
     });
     
     // Add folder prefix if it doesn't already have one
-    if (input.imagePath && config.folderPath) {
+    // Skip URLs (http://, https://) as they don't need folder prefixes
+    const isUrl = input.imagePath && (input.imagePath.startsWith('http://') || input.imagePath.startsWith('https://'));
+    if (input.imagePath && config.folderPath && !isUrl) {
       if (!input.imagePath.startsWith(config.folderPath)) {
         input.imagePath = config.folderPath + input.imagePath;
       }

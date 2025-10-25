@@ -32,19 +32,27 @@ function getMediaType(imagePath: string) {
 
 // Helper to convert YouTube URL to embed URL
 function getYouTubeEmbedUrl(url: string) {
+  // If it's already an embed URL, just add autoplay parameters
+  if (url.includes('youtube.com/embed/')) {
+    const baseUrl = url.split('?')[0]; // Get URL without existing parameters
+    const videoId = baseUrl.split('/embed/')[1];
+    return `${baseUrl}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0`;
+  }
+  
+  // Convert watch or short URLs to embed format
   let videoId = '';
   if (url.includes('youtube.com/watch?v=')) {
     videoId = url.split('v=')[1].split('&')[0];
   } else if (url.includes('youtu.be/')) {
     videoId = url.split('youtu.be/')[1].split('?')[0];
   }
-  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}`;
+  return `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&loop=1&playlist=${videoId}&controls=0`;
 }
 
 // Helper to convert Vimeo URL to embed URL
 function getVimeoEmbedUrl(url: string) {
   const videoId = url.split('vimeo.com/')[1].split('/')[0].split('?')[0];
-  return `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1&loop=1`;
+  return `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1&loop=1&controls=false`;
 }
 
 // Import all media files (images, gifs, videos)
@@ -70,13 +78,19 @@ const artworkMedia = artwork.map(art => {
   
   if (mediaType === 'youtube') {
     embedUrl = getYouTubeEmbedUrl(art.imagePath);
+    console.log(`YouTube video detected: ${art.title}`, { embedUrl, originalPath: art.imagePath });
   } else if (mediaType === 'vimeo') {
     embedUrl = getVimeoEmbedUrl(art.imagePath);
+    console.log(`Vimeo video detected: ${art.title}`, { embedUrl, originalPath: art.imagePath });
   } else if (mediaType === 'video-url') {
     mediaSrc = art.imagePath;
+    console.log(`Direct video URL detected: ${art.title}`, { mediaSrc });
   } else {
     // Local file
     mediaSrc = mediaMap.get(art.imagePath);
+    if (!mediaSrc && art.imagePath) {
+      console.warn(`Could not find media for: ${art.imagePath}`);
+    }
   }
   
   return {
@@ -126,7 +140,7 @@ const artworkMedia = artwork.map(art => {
               <video 
                 src={art.mediaSrc.src}
                 class="main-video-content"
-                controls
+                controls="false"
                 autoplay={index === 0}
                 muted
                 loop
@@ -138,7 +152,7 @@ const artworkMedia = artwork.map(art => {
               <video 
                 src={art.mediaSrc}
                 class="main-video-content"
-                controls
+                controls="false"
                 autoplay={index === 0}
                 muted
                 loop

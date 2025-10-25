@@ -46,10 +46,10 @@ modal.addEventListener('mousemove', (e) => {
   const imageRect = image.getBoundingClientRect();
   const mouseX = e.clientX;
   const mouseY = e.clientY;
-  if (!(mouseX >= imageRect.left && mouseX <= imageRect.right && mouseY >= imageRect.top && mouseY <= imageRect.bottom)) {
-    modal.style.cursor = 'zoom-out';
-    return;
-  }
+  // if (!(mouseX >= imageRect.left && mouseX <= imageRect.right && mouseY >= imageRect.top && mouseY <= imageRect.bottom)) {
+  //   modal.style.cursor = 'zoom-out';
+  //   return;
+  // }
   
   if (clickPosition < 0.20) {
     modal.style.cursor = 'w-resize';  // or 'col-resize'
@@ -91,6 +91,7 @@ modal.addEventListener('mousemove', (e) => {
         if (mouseX >= imageRect.left && mouseX <= imageRect.right && mouseY >= imageRect.top && mouseY <= imageRect.bottom) {
           mouseOverImage = true;
         }
+        mouseOverImage = true;
 
         if (clickPosition < 0.20 && mouseOverImage) {
           // Left third - previous image

@@ -94,7 +94,21 @@ document.addEventListener('DOMContentLoaded', () => {
         modalContent.appendChild(videoClone);
       } else if (media.type === 'iframe') {
         const iframeClone = document.createElement('iframe');
-        iframeClone.src = media.iframe.src;
+        
+        // Get original src and enable controls for modal
+        let modalSrc = media.iframe.src;
+        
+        // Enable controls for YouTube
+        if (modalSrc.includes('youtube.com')) {
+          modalSrc = modalSrc.replace('controls=0', 'controls=1');
+        }
+        
+        // Enable controls for Vimeo
+        if (modalSrc.includes('vimeo.com')) {
+          modalSrc = modalSrc.replace('controls=false', 'controls=true');
+        }
+        
+        iframeClone.src = modalSrc;
         iframeClone.className = 'modal-iframe';
         iframeClone.frameBorder = '0';
         iframeClone.allow = 'autoplay; fullscreen; picture-in-picture';

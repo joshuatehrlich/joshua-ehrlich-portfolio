@@ -18,6 +18,7 @@
   .selector {
     width: 50%;
     height: 100%;
+    cursor: col-resize;
   }
 }
 
@@ -69,16 +70,16 @@
         &.left {
           background: linear-gradient(to left, transparent, rgb(0, 0, 0));
           cursor: col-resize;
-          width: 25%;
+          width: 0%;
         }
         &.center {
-          width: 50%;
+          width: 100%;
           cursor: pointer;
         }
         &.right {
           background: linear-gradient(to right, transparent, rgb(0, 0, 0));
           cursor: col-resize;
-          width: 25%;
+          width: 0%;
         }
         &:hover {
           opacity: 0.2;
@@ -111,10 +112,10 @@
     max-height: 90vh;
     object-fit: contain;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  &[src*=".gif?"] {
-    min-width: 80vw;
-    // object-fit: contain;
-  }
+    &[src*=".gif?"] {
+      min-width: 80vw;
+      // object-fit: contain;
+    }
   }
 }
 
@@ -135,6 +136,11 @@
     max-height: 70vh;
     object-fit: contain;
   }
+}
+.main-video-content {
+  min-width: 60vw;  
+  // height: calc(width*0.5625);
+  aspect-ratio: 16/9;
 }
 
 
@@ -257,7 +263,19 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   pointer-events: none;
 }
-
+// Target only video elements (not iframes)
+video.main-video-content {
+  &::-webkit-media-controls-panel {
+    display: none !important;
+  }
+  &::-webkit-media-controls {
+    display: none !important;
+  }
+  // Also hide controls in other browsers
+  &::-moz-media-controls {
+    display: none !important;
+  }
+}
 // Thumbnail video indicator
 .thumbnail-video-indicator {
   width: 100%;
@@ -284,8 +302,7 @@
 }
 
 .modal-iframe {
-  width: 90vw;
-  height: 90vh;
+  min-width: 80vw;
   aspect-ratio: 16/9;
 }
 
