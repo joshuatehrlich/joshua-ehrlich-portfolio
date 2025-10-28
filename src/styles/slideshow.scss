@@ -111,7 +111,7 @@
     max-height: 90vh;
     object-fit: contain;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    &[src*=".gif?"] {
+    &.gif-image {
       min-width: 80vw;
       // object-fit: contain;
     }
@@ -130,7 +130,7 @@
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   pointer-events: none;
   // After the .main-image-content rule, add:
-  &[src*=".gif?"] {
+  &.gif-image {
     // width: calc((100vw - var(--sidebar-width)) * 0.95);
     // height: 70vh;
     min-width: 60vw;
