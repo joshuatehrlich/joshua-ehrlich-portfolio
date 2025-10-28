@@ -29,15 +29,30 @@ console.log('Artwork count:', artwork.length);
 <BaseLayout title={`Blade Bearer - ${SITE_TITLE}`} description="">
   <div class="illustration-page">
     <div class="category-selector">
-		<span class="category-option active">Gameplay</span>
-		<span class="category-separator">•</span>
-		<span class="category-option">About</span>
-		<span class="category-separator">•</span>
-		<span class="category-option">Game Jam Edition</span>
+		<span class="category-option active gameplay">Gameplay</span>
+		<!-- <span class="category-separator">•</span> -->
+		<span class="category-option about">About</span>
+		<!-- <span class="category-separator">•</span> -->
+		<span class="category-option link"><a href="https://lukko-digital.itch.io/bladebearer-recarved" target="_blank">Game Jam</a></span>
+		<!-- <span class="category-separator">•</span> -->
+		<span class="category-option link"><a href="https://store.steampowered.com/app/3574540/Bladebearer_Recarved/" target="_blank">Wishlist</a></span>
     </div>
 
-    <div class="slideshow-container">
+    <div class="slideshow-container active category-content gameplay">
       <SlideshowVariableLayout artwork={artwork} />
+    </div>
+    <div class="category-content about">
+      <h1>
+        Currently in development by
+      </h1>
+      <a href="https://lukko.digital" target="_blank">Lukko Digital</a>
+      <h2>
+        Ian Lum<br>
+        Joshua Ehrlich<br>
+        Miles Frank<br>
+        Jonathan Han<br>
+        Eli Smirin<br>
+      </h2>
     </div>
   </div>
 </BaseLayout>
@@ -46,21 +61,37 @@ console.log('Artwork count:', artwork.length);
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const categoryOptions = document.querySelectorAll('.category-option');
+
+    let activeCategory = 'gameplay';
     
-    // Get current category from URL for debugging
-    const url = new URL(window.location.href);
-    const currentCategory = url.searchParams.get('category');
-    console.log('Current category from URL:', currentCategory);
-    
-    categoryOptions.forEach(option => {
-      option.addEventListener('click', () => {
-        const element = option as HTMLElement;
-        const category = element.dataset.category;
-        
-        const url = new URL(window.location.href);
-        url.searchParams.set('category', category || 'illustration');
-        window.location.href = url.toString();
+    for (let category_option of categoryOptions) {
+
+      if (category_option.classList.contains('link')) {
+        return;
+      };
+
+      category_option.addEventListener('click', () => {
+
+
+        activeCategory = category_option.classList[category_option.classList.length - 1];
+        console.log('Active category:', activeCategory);
+
+        categoryOptions.forEach(option => {
+          option.classList.remove('active');
+        });
+        category_option.classList.add('active');
+
+
+        document.querySelectorAll('.category-content').forEach(content => {
+          content.classList.remove('active');
+        });
+        const currentContent = document.querySelector(`.category-content.${activeCategory}`);
+        if (currentContent) {
+          currentContent.classList.add('active');
+        }
+        console.log('Current content:', currentContent);
       });
-    });
+    }
+
   });
 </script>
