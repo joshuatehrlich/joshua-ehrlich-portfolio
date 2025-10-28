@@ -1,0 +1,21 @@
+.about-section {
+	padding: 5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	justify-content: center;
+	gap: 2rem;
+	width: 600px;
+
+	div {
+		display: flex;
+		flex-direction: column;
+		align-items: start;
+		justify-content: center;
+		gap: 0.5rem;
+	}
+}
+
+#experience-heading {
+	// margin-bottom: -1rem;
+}

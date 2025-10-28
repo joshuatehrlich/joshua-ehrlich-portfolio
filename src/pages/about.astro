@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+import '../styles/about.scss'
+---
+
+<BaseLayout title={SITE_TITLE + " | About"} description={SITE_DESCRIPTION}>
+  <section class="about-section">
+
+	<div class="intro">
+		<h1>About</h1>
+		
+		<p>
+			I love designing narrative experiences that consume the viewer, whether in games, comics, or short films. I hope for my work to evoke a sense of curiosity and exploration. In my interactive work, I'm interested in exploring how the medium of games can be used as a mode of learning.
+		</p>
+		<p>
+			I'm the lead artist at <a href="https://lukko.digital" target="_blank">Lukko Digital</a>,
+			where we're exploring these ideas now - check out our <a href="https://lukko-digital.itch.io/bladebearer-recarved" target="_blank">latest project!</a>
+		</p>
+		<p>
+			If you'd like to work with me, or recieve a sample of any of my game projects, please reach out at any of my socials below, or shoot me an email at <b>joshuatehrlich@gmail.com</b>
+		</p>
+	</div>
+
+	<div class="experience">
+		<h2 id="experience-heading">Experience</h2>
+		<p>Artist and Designer and Writer for Dust to be published by DVC Games in June 2026</p>
+		<p>Art and design intern at Wise Wizard Games, 2025</p>
+		<p>Artist for Name That! published by Wise Wizard Games, out 2025</p>
+		<p>Freelance graphic designer for Real Chemistry, 2024</p>
+	</div>
+	<div class="awards">
+		<h2 id="Awards">Awards</h2>
+		<p>Illustration West 63 Silver award, 2024</p>
+		<p>Big Mode Game Jam 2025: Finalist</p>
+		<p>Brackey's Game Jam 2024: 5th Overall</p>
+	</div>
+  </section>
+</BaseLayout>
