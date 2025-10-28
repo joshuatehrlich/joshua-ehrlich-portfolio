@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SlideshowLayout from '../components/SlideshowLayout.astro';
+import SlideshowVariableLayout from '../components/SlideshowVariableLayout.astro';
 import { loadAllArtworkCollections } from '../data/loader';
 import { SITE_TITLE } from '../consts';
 import '../styles/illustration.scss';
@@ -54,7 +54,7 @@ console.log('Artwork count:', artwork.length);
     </div>
 
     <div class="slideshow-container">
-      <SlideshowLayout artwork={artwork} />
+      <SlideshowVariableLayout artwork={artwork} />
     </div>
   </div>
 </BaseLayout>
