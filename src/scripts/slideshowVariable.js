@@ -118,7 +118,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgClone = document.createElement('img');
         imgClone.src = media.astroImage ? media.astroImage.src : media.img.src;
         imgClone.alt = 'Full size view';
-        imgClone.className = 'modal-image';
+        
+        // Check if the original image is a GIF and add the gif-image class
+        const isGif = media.astroImage?.classList.contains('gif-image') || 
+                      media.img?.classList.contains('gif-image') ||
+                      imgClone.src.includes('.gif');
+        
+        imgClone.className = isGif ? 'modal-image gif-image' : 'modal-image';
         modalContent.appendChild(imgClone);
       }
     }
