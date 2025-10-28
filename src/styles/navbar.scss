@@ -39,6 +39,11 @@
   width: 80%;
   object-fit: contain;
   opacity: 0.3;
+
+  @media (max-width: 720px) {
+    width: 60%;
+    margin-left: 10%;
+  }
 }
 
 .navbar {

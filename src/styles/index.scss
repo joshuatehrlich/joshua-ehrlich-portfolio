@@ -81,6 +81,13 @@
   align-items: center;
   gap: 0.9rem;
   z-index: 10;
+  @media (max-width: 720px) {
+    display: none;
+  }
+}
+
+.hamburger-menu-icon-line {
+  background-color: rgb(255, 255, 255);
 }
 
 .indicator {
