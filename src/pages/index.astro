@@ -32,7 +32,10 @@ for (const [path, imageLoader] of Object.entries(images)) {
                 alt={artwork.title}
                 class="gallery-image"
                 loading="eager"
-                quality={90}
+                quality={80}
+                widths={[640, 1280, 1920]}
+                sizes="100vw"
+                format="webp"
               />
             </div>
             <div class="image-info">
