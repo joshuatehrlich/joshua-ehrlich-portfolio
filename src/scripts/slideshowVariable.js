@@ -142,21 +142,25 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="modal-right-zone"></div>
       `;
       document.body.appendChild(modal);
+
+      let mouseOverCenterZone = false;
       
       // Handle clicks on modal - detect which third was clicked
       modal.addEventListener('click', (e) => {
         const clickX = e.clientX;
+        const clickY = e.clientY;
         const modalWidth = modal.offsetWidth;
         const clickPosition = clickX / modalWidth;
-        
-        if (clickPosition < 0.33) {
+
+        if (!mouseOverCenterZone) {
+          modal.classList.remove('active');
+        } else if (clickPosition < 0.33) {
           // Left third - previous image
           showImage(currentIndex - 1);
         } else if (clickPosition > 0.67) {
           // Right third - next image
           showImage(currentIndex + 1);
         } else {
-          // Center third - close modal
           modal.classList.remove('active');
         }
       });
@@ -164,16 +168,29 @@ document.addEventListener('DOMContentLoaded', () => {
       // Dynamically change cursor based on position
       modal.addEventListener('mousemove', (e) => {
         const clickX = e.clientX;
+        const clickY = e.clientY;
         const modalWidth = modal.offsetWidth;
         const clickPosition = clickX / modalWidth;
-        
-        if (clickPosition < 0.33) {
-          modal.style.cursor = 'w-resize';
-        } else if (clickPosition > 0.67) {
-          modal.style.cursor = 'e-resize';
+
+        // check if mouse is over modal center zone
+        const centerZone = modal.querySelector('.modal-center-zone');
+        const centerZoneRect = centerZone.getBoundingClientRect();
+        if (clickX >= centerZoneRect.left && clickX <= centerZoneRect.right && clickY >= centerZoneRect.top && clickY <= centerZoneRect.bottom) {
+          mouseOverCenterZone = true;
+          
+          if (clickPosition < 0.33) {
+            modal.style.cursor = 'w-resize';
+          } else if (clickPosition > 0.67) {
+            modal.style.cursor = 'e-resize';
+          } else {
+            modal.style.cursor = 'zoom-out';
+          }
+
         } else {
+          mouseOverCenterZone = false;
           modal.style.cursor = 'zoom-out';
         }
+        
       });
       
       // Close on Escape key

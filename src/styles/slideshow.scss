@@ -133,10 +133,10 @@
   &.gif-image {
     // width: calc((100vw - var(--sidebar-width)) * 0.95);
     // height: 70vh;
-    min-width: 60vw;
+    min-width: 50vw;
     // min-height: 60vh;
     max-width: calc((100vw - var(--sidebar-width)) * 0.90);
-    max-height: 70vh;
+    max-height: 60vh;
     object-fit: contain;
   }
 }
