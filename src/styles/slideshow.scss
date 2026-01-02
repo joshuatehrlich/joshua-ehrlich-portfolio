@@ -182,10 +182,11 @@ html {
   
   // GIF-specific styles (native img element, not Astro Image)
   &.gif-image {
-    max-width: calc((100vw - var(--sidebar-width)) * 0.90);
-    max-height: 60vh;
-    width: auto;
-    height: auto;
+    width: calc((100vw - var(--sidebar-width)) * 0.9);
+    max-width:95vh;
+    // width: calc(55vh * (16/9));
+    // width: auto;
+    // height: auto;
     object-fit: contain;
     @media (max-width: 768px) {
       max-width: 85vw;
