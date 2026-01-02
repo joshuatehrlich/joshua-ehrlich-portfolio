@@ -449,12 +449,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Handle thumbnails
-  document.querySelectorAll('.thumbnail-image').forEach(img => {
-    if (img.complete) {
-      img.closest('.thumbnail-container')?.classList.add('loaded');
+  // Handle thumbnails - add loaded class to container when ANY thumbnail loads
+  const thumbnailContainer = document.querySelector('.thumbnail-container');
+  if (thumbnailContainer) {
+    const thumbnailImages = document.querySelectorAll('.thumbnail-image');
+    let loadedCount = 0;
+    const totalThumbnails = thumbnailImages.length;
+    
+    function checkThumbnailsLoaded() {
+      loadedCount++;
+      // Show thumbnails once at least one has loaded (or all if you prefer)
+      if (loadedCount >= 1) {
+        thumbnailContainer.classList.add('loaded');
+      }
     }
-  });
+    
+    thumbnailImages.forEach(img => {
+      if (img.complete) {
+        checkThumbnailsLoaded();
+      } else {
+        img.addEventListener('load', checkThumbnailsLoaded);
+        img.addEventListener('error', checkThumbnailsLoaded); // Handle failed loads too
+      }
+    });
+    
+    // Fallback: if no thumbnails, still show the container
+    if (totalThumbnails === 0) {
+      thumbnailContainer.classList.add('loaded');
+    }
+  }
 
   // Handle videos
   document.querySelectorAll('.main-video-content').forEach(video => {

@@ -146,6 +146,12 @@ a {
 	img {
 		clip-path: inset(3px 3px 3px 3px);
 	}
+	.thumbnail {
+		background-color: white;
+		&.active {
+			background-color: white !important;
+		}
+	}
 }
 
 .main-image {
