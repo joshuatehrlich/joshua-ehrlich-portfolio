@@ -21,6 +21,7 @@ html {
   height: 100% - var(--sidebar-width);
   width: 100%;
   display: flex;
+  touch-action: none;  // Disable browser touch handling for swipe
   .selector {
     width: calc(50% - calc(var(--sidebar-width)/2));
     height: 100%;

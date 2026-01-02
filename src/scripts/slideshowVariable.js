@@ -2,17 +2,23 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   
-  let isMobile = false;
-	if (window.innerWidth < 768) {
-		isMobile = true;
-	}
-
   const mainImages = document.querySelectorAll('.main-image');
   const thumbnails = document.querySelectorAll('.thumbnail');
   const selectors = document.querySelectorAll('.selector');
   const mainImageContainer = document.querySelector('.main-image-container');
-  const slideSpacing = isMobile ? window.innerWidth / 1.15 : window.innerWidth * 0.1;
-  const slideSpeed = isMobile ? 0.01 : 0.006;
+  const pageOverlay = document.querySelector('.page-overlay');
+  const slideshowContainer = document.querySelector('.slideshow-container');
+  
+  // Dynamic slide spacing - recalculates on each call
+  function getSlideSpacing() {
+    const isMobile = window.innerWidth < 768;
+    return isMobile ? window.innerWidth / 1.15 : window.innerWidth * 0.1;
+  }
+  
+  function getSlideSpeed() {
+    const isMobile = window.innerWidth < 768;
+    return isMobile ? 0.006 : 0.006;
+  }
 
   let loopingIndex = 0;
   let cumulativeIndex = 0;
@@ -21,6 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
   
   let currentIndex = 0;
   let modal = null;
+  let slideShowShift = 0; 
+  let targetSlideShowShift = 0;
 
   
   // Function to pause/play videos based on active state
@@ -42,6 +50,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Function to reposition all slides based on current state
+  function repositionSlides() {
+    const spacing = getSlideSpacing();
+    
+    mainImages.forEach((slide, i) => {
+      const width = slide.getBoundingClientRect().width;
+      
+      // Calculate offset from current cumulative position
+      let offset = i - loopingIndex;
+      
+      // Wrap offset to be within half-length on either side
+      if (offset > mainImages.length / 2) {
+        offset -= mainImages.length;
+      } else if (offset < -mainImages.length / 2) {
+        offset += mainImages.length;
+      }
+      
+      // Position relative to cumulativeIndex
+      const position = cumulativeIndex + offset;
+      slide.style.translate = `${-width/2 + spacing * position}px -50%`;
+    });
+    
+    // Update container position
+    mainImageContainer.style.transform = `translate(${slideShowShift}px, 0)`;
+  }
   
   // Function to show specific image/video
   function showImage(index) {
@@ -67,26 +100,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loopingIndex = index;
     cumulativeIndex += deltaIndex;
-    targetSlideShowShift -= slideSpacing * deltaIndex;
+    targetSlideShowShift -= getSlideSpacing() * deltaIndex;
 
-    // position images relative to cumulative position
-    mainImages.forEach((slide, i) => {
-      let width = slide.getBoundingClientRect().width;
-      
-      // Calculate offset from current cumulative position
-      let offset = i - loopingIndex;  // offset from wrapped index
-      
-      // Wrap offset to be within half-length on either side
-      if (offset > mainImages.length / 2) {
-        offset -= mainImages.length;
-      } else if (offset < -mainImages.length / 2) {
-        offset += mainImages.length;
-      }
-      
-      // Position relative to cumulativeIndex (not loopingIndex)
-      let position = cumulativeIndex + offset;
-      slide.style.translate = `${-width/2 + slideSpacing * position}px -50%`;
-    });
+    // Reposition all slides
+    repositionSlides();
 
     // Remove active class from all main images
     mainImages.forEach(img => img.classList.remove('active'));
@@ -107,8 +124,8 @@ document.addEventListener('DOMContentLoaded', () => {
     updateModalMedia();
   }
 
-  let slideShowShift = 0; 
-  let targetSlideShowShift = 0;
+  // Touch/drag state - declared here so update() can access it
+  let isDragging = false;
 
   let lastTimeStamp = window.performance.now();
   function update() {
@@ -116,11 +133,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const deltaTime = window.performance.now() - lastTimeStamp;
     lastTimeStamp = window.performance.now();
 
-    slideShowShift = slideShowShift + (targetSlideShowShift - slideShowShift)* slideSpeed * deltaTime;
-    mainImageContainer.style.transform = `translate(${slideShowShift}px, 0)`;
+    // Only lerp when not actively dragging
+    if (!isDragging) {
+      slideShowShift = slideShowShift + (targetSlideShowShift - slideShowShift) * getSlideSpeed() * deltaTime;
+      mainImageContainer.style.transform = `translate(${slideShowShift}px, 0)`;
+    }
     requestAnimationFrame(update);
   }
   update();
+
+  // Handle window resize - recalculate positions
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      // Recalculate target position with new spacing
+      targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
+      slideShowShift = targetSlideShowShift; // Snap immediately
+      repositionSlides();
+    }, 100);
+  });
+
+  // Handle tab visibility change - re-sync positions
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
+      slideShowShift = targetSlideShowShift;
+      repositionSlides();
+    }
+  });
 
   
   // Function to get media content from active slide
@@ -305,12 +346,86 @@ document.addEventListener('DOMContentLoaded', () => {
       showImage(currentIndex + 1);
     }
   });
-  
-  // Initialize with first image
-  showImage(0);
+
+  // Touch/drag support for mobile
+  // Use pageOverlay since it sits on top and captures touch events
+  // isDragging is declared above (near update function) so it can pause the lerp
+  let startX = 0;
+  let startScrollPosition = 0;
+
+  // TOUCH START - finger down
+  pageOverlay.addEventListener('touchstart', (e) => {
+    isDragging = true;
+    startX = e.touches[0].clientX;
+    startScrollPosition = slideShowShift;
+    console.log("touchstart triggered");
+  }, { passive: true });
+
+  // TOUCH MOVE - finger dragging
+  pageOverlay.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    console.log("touchmove");
+    
+    const currentX = e.touches[0].clientX;
+    const deltaX = currentX - startX;
+    
+    // Update position directly (no animation)
+    slideShowShift = startScrollPosition + deltaX;
+    mainImageContainer.style.transform = `translate(${slideShowShift}px, 0)`;
+    
+    e.preventDefault();
+  }, { passive: false });
+
+  // TOUCH END - finger up
+  pageOverlay.addEventListener('touchend', (e) => {
+    if (!isDragging) return;
+    isDragging = false;
+    console.log("touchend");
+    
+    const deltaX = slideShowShift - startScrollPosition;
+    
+    if (deltaX > 50) {
+      // Dragged right → go to previous slide
+      showImage(currentIndex - 1);
+    } else if (deltaX < -50) {
+      // Dragged left → go to next slide
+      showImage(currentIndex + 1);
+    } else {
+      // Small drag → snap back to current
+      targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
+    }
+  });
+
+  // Also handle touch cancel (e.g., interrupted by notification)
+  pageOverlay.addEventListener('touchcancel', () => {
+    if (isDragging) {
+      isDragging = false;
+      targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
+    }
+  });
+
+  // Reset container position to ensure clean start
+  function resetSlideshow() {
+    loopingIndex = 0;
+    cumulativeIndex = 0;
+    slideShowShift = 0;
+    targetSlideShowShift = 0;
+    currentIndex = 0;
+    mainImageContainer.style.transform = 'translate(0px, 0)';
+    showImage(0);
+  }
+
+  // Initialize - reset and show first image
+  resetSlideshow();
+
+  // Also reinitialize when all images are loaded (in case of late loading)
+  window.addEventListener('load', () => {
+    // Re-run positioning after all resources loaded
+    repositionSlides();
+  });
 });
 
-// Add to your existing script or at the end
+// Handle image load states (separate listener for loaded class)
 document.addEventListener('DOMContentLoaded', () => {
   // Handle images
   document.querySelectorAll('.main-image-content').forEach(img => {
@@ -337,61 +452,9 @@ document.addEventListener('DOMContentLoaded', () => {
         video.closest('.main-image')?.classList.add('loaded');
       });
     } else if (video.tagName === 'IFRAME') {
-      // iframes load async, add loaded immediately or on load event
       video.addEventListener('load', () => {
         video.closest('.main-image')?.classList.add('loaded');
       });
     }
   });
-});
-
-let isDragging = false;
-let startX = 0;
-let startScrollPosition = 0;
-
-const container = document.querySelector('.main-image-container');
-
-// TOUCH START - finger down
-container.addEventListener('touchstart', (e) => {
-  isDragging = true;
-  startX = e.touches[0].clientX;
-  startScrollPosition = slideShowShift;  // Your current position variable
-  
-  // Optional: prevent default to stop browser scroll
-  console.log("touchstart")
-});
-
-// TOUCH MOVE - finger dragging
-container.addEventListener('touchmove', (e) => {
-  console.log("move");
-  if (!isDragging) return;
-  
-  const currentX = e.touches[0].clientX;
-  const deltaX = currentX - startX;  // How far finger moved
-  
-  // Update position (direct, no animation)
-  slideShowShift = startScrollPosition + deltaX;
-  container.style.transform = `translate(${slideShowShift}px, 0)`;
-  
-  e.preventDefault();  // Prevent page scroll while dragging
-}, { passive: false});
-
-// TOUCH END - finger up
-container.addEventListener('touchend', (e) => {
-  if (!isDragging) return;
-  isDragging = false;
-  
-  // Snap to nearest slide or add momentum here
-  const deltaX = slideShowShift - startScrollPosition;
-  
-  if (deltaX > 50) {
-    // Dragged right → go to previous slide
-    showImage(currentIndex - 1);
-  } else if (deltaX < -50) {
-    // Dragged left → go to next slide
-    showImage(currentIndex + 1);
-  } else {
-    // Small drag → snap back to current
-    targetSlideShowShift = -currentIndex * slideSpacing;
-  }
 });
