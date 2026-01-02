@@ -18,6 +18,10 @@ for (const [path, imageLoader] of Object.entries(images)) {
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <div class="greeting">
+    <h1>Hello!</h1>
+    <p>My name is Josh. I love making games. Please poke around and play some or check out my illustrations below.</p>
+  </div>
   <div class="autoscroll-gallery">
     <div class="slideshow-container">
       {homepageArtwork.map((artwork, index) => {
@@ -46,6 +50,12 @@ for (const [path, imageLoader] of Object.entries(images)) {
           </div>
         );
       })}
+    </div>
+
+    <div class="start">
+      <div class="start-button">
+        <h1>Let's see...</h1>
+      </div>
     </div>
     
     <!-- Slide indicators -->

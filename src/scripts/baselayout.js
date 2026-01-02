@@ -42,3 +42,10 @@ const hamburgers = document.querySelectorAll('.hamburger-menu-icon-line');
 		hamburgers.forEach(hamburger => (hamburger).classList.remove('open'));
 	}
 });
+
+export function openSidebar() {
+	if (sidebar) {
+		isOpen = true;
+		sidebar.style.transform = 'translateX(0px)';
+	}
+}

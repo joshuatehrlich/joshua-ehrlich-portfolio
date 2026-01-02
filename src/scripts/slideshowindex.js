@@ -1,3 +1,4 @@
+import { openSidebar } from './baselayout';
 // Slideshow functionality - separated from Astro component
 console.log('Slideshow script loaded');
 
@@ -102,4 +103,12 @@ window.addEventListener('beforeunload', () => {
   if (slideTimer) {
     clearInterval(slideTimer);
   }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const startButton = document.querySelector('.start-button');
+  startButton.addEventListener('click', () => {
+    openSidebar();
+    console.log('Sidebar opened');
+  });
 });
