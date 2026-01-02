@@ -353,56 +353,61 @@ document.addEventListener('DOMContentLoaded', () => {
   let startX = 0;
   let startScrollPosition = 0;
 
-  // TOUCH START - finger down
-  pageOverlay.addEventListener('touchstart', (e) => {
-    isDragging = true;
-    startX = e.touches[0].clientX;
-    startScrollPosition = slideShowShift;
-    console.log("touchstart triggered");
-  }, { passive: true });
+  // Only attach touch events if pageOverlay exists
+  if (pageOverlay) {
+    // TOUCH START - finger down
+    pageOverlay.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      startX = e.touches[0].clientX;
+      startScrollPosition = slideShowShift;
+      console.log("touchstart triggered");
+    }, { passive: true });
 
-  // TOUCH MOVE - finger dragging
-  pageOverlay.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    console.log("touchmove");
-    
-    const currentX = e.touches[0].clientX;
-    const deltaX = currentX - startX;
-    
-    // Update position directly (no animation)
-    slideShowShift = startScrollPosition + deltaX;
-    mainImageContainer.style.transform = `translate(${slideShowShift}px, 0)`;
-    
-    e.preventDefault();
-  }, { passive: false });
+    // TOUCH MOVE - finger dragging
+    pageOverlay.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      console.log("touchmove");
+      
+      const currentX = e.touches[0].clientX;
+      const deltaX = currentX - startX;
+      
+      // Update position directly (no animation)
+      slideShowShift = startScrollPosition + deltaX;
+      mainImageContainer.style.transform = `translate(${slideShowShift}px, 0)`;
+      
+      e.preventDefault();
+    }, { passive: false });
 
-  // TOUCH END - finger up
-  pageOverlay.addEventListener('touchend', (e) => {
-    if (!isDragging) return;
-    isDragging = false;
-    console.log("touchend");
-    
-    const deltaX = slideShowShift - startScrollPosition;
-    
-    if (deltaX > 50) {
-      // Dragged right → go to previous slide
-      showImage(currentIndex - 1);
-    } else if (deltaX < -50) {
-      // Dragged left → go to next slide
-      showImage(currentIndex + 1);
-    } else {
-      // Small drag → snap back to current
-      targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
-    }
-  });
-
-  // Also handle touch cancel (e.g., interrupted by notification)
-  pageOverlay.addEventListener('touchcancel', () => {
-    if (isDragging) {
+    // TOUCH END - finger up
+    pageOverlay.addEventListener('touchend', (e) => {
+      if (!isDragging) return;
       isDragging = false;
-      targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
-    }
-  });
+      console.log("touchend");
+      
+      const deltaX = slideShowShift - startScrollPosition;
+      
+      if (deltaX > 50) {
+        // Dragged right → go to previous slide
+        showImage(currentIndex - 1);
+      } else if (deltaX < -50) {
+        // Dragged left → go to next slide
+        showImage(currentIndex + 1);
+      } else {
+        // Small drag → snap back to current
+        targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
+      }
+    });
+
+    // Also handle touch cancel (e.g., interrupted by notification)
+    pageOverlay.addEventListener('touchcancel', () => {
+      if (isDragging) {
+        isDragging = false;
+        targetSlideShowShift = -cumulativeIndex * getSlideSpacing();
+      }
+    });
+  } else {
+    console.warn('pageOverlay not found - touch events disabled');
+  }
 
   // Reset container position to ensure clean start
   function resetSlideshow() {
@@ -415,8 +420,14 @@ document.addEventListener('DOMContentLoaded', () => {
     showImage(0);
   }
 
-  // Initialize - reset and show first image
-  resetSlideshow();
+  // Initialize with a slight delay to ensure viewport is stable
+  // This fixes mobile browsers where viewport dimensions may not be final on DOMContentLoaded
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      // Double RAF ensures browser has completed layout
+      resetSlideshow();
+    });
+  });
 
   // Also reinitialize when all images are loaded (in case of late loading)
   window.addEventListener('load', () => {
