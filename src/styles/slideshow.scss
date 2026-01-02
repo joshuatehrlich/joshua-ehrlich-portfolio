@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .slideshow-container {
   display: flex;
   flex-direction: column;
@@ -135,7 +137,7 @@
     // height: 70vh;
     min-width: 50vw;
     // min-height: 60vh;
-    max-width: calc((100vw - var(--sidebar-width)) * 0.90);
+    max-width: calc((100vw - $mobile-medium) * 0.90);
     max-height: 60vh;
     object-fit: contain;
   }
@@ -235,7 +237,7 @@
 }
 
 // Responsive design
-@media (max-width: 768px) {
+@media (max-width: var(--mobile-small)) {
   .slideshow-container {
     padding: 1rem;
     gap: 1rem;
