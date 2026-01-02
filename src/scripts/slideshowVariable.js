@@ -420,46 +420,78 @@ document.addEventListener('DOMContentLoaded', () => {
     showImage(0);
   }
 
-  // Initialize with a slight delay to ensure viewport is stable
-  // This fixes mobile browsers where viewport dimensions may not be final on DOMContentLoaded
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      // Double RAF ensures browser has completed layout
-      resetSlideshow();
+  // Flag to track if initial positioning is complete
+  let initialPositioningComplete = false;
+
+  // Function to add .loaded class to an image's parent
+  function markImageLoaded(img) {
+    const mainImage = img.closest('.main-image');
+    if (mainImage) {
+      // Only add .loaded if positioning is complete, otherwise queue it
+      if (initialPositioningComplete) {
+        mainImage.classList.add('loaded');
+      } else {
+        // Will be handled after positioning completes
+        mainImage.dataset.pendingLoaded = 'true';
+      }
+    }
+  }
+
+  // Function to process any pending .loaded classes after positioning
+  function processPendingLoaded() {
+    mainImages.forEach(img => {
+      if (img.dataset.pendingLoaded === 'true') {
+        img.classList.add('loaded');
+        delete img.dataset.pendingLoaded;
+      }
     });
-  });
+  }
 
-  // Also reinitialize when all images are loaded (in case of late loading)
-  window.addEventListener('load', () => {
-    // Re-run positioning after all resources loaded
-    repositionSlides();
-  });
-});
-
-// Handle image load states (separate listener for loaded class)
-document.addEventListener('DOMContentLoaded', () => {
-  // Handle images
+  // Set up image load listeners
   document.querySelectorAll('.main-image-content').forEach(img => {
     if (img.complete) {
-      img.closest('.main-image')?.classList.add('loaded');
+      markImageLoaded(img);
     } else {
-      img.addEventListener('load', () => {
-        img.closest('.main-image')?.classList.add('loaded');
+      img.addEventListener('load', () => markImageLoaded(img));
+    }
+  });
+
+  // Handle videos
+  document.querySelectorAll('.main-video-content').forEach(video => {
+    if (video.tagName === 'VIDEO') {
+      video.addEventListener('loadeddata', () => {
+        const mainImage = video.closest('.main-image');
+        if (mainImage) {
+          if (initialPositioningComplete) {
+            mainImage.classList.add('loaded');
+          } else {
+            mainImage.dataset.pendingLoaded = 'true';
+          }
+        }
+      });
+    } else if (video.tagName === 'IFRAME') {
+      video.addEventListener('load', () => {
+        const mainImage = video.closest('.main-image');
+        if (mainImage) {
+          if (initialPositioningComplete) {
+            mainImage.classList.add('loaded');
+          } else {
+            mainImage.dataset.pendingLoaded = 'true';
+          }
+        }
       });
     }
   });
 
-  // Handle thumbnails - add loaded class to container when ANY thumbnail loads
+  // Handle thumbnails
   const thumbnailContainer = document.querySelector('.thumbnail-container');
   if (thumbnailContainer) {
     const thumbnailImages = document.querySelectorAll('.thumbnail-image');
     let loadedCount = 0;
-    const totalThumbnails = thumbnailImages.length;
     
     function checkThumbnailsLoaded() {
       loadedCount++;
-      // Show thumbnails once at least one has loaded (or all if you prefer)
-      if (loadedCount >= 1) {
+      if (loadedCount >= 1 && initialPositioningComplete) {
         thumbnailContainer.classList.add('loaded');
       }
     }
@@ -469,26 +501,36 @@ document.addEventListener('DOMContentLoaded', () => {
         checkThumbnailsLoaded();
       } else {
         img.addEventListener('load', checkThumbnailsLoaded);
-        img.addEventListener('error', checkThumbnailsLoaded); // Handle failed loads too
+        img.addEventListener('error', checkThumbnailsLoaded);
       }
     });
     
-    // Fallback: if no thumbnails, still show the container
-    if (totalThumbnails === 0) {
-      thumbnailContainer.classList.add('loaded');
+    if (thumbnailImages.length === 0) {
+      // No thumbnails - will be shown after positioning
     }
   }
 
-  // Handle videos
-  document.querySelectorAll('.main-video-content').forEach(video => {
-    if (video.tagName === 'VIDEO') {
-      video.addEventListener('loadeddata', () => {
-        video.closest('.main-image')?.classList.add('loaded');
-      });
-    } else if (video.tagName === 'IFRAME') {
-      video.addEventListener('load', () => {
-        video.closest('.main-image')?.classList.add('loaded');
-      });
-    }
+  // Initialize with a slight delay to ensure viewport is stable
+  // This fixes mobile browsers where viewport dimensions may not be final on DOMContentLoaded
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      // Double RAF ensures browser has completed layout
+      resetSlideshow();
+      
+      // NOW mark positioning as complete and process pending loaded states
+      initialPositioningComplete = true;
+      processPendingLoaded();
+      
+      // Also show thumbnail container now
+      if (thumbnailContainer) {
+        thumbnailContainer.classList.add('loaded');
+      }
+    });
+  });
+
+  // Also reinitialize when all images are loaded (in case of late loading)
+  window.addEventListener('load', () => {
+    // Re-run positioning after all resources loaded
+    repositionSlides();
   });
 });
