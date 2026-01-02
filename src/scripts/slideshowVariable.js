@@ -239,3 +239,37 @@ document.addEventListener('DOMContentLoaded', () => {
   showImage(0);
 });
 
+// Add to your existing script or at the end
+document.addEventListener('DOMContentLoaded', () => {
+  // Handle images
+  document.querySelectorAll('.main-image-content').forEach(img => {
+    if (img.complete) {
+      img.closest('.main-image')?.classList.add('loaded');
+    } else {
+      img.addEventListener('load', () => {
+        img.closest('.main-image')?.classList.add('loaded');
+      });
+    }
+  });
+
+  // Handle thumbnails
+  document.querySelectorAll('.thumbnail-image').forEach(img => {
+    if (img.complete) {
+      img.closest('.thumbnail-container')?.classList.add('loaded');
+    }
+  });
+
+  // Handle videos
+  document.querySelectorAll('.main-video-content').forEach(video => {
+    if (video.tagName === 'VIDEO') {
+      video.addEventListener('loadeddata', () => {
+        video.closest('.main-image')?.classList.add('loaded');
+      });
+    } else if (video.tagName === 'IFRAME') {
+      // iframes load async, add loaded immediately or on load event
+      video.addEventListener('load', () => {
+        video.closest('.main-image')?.classList.add('loaded');
+      });
+    }
+  });
+});
