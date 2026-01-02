@@ -1,13 +1,27 @@
 // Variable Slideshow functionality (supports images, GIFs, and videos)
+
 document.addEventListener('DOMContentLoaded', () => {
+  
+  let isMobile = false;
+	if (window.innerWidth < 768) {
+		isMobile = true;
+	}
+
   const mainImages = document.querySelectorAll('.main-image');
   const thumbnails = document.querySelectorAll('.thumbnail');
   const selectors = document.querySelectorAll('.selector');
+  const mainImageContainer = document.querySelector('.main-image-container');
+  const slideSpacing = isMobile ? window.innerWidth / 1.15 : window.innerWidth * 0.1;
+  const slideSpeed = isMobile ? 0.01 : 0.006;
+
+  let loopingIndex = 0;
+  let cumulativeIndex = 0;
   
   if (mainImages.length === 0 || thumbnails.length === 0) return;
   
   let currentIndex = 0;
   let modal = null;
+
   
   // Function to pause/play videos based on active state
   function manageVideoPlayback(index) {
@@ -27,11 +41,52 @@ document.addEventListener('DOMContentLoaded', () => {
       // The autoplay parameter in the URL handles this
     });
   }
+
   
   // Function to show specific image/video
   function showImage(index) {
     if (index < 0) index = mainImages.length - 1;
     if (index >= mainImages.length) index = 0;
+
+    // Find true desired delta through closest path of travel
+    let possibleDeltas = [
+      (index - loopingIndex),
+      (index - loopingIndex + mainImages.length),
+      (index - loopingIndex - mainImages.length)
+    ];
+    let correctDeltaIndex;
+    possibleDeltas.forEach((possibility, i) => {
+      if (i == 0) {
+        correctDeltaIndex = i;
+      }
+      else if (Math.abs(possibility) < Math.abs(possibleDeltas[correctDeltaIndex])) {
+        correctDeltaIndex = i;
+      }
+    });
+    const deltaIndex = possibleDeltas[correctDeltaIndex];
+
+    loopingIndex = index;
+    cumulativeIndex += deltaIndex;
+    targetSlideShowShift -= slideSpacing * deltaIndex;
+
+    // position images relative to cumulative position
+    mainImages.forEach((slide, i) => {
+      let width = slide.getBoundingClientRect().width;
+      
+      // Calculate offset from current cumulative position
+      let offset = i - loopingIndex;  // offset from wrapped index
+      
+      // Wrap offset to be within half-length on either side
+      if (offset > mainImages.length / 2) {
+        offset -= mainImages.length;
+      } else if (offset < -mainImages.length / 2) {
+        offset += mainImages.length;
+      }
+      
+      // Position relative to cumulativeIndex (not loopingIndex)
+      let position = cumulativeIndex + offset;
+      slide.style.translate = `${-width/2 + slideSpacing * position}px -50%`;
+    });
 
     // Remove active class from all main images
     mainImages.forEach(img => img.classList.remove('active'));
@@ -51,6 +106,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update modal if it's open
     updateModalMedia();
   }
+
+  let slideShowShift = 0; 
+  let targetSlideShowShift = 0;
+
+  let lastTimeStamp = window.performance.now();
+  function update() {
+    // update every frame
+    const deltaTime = window.performance.now() - lastTimeStamp;
+    lastTimeStamp = window.performance.now();
+
+    slideShowShift = slideShowShift + (targetSlideShowShift - slideShowShift)* slideSpeed * deltaTime;
+    mainImageContainer.style.transform = `translate(${slideShowShift}px, 0)`;
+    requestAnimationFrame(update);
+  }
+  update();
+
   
   // Function to get media content from active slide
   function getActiveMediaContent() {
@@ -272,4 +343,55 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+});
+
+let isDragging = false;
+let startX = 0;
+let startScrollPosition = 0;
+
+const container = document.querySelector('.main-image-container');
+
+// TOUCH START - finger down
+container.addEventListener('touchstart', (e) => {
+  isDragging = true;
+  startX = e.touches[0].clientX;
+  startScrollPosition = slideShowShift;  // Your current position variable
+  
+  // Optional: prevent default to stop browser scroll
+  console.log("touchstart")
+});
+
+// TOUCH MOVE - finger dragging
+container.addEventListener('touchmove', (e) => {
+  console.log("move");
+  if (!isDragging) return;
+  
+  const currentX = e.touches[0].clientX;
+  const deltaX = currentX - startX;  // How far finger moved
+  
+  // Update position (direct, no animation)
+  slideShowShift = startScrollPosition + deltaX;
+  container.style.transform = `translate(${slideShowShift}px, 0)`;
+  
+  e.preventDefault();  // Prevent page scroll while dragging
+}, { passive: false});
+
+// TOUCH END - finger up
+container.addEventListener('touchend', (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  
+  // Snap to nearest slide or add momentum here
+  const deltaX = slideShowShift - startScrollPosition;
+  
+  if (deltaX > 50) {
+    // Dragged right → go to previous slide
+    showImage(currentIndex - 1);
+  } else if (deltaX < -50) {
+    // Dragged left → go to next slide
+    showImage(currentIndex + 1);
+  } else {
+    // Small drag → snap back to current
+    targetSlideShowShift = -currentIndex * slideSpacing;
+  }
 });
