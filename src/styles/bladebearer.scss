@@ -52,11 +52,11 @@ a {
 		// font-weight: 900 !important;
 	}
 
-	@media (max-width: 768px) {
+	@media (max-width: $mobile-medium) {
 	}
 }
 
-@media (max-width: 768px) {
+@media (max-width: $mobile-medium) {
 	.desktop-only {
 		display: none;
 	}
@@ -91,7 +91,7 @@ a {
 		font-family: crimson text;
 		gap: 0rem;
 
-		@media (max-width: 768px) {
+		@media (max-width: $mobile-medium) {
 			font-size: 0.8em;
 		}
 		h1, h2 {
@@ -151,8 +151,11 @@ a {
 }
 
 @media (max-width: $mobile-medium) {
+	.category-selector {
+		gap: 3rem !important;
+	}
 	.thumbnail {
-		background-color: white;
+		background-color: white !important;
 		&.active {
 			background-color: white !important;
 		}
