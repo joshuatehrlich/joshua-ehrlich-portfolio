@@ -8,6 +8,28 @@ let isInitialized = false;
 
 const SLIDE_DURATION = 5000; // 5 seconds
 
+// Set up image load listeners for fade-in effect
+function setupImageLoadListeners() {
+  const imageContainers = document.querySelectorAll('.image-container');
+  
+  imageContainers.forEach(container => {
+    const img = container.querySelector('.gallery-image');
+    if (!img) return;
+    
+    const markLoaded = () => {
+      container.classList.add('loaded');
+    };
+    
+    // Check if image is already loaded (cached)
+    if (img.complete && img.naturalWidth > 0) {
+      markLoaded();
+    } else {
+      img.addEventListener('load', markLoaded, { once: true });
+      img.addEventListener('error', markLoaded, { once: true });
+    }
+  });
+}
+
 function initializeSlideshow() {
   if (isInitialized) {
     console.log('Slideshow already initialized, skipping');
@@ -25,6 +47,9 @@ function initializeSlideshow() {
 
   console.log(`Initializing slideshow with ${slides.length} slides`);
   isInitialized = true;
+  
+  // Set up image load listeners for fade-in
+  setupImageLoadListeners();
   
   function showSlide(index) {
     console.log(`Showing slide ${index}`);
