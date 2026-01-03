@@ -646,21 +646,27 @@ function attachEventListeners() {
   if (thumbnailElements) {
     thumbnailElements.forEach(thumbnail => {
       const img = thumbnail.querySelector('.thumbnail-image');
+      const videoIndicator = thumbnail.querySelector('.thumbnail-video-indicator');
+      
+      const markLoaded = () => {
+        if (initialPositioningComplete) {
+          thumbnail.classList.add('loaded');
+        } else {
+          thumbnail.dataset.pendingLoaded = 'true';
+        }
+      };
+      
       if (img) {
-        const markLoaded = () => {
-          if (initialPositioningComplete) {
-            thumbnail.classList.add('loaded');
-          } else {
-            thumbnail.dataset.pendingLoaded = 'true';
-          }
-        };
-        
+        // Image thumbnail - wait for load
         if (img.complete) {
           markLoaded();
         } else {
           img.addEventListener('load', markLoaded);
           img.addEventListener('error', markLoaded);
         }
+      } else if (videoIndicator) {
+        // Video indicator doesn't need to load - mark immediately
+        markLoaded();
       }
     });
   }

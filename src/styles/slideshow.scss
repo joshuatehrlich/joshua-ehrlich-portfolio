@@ -129,12 +129,14 @@ html {
       align-items: start;
       
       .thumbnail {
-        opacity: 0.5;
+        opacity: 0.2 !important;
         // border-radius: 100%;
         width: 15px;
         height: 15px;
         scale: 0.5;
+        background-color: black;
         &.active {
+          opacity: 0.5 !important;
           transform: rotate(45deg);
           scale: 1.0;
           background-color: black;
@@ -355,18 +357,18 @@ html {
   pointer-events: none;
 }
 // Target only video elements (not iframes)
-video.main-video-content {
-  &::-webkit-media-controls-panel {
-    display: none !important;
-  }
-  &::-webkit-media-controls {
-    display: none !important;
-  }
-  // Also hide controls in other browsers
-  &::-moz-media-controls {
-    display: none !important;
-  }
-}
+// video.main-video-content {
+//   &::-webkit-media-controls-panel {
+//     display: none !important;
+//   }
+//   &::-webkit-media-controls {
+//     display: none !important;
+//   }
+//   // Also hide controls in other browsers
+//   &::-moz-media-controls {
+//     display: none !important;
+//   }
+// }
 // Thumbnail video indicator
 .thumbnail-video-indicator {
   width: 100%;
@@ -375,6 +377,7 @@ video.main-video-content {
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.7);
+  opacity: 1.0 !important;
   
   span {
     font-size: 2rem;
