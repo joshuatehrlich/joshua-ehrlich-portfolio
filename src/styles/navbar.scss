@@ -185,3 +185,27 @@
 .illustration-item {
   @extend .dropdown-item;
 }
+
+.social-links {
+  // height: 100%;
+  // width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: start;
+  gap: 1rem;
+}
+
+.social-logo {
+  width: 1.5rem;
+  height: 1.5rem;
+  opacity: 0.6;
+  transform: translateY(0);
+  transition: opacity 0.2s, transform 0.2s;
+  &:hover {
+    opacity: 1.0;
+    transform: translateY(-0.2rem);
+  }
+}

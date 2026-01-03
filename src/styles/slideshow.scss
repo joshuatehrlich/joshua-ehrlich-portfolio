@@ -266,10 +266,15 @@ html {
   border: none;
   overflow: hidden;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   position: relative;
   background: transparent;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  
+  &.loaded {
+    opacity: 1;
+  }
   
   &:hover {
     transform: translateY(-0.3rem);

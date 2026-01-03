@@ -499,32 +499,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Handle thumbnails
+  // Handle thumbnails - show each one individually as its image loads
   const thumbnailContainer = document.querySelector('.thumbnail-container');
-  if (thumbnailContainer) {
-    const thumbnailImages = document.querySelectorAll('.thumbnail-image');
-    let loadedCount = 0;
-    
-    function checkThumbnailsLoaded() {
-      loadedCount++;
-      if (loadedCount >= 1 && initialPositioningComplete) {
-        thumbnailContainer.classList.add('loaded');
-      }
-    }
-    
-    thumbnailImages.forEach(img => {
+  const thumbnailElements = document.querySelectorAll('.thumbnail');
+  
+  thumbnailElements.forEach(thumbnail => {
+    const img = thumbnail.querySelector('.thumbnail-image');
+    if (img) {
+      const markLoaded = () => {
+        if (initialPositioningComplete) {
+          thumbnail.classList.add('loaded');
+        } else {
+          thumbnail.dataset.pendingLoaded = 'true';
+        }
+      };
+      
       if (img.complete) {
-        checkThumbnailsLoaded();
+        markLoaded();
       } else {
-        img.addEventListener('load', checkThumbnailsLoaded);
-        img.addEventListener('error', checkThumbnailsLoaded);
+        img.addEventListener('load', markLoaded);
+        img.addEventListener('error', markLoaded);
       }
-    });
-    
-    if (thumbnailImages.length === 0) {
-      // No thumbnails - will be shown after positioning
     }
-  }
+  });
 
   // Initialize with a slight delay to ensure viewport is stable
   // This fixes mobile browsers where viewport dimensions may not be final on DOMContentLoaded
@@ -537,7 +534,15 @@ document.addEventListener('DOMContentLoaded', () => {
       initialPositioningComplete = true;
       processPendingLoaded();
       
-      // Also show thumbnail container now
+      // Process pending thumbnail loaded states
+      thumbnailElements.forEach(thumbnail => {
+        if (thumbnail.dataset.pendingLoaded === 'true') {
+          thumbnail.classList.add('loaded');
+          delete thumbnail.dataset.pendingLoaded;
+        }
+      });
+      
+      // Show thumbnail container now
       if (thumbnailContainer) {
         thumbnailContainer.classList.add('loaded');
       }
