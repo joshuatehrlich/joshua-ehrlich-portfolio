@@ -131,7 +131,7 @@
 }
 
 // Responsive adjustments
-@media (max-width: 768px) {
+@media (max-width: $mobile-medium) {
   .illustration-gallery {
     padding: 1rem;
     --row-gap: 1rem;
