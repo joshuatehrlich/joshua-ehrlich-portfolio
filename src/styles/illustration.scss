@@ -1,7 +1,9 @@
+@use 'variables' as *;
+
 .illustration-page {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   gap: 3rem;
   padding: 5rem 0 3rem 0;
 }
@@ -17,9 +19,6 @@
   font-size: 1.5rem;
   z-index: 10;
 
-  @media (max-width: 720px) {
-    margin-top: 5rem;
-  }
 }
 
 .slideshow-container {
@@ -49,4 +48,11 @@
 .category-separator {
   font-weight: 400;
   opacity: 0.6;
+}
+
+
+@media (max-width: $mobile-medium) {
+  .category-selector {
+    margin-top: 0rem;
+  }
 }

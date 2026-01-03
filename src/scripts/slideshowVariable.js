@@ -351,7 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Use pageOverlay since it sits on top and captures touch events
   // isDragging is declared above (near update function) so it can pause the lerp
   let startX = 0;
+  let startY = 0;
   let startScrollPosition = 0;
+  let touchStartTime = 0;
 
   // Only attach touch events if pageOverlay exists
   if (pageOverlay) {
@@ -359,14 +361,14 @@ document.addEventListener('DOMContentLoaded', () => {
     pageOverlay.addEventListener('touchstart', (e) => {
       isDragging = true;
       startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
       startScrollPosition = slideShowShift;
-      console.log("touchstart triggered");
+      touchStartTime = Date.now();
     }, { passive: true });
 
     // TOUCH MOVE - finger dragging
     pageOverlay.addEventListener('touchmove', (e) => {
       if (!isDragging) return;
-      console.log("touchmove");
       
       const currentX = e.touches[0].clientX;
       const deltaX = currentX - startX;
@@ -382,11 +384,25 @@ document.addEventListener('DOMContentLoaded', () => {
     pageOverlay.addEventListener('touchend', (e) => {
       if (!isDragging) return;
       isDragging = false;
-      console.log("touchend");
       
       const deltaX = slideShowShift - startScrollPosition;
+      const touchDuration = Date.now() - touchStartTime;
       
-      if (deltaX > 50) {
+      // Detect tap: minimal movement AND short duration
+      const isTap = Math.abs(deltaX) < 20 && touchDuration < 300;
+      
+      if (isTap) {
+        // Check if tap is within the active main image bounds
+        const activeImage = document.querySelector('.main-image.active');
+        if (activeImage) {
+          const rect = activeImage.getBoundingClientRect();
+          const tapInBounds = startX >= rect.left && startX <= rect.right &&
+                              startY >= rect.top && startY <= rect.bottom;
+          if (tapInBounds) {
+            openHighResModal();
+          }
+        }
+      } else if (deltaX > 50) {
         // Dragged right → go to previous slide
         showImage(currentIndex - 1);
       } else if (deltaX < -50) {

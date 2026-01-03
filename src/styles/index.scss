@@ -180,8 +180,14 @@ display: none;
     // display: none;
   }
 
+  .hamburger-menu {
+    pointer-events: none !important;
+  }
   .hamburger-menu-icon-line {
-    background-color: rgba(0, 0, 0, 0.26);
+    background-color: rgba(0, 0, 0, 0) !important;
+  }
+  .sidebar {
+    transform: translateX(0) !important;
   }
   
   .slide-indicators {
