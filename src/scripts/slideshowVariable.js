@@ -610,7 +610,10 @@ function attachEventListeners() {
     if (img.complete) {
       markImageLoaded(img);
     } else {
-      img.addEventListener('load', () => markImageLoaded(img));
+      img.addEventListener('load', () => {
+        markImageLoaded(img);
+        repositionSlides();  // Reposition after lazy image loads
+      });
       img.addEventListener('error', () => markImageLoaded(img));
     }
   });
@@ -627,6 +630,7 @@ function attachEventListeners() {
             mainImage.dataset.pendingLoaded = 'true';
           }
         }
+        repositionSlides();  // Reposition after lazy video loads
       });
     } else if (video.tagName === 'IFRAME') {
       video.addEventListener('load', () => {
@@ -638,6 +642,7 @@ function attachEventListeners() {
             mainImage.dataset.pendingLoaded = 'true';
           }
         }
+        repositionSlides();  // Reposition after lazy iframe loads
       });
     }
   });
