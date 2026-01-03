@@ -4,7 +4,7 @@ const hamburgerMenu = document.querySelector('.hamburger-menu');
 const sidebar = document.querySelector('.sidebar');
 
 document.addEventListener('DOMContentLoaded', () => {
-	if (window.innerWidth < 768) {
+	if (window.innerWidth < 850) {
 		isMobile = true;
 	}
 });

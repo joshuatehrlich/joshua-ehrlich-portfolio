@@ -5,7 +5,7 @@
 // MODULE-LEVEL STATE (accessible to pageshow handler)
 // ============================================================================
 
-const MOBILE_BREAKPOINT = 768; // Must match $mobile-medium in variables.scss
+const MOBILE_BREAKPOINT = 850; // Must match $mobile-medium in variables.scss
 
 let mainImages = null;
 let thumbnails = null;

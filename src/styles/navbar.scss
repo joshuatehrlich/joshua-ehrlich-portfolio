@@ -1,3 +1,5 @@
+@use 'variables' as *;
+
 .title-section {
   display: relative;
   position: relative;
@@ -207,5 +209,28 @@
   &:hover {
     opacity: 1.0;
     transform: translateY(-0.2rem);
+  }
+}
+
+@media (max-width: $mobile-medium) and (orientation: landscape) {
+  .navbar {
+    // align-items: space-between;
+    justify-content: start;
+    gap: 4rem;
+  }
+  .signature {
+    width: 40% !important;
+    margin-left: 5% !important;
+  }
+  .nav-links {
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    padding-right: 8rem;
+    gap: 1rem;
+    a {
+      font-size: 1.4rem !important;
+      line-height: 3rem !important;
+    }
   }
 }

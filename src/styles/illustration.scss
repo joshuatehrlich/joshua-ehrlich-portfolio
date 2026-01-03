@@ -56,3 +56,19 @@
     margin-top: 0rem;
   }
 }
+// for sideways phones
+@media (max-width: $mobile-medium) and (orientation: landscape) {
+  .illustration-page {
+    flex-direction: row-reverse;
+    padding: 0;
+    padding-right: 3rem;
+  }
+  .category-selector {
+    align-items: flex-end;
+    // justify-content: start;
+    flex-direction: column;
+    .category-separator {
+      display: none;
+    }
+  }
+}

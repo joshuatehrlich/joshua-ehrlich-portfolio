@@ -50,7 +50,7 @@ html {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translateZ(100px);
+  // transform: translateZ(100px);
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 
@@ -189,9 +189,9 @@ html {
 .main-image-content {
   max-width: calc((100vw - var(--sidebar-width)) * 0.95);
   max-height: 60vh;
-  @media (max-width: 768px) {
+  @media (max-width: $mobile-medium) {
     max-width: 85vw;
-    max-height: 40vh;
+    max-height: 60vh;
   }
   width: auto;
   height: auto;
@@ -207,7 +207,7 @@ html {
     // width: auto;
     // height: auto;
     object-fit: contain;
-    @media (max-width: 768px) {
+    @media (max-width: $mobile-medium) {
       max-width: 85vw;
       max-height: 40vh;
     }
@@ -430,4 +430,34 @@ html {
   width: 33.33%;
   height: 100%;
   z-index: 1;
+}
+
+@media (max-width: $mobile-medium) and (orientation: landscape) {
+
+  .thumbnail-container {
+    position: fixed;
+    bottom: 0 !important;
+    left: 2rem !important;
+    height: 100dvh;
+    width: 100dvw;
+    padding: 0;
+    // justify-content: flex-start;
+  }
+  .thumbnail-row {
+    flex-direction: column !important;
+  }
+  .main-image-container {
+    translate: -5% 3%;
+    
+  }
+  .main-image-content {
+    max-width: 65vw;
+    max-height: 70vh;
+  }
+  .main-image {
+    opacity: 0.0 !important;
+  }
+  .main-image.active.positioned.loaded {
+    opacity: 1.0 !important;
+  }
 }
