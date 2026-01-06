@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SlideshowVariableLayout from '../components/SlideshowVariableLayout.astro';
+import { loadAllArtworkCollections } from '../data/loader';
+import { SITE_TITLE } from '../consts';
+import '../styles/illustration.scss';
+
+// Auto-load ALL categories, then optionally filter to specific ones
+const allCategories = loadAllArtworkCollections();
+
+// Option 1: Show specific categories only
+const CATEGORIES = allCategories.filter(cat => 
+  ['dust', 'name-that'].includes(cat.key)  // Use lowercase to match CSV filename
+);
+
+// Option 2: Show all categories EXCEPT certain ones
+// const CATEGORIES = allCategories.filter(cat => 
+//   !['comics'].includes(cat.key)
+// );
+
+// Option 3: Show ALL categories
+// const CATEGORIES = allCategories;
+
+// Get category from URL params, default to first category
+const url = new URL(Astro.request.url);
+const categoryParam = url.searchParams.get('category');
+const currentCategoryKey = categoryParam || CATEGORIES[0]?.key || 'board-games';
+
+// Find the current category config and get its artwork
+const currentCategory = CATEGORIES.find(cat => cat.key === currentCategoryKey) || CATEGORIES[0];
+const artwork = currentCategory?.artwork || [];
+
+console.log('Available categories:', CATEGORIES.map(c => c.key));
+console.log('Current category:', currentCategoryKey);
+console.log('Artwork count:', artwork.length);
+---
+
+<BaseLayout title={`Illustration - ${SITE_TITLE}`} description="A collection of illustrations and artwork">
+  <div class="illustration-page">
+    <div class="category-selector">
+      {CATEGORIES.map((cat, index) => (
+        <>
+          <span 
+            class={`category-option ${currentCategoryKey === cat.key ? 'active' : ''}`} 
+            data-category={cat.key}
+          >
+            {cat.label}
+          </span>
+          {index < CATEGORIES.length - 1 && (
+            <span class="category-separator">•</span>
+          )}
+        </>
+      ))}
+    </div>
+
+    <SlideshowVariableLayout artwork={artwork} />
+  </div>
+</BaseLayout>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryOptions = document.querySelectorAll('.category-option');
+    
+    // Get current category from URL for debugging
+    const url = new URL(window.location.href);
+    const currentCategory = url.searchParams.get('category');
+    console.log('Current category from URL:', currentCategory);
+    
+    categoryOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        const element = option as HTMLElement;
+        const category = element.dataset.category;
+        
+        const url = new URL(window.location.href);
+        url.searchParams.set('category', category || 'illustration');
+        window.location.href = url.toString();
+      });
+    });
+  });
+</script>
