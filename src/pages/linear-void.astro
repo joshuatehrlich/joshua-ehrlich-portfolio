@@ -4,5 +4,77 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
 <BaseLayout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+	<h1 id="about">?</h1>
+	<div id="description"><p>Linear Void is an educational game focused on building intuition in one of the fundamental concepts of linear algebra: vector addition, subtraction, and multiplication. It engages with the possibility for computer games to react to curious input rather than teaching didactically, allowing learning to be more engaging and natural. It should also be fun, hopefully! I hope you enjoy it.</p></div>
 	<iframe src="https://joshuatehrlich.github.io/linalg-game/" style="width: 100%; height: 100%; border: none;"></iframe>
 </BaseLayout>
+
+<style>
+	#about {
+		font-size: 2rem;
+		font-weight: bold;
+		margin-bottom: 1rem;
+		color: white;
+
+		position: absolute;
+		bottom: 20px;
+		right: 30px;
+		z-index: 100;
+
+		margin: 0;
+		padding: 0;
+		cursor: pointer;
+		transition: scale 0.2s ease-in-out, opacity 0.2s ease-in-out;
+		opacity: 0.5;
+		pointer-events: all;
+	}
+	#about:hover {
+		scale: 1.2;
+		opacity: 1.0;
+	}
+	#description {
+		font-size: 1.5rem;
+		margin-bottom: 2rem;
+		color: white;
+
+		width: 100% - var(--sidebar-width);
+		height: 100%;
+		position: absolute;
+		top: 0;
+		left: var(--sidebar-width);
+		background-color: rgba(0, 0, 0, 0.76);
+
+		padding: 0 20%;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		transition: opacity 0.2s ease-in-out;
+		opacity: 0;
+
+		pointer-events: none;
+	}
+	p {
+		font-size: 1.2rem;
+		pointer-events: none;
+	}
+
+	#description.active {
+		opacity: 1.0 !important;
+		pointer-events: auto;
+	}
+</style>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const about = document.getElementById('about');
+		const description = document.getElementById('description');
+		about.addEventListener('click', () => {
+			description.classList.toggle('active');
+		});
+		// clicking description closes it
+		description.addEventListener('click', () => {
+			description.classList.remove('active');
+		});
+	});
+</script>
