@@ -25,3 +25,5 @@ pnpm-debug.log*
 
 # Local Netlify folder
 .netlify
+# Windows Zone.Identifier files (WSL compatibility)
+**/*:Zone.Identifier
